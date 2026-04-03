@@ -33,7 +33,6 @@
                     
             </div>
             <a href="${experiments[i].href}" class="view-button">
-                <svg>...</svg>
                 View
             </a>`;
 
