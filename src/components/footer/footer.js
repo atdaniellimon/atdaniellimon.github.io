@@ -6,7 +6,7 @@
 (async function(){
     const footerHTML = `<div class="footer-container">
             <div class="footer-section branding">
-                <img src="/assets/img/logo_min.png" alt="Logo">
+                <img src="/src/assets/img/logo_min.png" alt="Logo">
                 <p>${translation.footer.tagline}</p>
             </div>
 

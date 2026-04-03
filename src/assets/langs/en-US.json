@@ -16,6 +16,9 @@
         },
         "labs": {
             "title": "Welcome to Daniel's lab"
+        },
+        "contact": {
+            "title": "Contact Daniel"
         }
     },
     "footer": {

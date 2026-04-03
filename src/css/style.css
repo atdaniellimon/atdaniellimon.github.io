@@ -33,7 +33,6 @@ h1{
     border: 1px solid rgba(255, 255, 255, .3);
     box-sizing: border-box;
 }
-
 .banner h1{
     width: 90%;
     max-width: 800px;
@@ -43,52 +42,27 @@ h1{
     line-height: 1.2;
     transition: filter .4s;
 }
-
 .banner .links{
     display: flex;
     justify-content: center;
     gap: 20px;
     flex-wrap: wrap;
 }
-
-.banner p{
+.banner p, .banner a{
     margin: 0;
     opacity: .6;
     cursor: pointer;
     transition: transform .2s, opacity .3s, text-shadow .1s;
     font-weight: 500;
+    color: black;
+    text-decoration: none;
 }
-
-.banner p:hover{
+.banner p:hover, .banner a:hover{
     transform: translateY(-2px);
     opacity: 1;
 }
-
 .banner:has(.links:hover) h1{
     filter: blur(4px);
-}
-
-@media screen and (max-width: 768px){
-    .banner{
-        padding: 60px 20px;
-        width: 92vw;
-    }
-    .banner h1{
-        font-size: 1.8rem;
-        width: 100%;
-        text-align: center;
-    }
-
-    .banner .links{
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-    }
-
-    .banner p{
-        font-size: 1.1rem;
-        padding: 10px;
-    }
 }
 .labs-grid{
     display: grid;
@@ -169,4 +143,99 @@ h1{
     border-radius: 10px;
     margin-top: 10px;
     padding-top: 10px;
+}
+.contact-container{
+    display: flex;
+}
+.contact-card{
+    width: 47vw;
+    max-width: 1500px;
+    margin-left: 2vw;
+    border-radius: 25px;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 20px;
+    box-sizing: border-box;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(221, 221, 221, 0.2));
+    box-shadow: 
+        inset 0 1px 1px rgba(255, 255, 255, 0.4),
+        0 10px 30px rgba(0, 0, 0, 0.05);
+}
+.email-form h1{
+    margin-bottom: 15px;
+}
+.email-form input{
+    width: 100%;
+    height: 40px;
+    border-radius: 10px;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, .3);
+    background: rgba(255, 255, 255, 0.5);
+    outline: none;
+    padding-left: 7px;
+    transition: .2s all;
+    margin-bottom: 10px;
+}
+.email-form textarea{
+    width: 100%;
+    height: 100px;
+    border-radius: 10px;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, .3);
+    background: rgba(255, 255, 255, 0.5);
+    outline: none;
+    padding: 7px;
+    transition: .2s all;
+    margin-bottom: 10px;
+    resize: none;
+}
+.email-form input:focus, .email-form textarea:focus, .contact-card button:hover{
+    border: 2px solid #9fc7ff85;
+}
+.contact-card button{
+    width: 100%;
+    color: rgb(0, 0, 0);
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    text-align: center;
+    height: 40px;
+    backdrop-filter: blur(15px);
+    border-radius: 10px;
+    transition: .2s border ease-in-out, .2s scale cubic-bezier(.65,-0.01,.47,1.25);
+}
+.contact-card disclaimer{
+    opacity: .5;
+    font-size: 13px;
+}
+.contact-card button:active{
+    scale: .97;
+    border: 1px solid #9fc7ffc9;
+}
+@media screen and (max-width: 768px){
+    .banner{
+        padding: 60px 20px;
+        width: 92vw;
+    }
+    .banner h1{
+        font-size: 1.8rem;
+        width: 100%;
+        text-align: center;
+    }
+
+    .banner .links{
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .banner p, .banner a{
+        font-size: 1.1rem;
+        padding: 10px;
+    }
+    
+    .email-form{
+        width: 96vw;
+    }
 }

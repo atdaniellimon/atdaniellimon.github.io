@@ -4,16 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daniel Limon</title>
-    <link rel="stylesheet" href="/assets/style.css">
+    <link rel="stylesheet" href="/src/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <footer>
-
-    </footer>
-    <script src="/assets/header/header.js"></script>
-    <script src="/assets/injector.js"></script>
+    <div class="banner">
+        <h1>
+            {{hero.contact.title}}
+        </h1>
+        <div class="links">
+            <a href="https://wa.me/522311477876?text=I'm%20interested%20in%20one%20of%20your%20services">WhatsApp</a>
+            <a href="mailto:d4nilin0n@icloud.com">Email</a>
+            <a href="https://instagram.com/d.limvn">Instagram</a>
+        </div>
+    </div>
+    <div class="contact-container">
+        <div class="email-form contact-card">
+            <h1>
+                Tell me more.
+            </h1>
+            <input type="text" id="customer-name" placeholder="Name">
+            <textarea placeholder="Lorem ipsum dolor sit amet"></textarea>
+            <button>Send</button>
+        </div>
+        <div class="summary-article contact-card">
+            <h1>
+                Your summary.
+            </h1>
+            <disclaimer>
+                * This is an estimated price, final tag should be clarified between the costumer & Daniel Limon
+            </disclaimer>
+        </div>
+    </div>
+    <script src="/src/utils/injector.js"></script>
 </body>
 </html>

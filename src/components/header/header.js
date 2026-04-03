@@ -8,7 +8,7 @@
     <li data-page="/labs/">${translation.header.labs}</li>
     <li data-page="/services/">${translation.header.services}</li>
 </ul>
-<img src="/assets/img/logo.png" alt="Daniel Limon">
+<img src="/src/assets/img/logo.png" alt="Daniel Limon">
 <ul class="right">
     <li data-page="/aboutme/">${translation.header.about_me}</li>
     <li data-page="/contact/">${translation.header.contact}</li>

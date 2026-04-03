@@ -18,12 +18,12 @@
     var icn, touch, translations, header, footer;
     icn = document.createElement('link');
     icn.setAttribute('rel', 'shortcut icon');
-    icn.href = '/assets/img/logo_min.png';
+    icn.href = '/src/assets/img/logo_min.png';
     icn.setAttribute('type', 'image/x-icon')
 
     touch = document.createElement('link');
     touch.setAttribute('rel', 'apple-touch-icon');
-    touch.href = '/assets/img/logo_min.png';
+    touch.href = '/src/assets/img/logo_min.png';
 
     document.head.appendChild(icn);
     document.head.appendChild(touch);
@@ -43,14 +43,14 @@
     window.addEventListener("Translations_Ready", () => {
         if(settings?.header !== false){
             header = document.createElement('script');
-            header.src = '/assets/header/header.js';
+            header.src = '/src/components/header/header.js';
 
             document.body.appendChild(header);
         }
 
         if(settings?.footer !== false){
             footer = document.createElement('script');
-            footer.src = '/assets/footer/footer.js';
+            footer.src = '/src/components/footer/footer.js';
 
             document.body.appendChild(footer);
         }
@@ -106,6 +106,6 @@
         });
     });
     translations = document.createElement('script');
-    translations.src = '/assets/langs/handler.js';
+    translations.src = '/src/utils/languages.js';
     document.body.prepend(translations);
 })();

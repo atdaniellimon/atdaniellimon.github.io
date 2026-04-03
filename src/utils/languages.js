@@ -4,7 +4,7 @@ var translation = null;
     const lang = navigator.language || 'en-US';
 
     async function fetchLangauge(which){
-        const request = new Request(`/assets/langs/${which}.json`);
+        const request = new Request(`/src/assets/langs/${which}.json`);
         await fetch(request).then(async (response) => {
             if (!response.ok) {
                 await fetchLangauge('en-US');
