@@ -25,9 +25,9 @@
             <h1>
                 Tell me more.
             </h1>
-            <input type="text" id="customer-name" placeholder="Name">
-            <textarea placeholder="Lorem ipsum dolor sit amet"></textarea>
-            <button>Send</button>
+            <input type="text" id="customer_name" placeholder="Name">
+            <textarea id="request_body" placeholder="Lorem ipsum dolor sit amet"></textarea>
+            <button onclick="sendMailForm()">Send</button>
         </div>
         <div class="summary-article contact-card">
             <h1>
@@ -39,5 +39,13 @@
         </div>
     </div>
     <script src="/src/utils/injector.js"></script>
+    <script src="/src/utils/mail.js"></script>
+    <script>
+        const form_name = document.getElementById('customer_name');
+        const form_body = document.getElementById('request_body');
+        function sendMailForm(){
+            sendMail(form_name.value, form_body.value);
+        }
+    </script>
 </body>
 </html>

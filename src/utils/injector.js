@@ -93,19 +93,29 @@
                     window.location.href = href;
                 }, 300);
             }
-
-            const sec_el = e.target.closest('p');
-            if(sec_el){
-                e.preventDefault();
-                const href = sec_el.getAttribute('href') || sec_el.dataset.href; 
-                document.body.classList.remove('ready');
-                setTimeout(() => {
-                    window.location.href = href;
-                }, 300);
-            }
         });
     });
     translations = document.createElement('script');
     translations.src = '/src/utils/languages.js';
     document.body.prepend(translations);
 })();
+
+const alert = (content = "") => {
+    if(document.querySelector("alert-container")) return;
+    const alert_element = document.createElement("alert-element");
+    const alert_container = document.createElement("alert-container");
+    alert_element.innerHTML = `
+        <alert-text>${content}</alert-text>
+        <alert-button><p>Ok</p></alert-button>
+    `;
+
+    alert_element.querySelector("alert-button").addEventListener("click", () => {
+        alert_element.style.opacity = "0";
+        alert_container.style.opacity = "0";
+        setTimeout(() => {
+            alert_container.remove();
+        }, 500);
+    });
+    alert_container.appendChild(alert_element);
+    document.body.appendChild(alert_container);
+};
