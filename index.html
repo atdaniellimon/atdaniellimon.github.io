@@ -3,25 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daniel Limón | Systems & Software Developer</title>
+    <title>Daniel Limón — Technology Holding</title>
     <link rel="stylesheet" href="/src/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <meta name="description" content="Daniel Limon's official website. Exploring systems programming, low-level development, and open-source software engineering through custom projects on GitHub.">
+    <meta name="description" content="Daniel Limón is a technology holding company. We build, fund, and operate software ventures — from operating-system kernels to autonomous agents.">
     <meta name="robots" content="index, follow">
+
+    <script type="importmap">
+    { "imports": { "three": "/src/vendor/three.module.min.js" } }
+    </script>
 </head>
 <body>
-    <div class="banner">
-        <h1>
-            {{hero.home.title}}
-        </h1>
-        <div class="links">
-            <a href="/labs/">{{hero.home.links.view_labs}}</a>
-            <a href="/contact/">{{hero.home.links.hire_me}}</a>
+    <section class="hero">
+        <div class="hero-text" data-reveal>
+            <span class="eyebrow">{{hero.home.eyebrow}}</span>
+            <h1><span class="grad">{{hero.home.title}}</span></h1>
+            <p class="lede">{{hero.home.subtitle}}</p>
+            <div class="links">
+                <a href="/labs/" class="btn-primary">{{hero.home.links.view_ventures}}</a>
+                <a href="/contact/" class="btn-secondary">{{hero.home.links.partner}}</a>
+            </div>
+            <div class="hero-rail" aria-hidden="true">
+                <span class="rail-tick"></span>
+                <span class="rail-label">Kernel → Cloud</span>
+                <span class="rail-tick"></span>
+            </div>
         </div>
-    </div>
+        <div class="hero-visual" data-reveal>
+            <div id="hero-canvas"></div>
+        </div>
+    </section>
 
-    
+    <section class="philosophy">
+        <header class="section-head" data-reveal>
+            <span class="eyebrow">{{philosophy.eyebrow}}</span>
+            <h2>{{philosophy.title}}</h2>
+            <p class="lede">{{philosophy.lede}}</p>
+        </header>
+        <div class="principles" data-reveal data-stagger>
+            <template>
+                <article class="principle">
+                    <span class="kicker">{{item.kicker}}</span>
+                    <h3>{{item.title}}</h3>
+                    <p>{{item.body}}</p>
+                </article>
+            </template>
+        </div>
+    </section>
+
+    <section class="model">
+        <header class="section-head" data-reveal>
+            <span class="eyebrow">{{model.eyebrow}}</span>
+            <h2>{{model.title}}</h2>
+        </header>
+        <div class="model-grid" data-reveal data-stagger>
+            <template>
+                <article class="model-item">
+                    <span class="model-k">{{item.kicker}}</span>
+                    <p>{{item.body}}</p>
+                </article>
+            </template>
+        </div>
+    </section>
+
+    <section class="ventures-home">
+        <header class="section-head" data-reveal>
+            <span class="eyebrow">{{ventures.eyebrow}}</span>
+            <h2>{{hero.ventures.title}}</h2>
+            <p class="lede">{{hero.ventures.subtitle}}</p>
+        </header>
+        <div class="labs-grid" data-reveal data-stagger>
+            <!-- Renderizado por el componente Labs -->
+        </div>
+    </section>
+
+    <section class="cta-band" data-reveal>
+        <h2><span class="grad">{{cta.title}}</span></h2>
+        <p>{{cta.body}}</p>
+        <a href="/contact/" class="btn-primary">{{cta.button}}</a>
+    </section>
+
     <script src="/src/components/MokeSDK/index.js"></script>
     <script src="/src/utils/injector.js"></script>
+    <script src="/src/utils/motion.js"></script>
+    <script>
+        Moke.import({ piece: 'Labs', def_route: true });
+    </script>
+    <script type="module" src="/src/components/Hero3D/index.js"></script>
 </body>
 </html>

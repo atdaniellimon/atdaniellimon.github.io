@@ -11,14 +11,14 @@
 
     const css_injection = `
         alert-container {
-            position: fixed;
+            position: fixed !important;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(0, 0, 0, .1);
-            backdrop-filter: blur(3px);
-            -webkit-backdrop-filter: blur(3px);
+            background: rgba(0, 0, 0, .1)  !important;
+            backdrop-filter: blur(3px)  !important;
+            -webkit-backdrop-filter: blur(3px)  !important;
             z-index: 9999999999999;
             transition: opacity .5s;
             display: flex;
@@ -30,11 +30,11 @@
             width: 340px;
             padding: 28px;
             padding-bottom: 70px;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(221, 221, 221, 0.2));
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), rgba(221, 221, 221, 0.2))  !important;
             box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4), 0 10px 30px rgba(0, 0, 0, 0.05);
-            border-radius: 25px;
+            border-radius: 25px  !important;
             animation: alert-in 0.25s ease-out forwards;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.25), 0 8px 25px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.6);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25), 0 8px 25px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.6)  !important;
             z-index: 9999999999999;
             outline: none;
         }
@@ -44,10 +44,10 @@
             bottom: 5%;
             left: 2.5%;
             position: absolute;
-            color: rgb(0, 0, 0);
+            color: rgb(0, 0, 0)  !important;
             background: rgba(255, 255, 255, 0.5);
             backdrop-filter: blur(5px);
-            border-radius: 17px;
+            border-radius: 17px  !important;
             text-align: center;
             display: flex;
             align-items: center;
@@ -80,6 +80,7 @@
         }
         alert-button p {
             margin: 0;
+            color: black !important;
         }
         alert-text {
             display: block;

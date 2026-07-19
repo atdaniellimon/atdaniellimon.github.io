@@ -1,12 +1,11 @@
 (async function(){
     const pagesList = {
-        "/": "Daniel Limon",
-        "/labs/": "Labs",
-        "/services/": "Services",
-        "/aboutme/": "About Daniel",
-        "/contact/": "Contact Daniel",
-        "/404.html": "Not found",
-        "/project/": "Overview"
+        "/": "Daniel Limón — Technology Holding",
+        "/labs/": "Daniel Limón — Ventures",
+        "/aboutme/": "Daniel Limón — About",
+        "/contact/": "Daniel Limón — Contact",
+        "/404.html": "Not found — Daniel Limón",
+        "/project/": "Daniel Limón — Project"
     }
     const currentTitle = pagesList[window.location.pathname];
     

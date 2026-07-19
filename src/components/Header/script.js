@@ -1,290 +1,236 @@
 /*
-    Header
-    Version 1.3
-
-    Made by: Daniel Limón
-    See more atdaniellimon.github.io
+    Header — Sleek glass
+    Version 3.0  ·  Made by Daniel Limón
 */
 
 (async function(){
-    const headerHTML = `<ul class="left">
-    <li data-page="/labs/">${translation.header.labs}</li>
-    <li data-page="/services/">${translation.header.services}</li>
-</ul>
-<img src="/src/assets/img/logo.png" alt="Daniel Limon">
-<ul class="right">
-    <li data-page="/aboutme/">${translation.header.about_me}</li>
-    <li data-page="/contact/">${translation.header.contact}</li>
-</ul>
-<div class="cursor"></div>
-<select id="current-website">
-    <option value="/">${translation.header.home}</option>
-    <option value="/labs/">${translation.header.labs}</option>
-    <option value="/services/">${translation.header.services}</option>
-    <option value="/aboutme/">${translation.header.about_me}</option>
-    <option value="/contact/">${translation.header.contact}</li>
-</select>`;
+    const headerHTML = `
+        <a class="brand" data-page="/" aria-label="Daniel Limón">
+            <span class="brand-dot"></span>
+            <span class="brand-name">Daniel Limón</span>
+        </a>
+        <nav class="nav-primary">
+            <a href="/labs/" class="nav-link" data-page="/labs/">${translation.header.labs}</a>
+            <a href="/aboutme/" class="nav-link" data-page="/aboutme/">${translation.header.about_me}</a>
+            <a href="/contact/" class="nav-link" data-page="/contact/">${translation.header.contact}</a>
+        </nav>
+        <a href="/contact/" class="nav-cta">${translation.header.contact} →</a>
+        <button class="hamburger" aria-label="Menu" aria-expanded="false">☰</button>
+        <div class="mobile-menu">
+            <a href="/" data-page="/">${translation.header.home}</a>
+            <a href="/labs/" data-page="/labs/">${translation.header.labs}</a>
+            <a href="/aboutme/" data-page="/aboutme/">${translation.header.about_me}</a>
+            <a href="/contact/" data-page="/contact/">${translation.header.contact}</a>
+        </div>
+    `;
 
-    const headerCSS = `header{
-    position: fixed;
-    width: 96vw;
-    height: 50px;
-    top: 2vw;
-    left: 50%;
-    z-index: 10000;
-    transform: translateX(-50%);
-    overflow: hidden;
-    border-radius: 20px;
-    background: rgba(255, 255, 255, .5);
-    font-family: "Noto Serif", serif;
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, .3);
-    max-width: 1300px;
-    box-shadow: 0px 10px 43px 0px rgba(0,0,0,0.2);
-    -webkit-box-shadow: 0px 10px 43px 0px rgba(0,0,0,0.2);
-    -moz-box-shadow: 0px 10px 43px 0px rgba(0,0,0,0.2);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.35);
-}
-header img{
-    height: 40px;
-    position: absolute;
-    top: 5px;
-    left: 50%;
-    transform: translateX(-50%);
-    cursor: pointer;
-}
-header ul.left{
-    position: absolute;
-    display: flex;
-    top: 50%;
-    left: 30px;
-    transform: translateY(-50%);
-}
-header ul.right{
-    position: absolute;
-    display: flex;
-    top: 50%;
-    right: 30px;
-    transform: translateY(-50%);
-}
-header ul li{
-    list-style: none;
-    letter-spacing: 0.05em;
-    transition: transform .5s, filter .2s, text-shadow .1s;
-    cursor: pointer;
-    width: 110px;
-    text-align: center;
-    transition-delay: filter .1s;
-}
-header:has(li:hover) li {
-    filter: blur(1px);
-}
-header ul li:hover{
-    transform: translateY(-1px);
-    filter: none !important;
-}
-header ul li:active{
-    transform: translateY(1px);
-    text-shadow: 0px 0px 11px #757575a5;
-}
-header .cursor{
-    position: absolute;
-    bottom: 0;
-    left: 0; /* Punto cero nativo del contenedor */
-    width: 100px;
-    height: 3px;
-    background: rgba(0, 0, 0, .3);
-    transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1), width 0.5s cubic-bezier(0.19, 1, 0.22, 1), height .2s;
-    will-change: transform, width;
-    pointer-events: none;
-    z-index: 0;
-    transform-origin: left center; /* Corregido: Sin coma para sintaxis CSS válida */
-}
-header select{
-    display: none;
-}
-@media screen and (max-width: 768px){
-    header ul{
-        display: none !important;
-    }
-    header .cursor{
-        display: none;
-    }
-    header img{
-        left: 20px;
-        transform: none;
-    }
-    header select{
-        display: block;
-        position: absolute;
-        right: 10px;
-        height: 30px;
-        top: 10px;
-        width: 30%;
-    }
-}
+    const headerCSS = `
+        header.main-lemons-header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 10000;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            padding: 0 clamp(16px, 4vw, 48px);
+            background: rgba(10, 11, 13, 0.55);
+            backdrop-filter: blur(22px) saturate(1.3);
+            -webkit-backdrop-filter: blur(22px) saturate(1.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: background 280ms ease, border-color 280ms ease;
+        }
+        header.main-lemons-header.scrolled {
+            background: rgba(10, 11, 13, 0.82);
+            border-bottom-color: rgba(255, 255, 255, 0.09);
+        }
 
-div[header-gradient]{
-    position: fixed;
-    z-index: 9999;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: calc(4vw + 50px);
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%);
-}
-    
-div[header-space]{
-    width: 100%;
-    margin: 0;
-    margin-bottom: calc(4vw + 50px);
-}`;
-    var headerTimeout, temp_header, current_option, activeLi, logoPos, temp_header_space, temp_header_gradient, lastX, headerRect, originalX, originalWidth;
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            cursor: pointer;
+            margin-right: auto;
+        }
+        .brand-dot {
+            width: 9px; height: 9px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--brass), var(--brass-2));
+            box-shadow: 0 0 0 3px rgba(205, 174, 99, 0.16);
+            flex-shrink: 0;
+        }
+        .brand-name {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.2rem;
+            color: var(--platinum);
+            letter-spacing: -0.3px;
+            line-height: 1;
+        }
 
-    function render(){
-        temp_header = document.createElement('header');
-        temp_header_space = document.createElement('div');
-        temp_header_gradient = document.createElement('div');
-    
-        temp_header.innerHTML = headerHTML;
+        .nav-primary {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .nav-link {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--steel);
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: 999px;
+            transition: color 180ms ease, background 180ms ease;
+            position: relative;
+        }
+        .nav-link:hover { color: var(--platinum); background: rgba(255, 255, 255, 0.05); }
+        .nav-link.active { color: var(--platinum); background: rgba(255, 255, 255, 0.06); }
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px; left: 50%; transform: translateX(-50%);
+            width: 18px; height: 2px; border-radius: 1px;
+            background: var(--brass);
+        }
 
-        const temp_header_css = document.createElement('style');
-        temp_header_css.innerHTML = headerCSS;
+        .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 500;
+            text-decoration: none;
+            color: #1a1408;
+            background: linear-gradient(180deg, var(--brass), var(--brass-2));
+            padding: 9px 18px;
+            border-radius: 999px;
+            box-shadow: 0 8px 20px -12px rgba(205, 174, 99, 0.7);
+            transition: transform 160ms var(--ease-out), box-shadow 220ms ease;
+        }
+        .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 12px 26px -12px rgba(205, 174, 99, 0.85); }
+        .nav-cta:active { transform: scale(0.98); }
 
-        temp_header_space.setAttribute('header-space', 'true');
-        temp_header_gradient.setAttribute('header-gradient', 'true');
+        .hamburger {
+            display: none;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--line-2);
+            color: var(--platinum);
+            border-radius: var(--r);
+            width: 38px; height: 38px;
+            cursor: pointer;
+            font-size: 18px;
+            line-height: 1;
+            transition: border-color 180ms ease, background 180ms ease;
+        }
+        .hamburger:hover { border-color: var(--brass); background: rgba(205, 174, 99, 0.06); }
 
-        document.head.appendChild(temp_header_css);
-        document.body.prepend(temp_header);
-        document.body.prepend(temp_header_gradient);
-        document.body.prepend(temp_header_space);
+        .mobile-menu {
+            position: absolute;
+            top: 72px; right: clamp(16px, 4vw, 48px);
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            min-width: 224px;
+            padding: 12px;
+            background: rgba(16, 18, 22, 0.94);
+            backdrop-filter: blur(22px);
+            border: 1px solid var(--line);
+            border-radius: var(--r);
+            box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.8);
+        }
+        .mobile-menu.open {
+            display: flex;
+            animation: menuIn 220ms var(--ease-out);
+        }
+        .mobile-menu a {
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--platinum-2);
+            padding: 12px 14px;
+            border-radius: 999px;
+            transition: background 160ms ease, color 160ms ease;
+        }
+        .mobile-menu a:hover { background: rgba(255, 255, 255, 0.05); color: var(--platinum); }
+        .mobile-menu a.active { color: var(--brass); background: rgba(205, 174, 99, 0.08); }
+        @keyframes menuIn {
+            from { opacity: 0; transform: translateY(-6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
 
-        //On end:
-        current_option = temp_header.querySelector(`select option[value="${window.location.pathname}"]`);
-        activeLi = temp_header.querySelector(`li[data-page="${window.location.pathname}"]`);
-    }
+        @media screen and (max-width: 880px) {
+            .nav-primary, .nav-cta { display: none; }
+            .hamburger { display: block; }
+            .nav-primary { left: 0; transform: none; }
+        }
 
-    function renderPositions(){
-        logoPos = temp_header.querySelector('header img').getBoundingClientRect();
-        headerRect = temp_header.getBoundingClientRect();
+        div[header-space] { height: 0; }
+        div[header-gradient] { display: none; }
+    `;
 
-        temp_header.querySelectorAll('ul li').forEach((el) => {
-            el.onmouseover = () => {
-                var rect = el.getBoundingClientRect();
-                var localX = rect.left - headerRect.left;
-                changeCursorPos(localX, rect.width);
-            }
+    const header = document.createElement('header');
+    header.classList.add('main-lemons-header');
+    header.innerHTML = headerHTML;
+    const css = document.createElement('style');
+    css.innerHTML = headerCSS;
+    document.head.appendChild(css);
+    document.body.prepend(header);
 
-            el.onmouseleave = () => {
-                toOriginalPos();
-            }
+    const space = document.createElement('div'); space.setAttribute('header-space', 'true');
+    const grad  = document.createElement('div'); grad.setAttribute('header-gradient', 'true');
+    document.body.prepend(grad);
+    document.body.prepend(space);
+
+    // Active page marker
+    const path = window.location.pathname;
+    header.querySelectorAll('[data-page]').forEach(a => {
+        if (a.dataset.page === path) a.classList.add('active');
+    });
+
+    // Smooth internal navigation (page fade)
+    header.querySelectorAll('a[data-page]').forEach(a => {
+        a.addEventListener('click', (e) => {
+            if (a.dataset.page === path) { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+            e.preventDefault();
+            document.body.classList.remove('ready');
+            setTimeout(() => { window.location.href = a.dataset.page; }, 280);
         });
+    });
 
-        temp_header.onclick = (el) => {
-            if(el.target.matches('li')){
-                document.body.classList.remove('ready');
-                setTimeout(() => {
-                    window.location.href = el.target.getAttribute('data-page');
-                }, 300);
-            }
+    // Brand click → home (or scroll top on home)
+    header.querySelector('.brand').addEventListener('click', (e) => {
+        if (path === '/') { window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+        document.body.classList.remove('ready');
+        setTimeout(() => { window.location.href = '/'; }, 280);
+    });
+
+    // Scrolled state (nav intensifies)
+    const onScroll = () => {
+        const y = window.scrollY;
+        header.classList.toggle('scrolled', y > 12);
+    };
+    document.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Hamburger
+    const burger = header.querySelector('.hamburger');
+    const menu = header.querySelector('.mobile-menu');
+    burger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const open = menu.classList.toggle('open');
+        burger.textContent = open ? '✕' : '☰';
+        burger.setAttribute('aria-expanded', open);
+    });
+    document.addEventListener('click', (e) => {
+        if (!header.contains(e.target)) {
+            menu.classList.remove('open');
+            burger.textContent = '☰';
+            burger.setAttribute('aria-expanded', 'false');
         }
-
-        temp_header.querySelector('img').onmouseover = () => {
-            centerCursor();
-        }
-        temp_header.querySelector('img').onmouseleave = () => {
-            toOriginalPos();
-        }
-
-        temp_header.querySelector('img').onclick = () => {
-            if(window.location.pathname == '/'){
-                window.scrollTo(0, 0);
-                return;
-            }
-            document.body.classList.remove('ready');
-            setTimeout(() => {
-                window.location.href = '/';
-            }, 300);
-        }
-
-        temp_header.querySelector('select').onchange = () => {
-            document.body.classList.remove('ready');
-            setTimeout(() => {
-                window.location.href = temp_header.querySelector('select').value;
-            }, 300);
-        }
-
-        if(current_option){
-            current_option.setAttribute("disabled", "true");
-            current_option.setAttribute("selected", "true");
-        }
-
-        const cursor = temp_header.querySelector('.cursor');
-        
-        if(window.location.pathname != '/' && activeLi){
-            cursor.style.transition = 'none';
-            
-            let activeRect = activeLi.getBoundingClientRect();
-            let localActiveX = activeRect.left - headerRect.left;
-            
-            originalX = localActiveX;
-            originalWidth = activeRect.width;
-            
-            cursor.style.width = `${originalWidth}px`;
-            cursor.style.transform = `translateX(${originalX}px)`;
-            lastX = originalX;
-            
-            setTimeout(() => {
-                cursor.style.transition = 'transform 0.5s cubic-bezier(0.19, 1, 0.22, 1), width 0.5s cubic-bezier(0.19, 1, 0.22, 1), height .2s';
-            }, 100);
-        } else {
-            originalX = logoPos.left - headerRect.left;
-            originalWidth = logoPos.width;
-            
-            cursor.style.transition = 'none';
-            cursor.style.width = `${originalWidth}px`;
-            cursor.style.transform = `translateX(${originalX}px)`;
-            lastX = originalX;
-            
-            setTimeout(() => {
-                cursor.style.transition = 'transform 0.5s cubic-bezier(0.19, 1, 0.22, 1), width 0.5s cubic-bezier(0.19, 1, 0.22, 1), height .2s';
-            }, 100);
-        }
-    }
-
-    function centerCursor(){
-        var localLogoX = logoPos.left - headerRect.left;
-        changeCursorPos(localLogoX, logoPos.width);
-    }
-
-    function toOriginalPos(){
-        changeCursorPos(originalX, originalWidth);
-    }
-
-    function changeCursorPos(localX, width){
-        clearTimeout(headerTimeout);
-        const cursor = temp_header.querySelector('.cursor');
-
-        cursor.style.width = `${width}px`;
-        cursor.style.height = '2px';
-
-        if(Math.abs(localX - lastX) > 50){
-            cursor.style.transform = `translateX(${localX}px) scaleX(1.1)`;
-        } else {
-            cursor.style.transform = `translateX(${localX}px)`;
-        }
-        lastX = localX;
-
-        headerTimeout = setTimeout(() => {
-            cursor.style.transform = `translateX(${localX}px) scaleX(1)`;
-            cursor.style.height = '3px';
-        }, 250);
-    }
-    
-    window.addEventListener('resize', () => {
-        renderPositions();
-    })
-    render();
-    renderPositions();
+    });
 })();

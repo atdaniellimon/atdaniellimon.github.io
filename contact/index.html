@@ -3,50 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daniel Limon</title>
+    <title>Daniel Limón — Contact</title>
     <link rel="stylesheet" href="/src/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <meta name="description" content="Direct line to Daniel Limón — partnerships, investment, and engineering conversations.">
+    <meta name="robots" content="index, follow">
 </head>
 <body>
-    <div class="banner">
-        <h1>
-            {{hero.contact.title}}
-        </h1>
+    <section class="banner" data-reveal>
+        <span class="eyebrow">{{hero.contact.title}}</span>
+        <h1>{{hero.contact.subtitle}}</h1>
         <div class="links">
-            <a href="https://wa.me/12148968727?text=I'm%20interested%20in%20one%20of%20your%20services">WhatsApp</a>
-            <a href="mailto:d4nilin0n@icloud.com">Email</a>
-            <a href="https://instagram.com/d.limvn">Instagram</a>
+            <a href="https://wa.me/12148968727" class="btn-secondary" target="_blank" rel="noopener">WhatsApp</a>
+            <a href="mailto:d4nilin0n@icloud.com" class="btn-secondary">Email</a>
+            <a href="https://instagram.com/d.limvn" class="btn-secondary" target="_blank" rel="noopener">Instagram</a>
         </div>
-    </div>
+    </section>
+
     <div class="contact-container">
-        <div class="email-form contact-card">
-            <h1>
-                Tell me more.
-            </h1>
-            <input type="text" id="customer_name" placeholder="Name">
-            <textarea id="request_body" placeholder="Lorem ipsum dolor sit amet"></textarea>
+        <div class="email-form contact-card" data-reveal>
+            <h1>Tell me more.</h1>
+            <input type="text" id="customer_name" placeholder="Name" autocomplete="name">
+            <textarea id="request_body" placeholder="Describe your project — what you're building, the stack, the timeline." rows="6"></textarea>
             <button onclick="sendMailForm()">Send</button>
         </div>
-        <div class="summary-article contact-card">
-            <h1>
-                Your summary.
-            </h1>
-            <disclaimer>
-                * This is an estimated price, final tag should be clarified between the costumer & Daniel Limon
-            </disclaimer>
-        </div>
     </div>
+
     <script src="/src/components/MokeSDK/index.js"></script>
     <script src="/src/utils/injector.js"></script>
-    <script src="/src/utils/mail.js"></script>
+    <script src="/src/utils/motion.js"></script>
     <script>
-        const form_name = document.getElementById('customer_name');
-        const form_body = document.getElementById('request_body');
-        function sendMailForm(){
-            sendMail(form_name.value, form_body.value);
+        function sendMailForm() {
+            const name = document.getElementById('customer_name').value.trim();
+            const body = document.getElementById('request_body').value.trim();
+            if (!name) { Moke.alert('Please enter your name.'); return; }
+            if (!body || body.length < 10) { Moke.alert('Please describe your project.'); return; }
+            const mailURL = `mailto:d4nilin0n@icloud.com?subject=${encodeURIComponent('Consult from ' + name)}&body=${encodeURIComponent(body)}`;
+            window.location.href = mailURL;
+            Moke.alert(`Thanks ${name}! I'll get back to you soon.`);
         }
+        window.sendMailForm = sendMailForm;
     </script>
 </body>
 </html>

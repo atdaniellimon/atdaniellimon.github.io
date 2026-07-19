@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ventures>
+    <venture id="mokeSystems">
+        <name>Moke</name>
+        <href>https://github.com/atdaniellimon/mokeOS</href>
+        <github>https://github.com/atdaniellimon/mokeOS</github>
+        <short_desc>Next-generation mokeOS kernels for secure, high-performance enterprise environments.</short_desc>
+        <description>Moke is the engineering backbone of the group — monolithic kernels and encrypted protocols for critical infrastructure.</description>
+    </venture>
+    <venture id="mokeAutomotive">
+        <name>Moke Automotive</name>
+        <href>https://github.com/atdaniellimon/MokeDrive</href>
+        <github>https://github.com/atdaniellimon/MokeDrive</github>
+        <short_desc>Smart infotainment interfaces and autonomous driving tech for next-gen vehicles.</short_desc>
+        <description>Moke Automotive redefines the in-car experience with intuitive dashboards and real-time data processing without distraction.</description>
+    </venture>
+    <venture id="newtonIntelligence">
+        <name>Newton AI</name>
+        <href>https://github.com/atdaniellimon/NewtonAI</href>
+        <github>https://github.com/atdaniellimon/NewtonAI</github>
+        <short_desc>Autonomous AI agents built for honesty and verifiable decision-making.</short_desc>
+        <description>Newton AI develops agents that prioritise truth — they plan, execute sandboxed code, and self-debug through the Microscope tool.</description>
+    </venture>
+    <venture id="ztrn">
+        <name>ZTRN</name>
+        <href>https://github.com/atdaniellimon/Glaze</href>
+        <github>https://github.com/atdaniellimon/Glaze</github>
+        <short_desc>Architecture, brutalism, precision.</short_desc>
+        <description>ZTRN is the group's design and architecture arm — brutalist structures, exact geometry, and the visual standard every subsidiary ships to.</description>
+    </venture>
+</ventures>

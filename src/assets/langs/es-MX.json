@@ -1,29 +1,94 @@
 {
     "header": {
-        "labs": "Labs",
-        "services": "Servicios",
-        "about_me": "Sobre mí",
+        "labs": "Empresas",
+        "about_me": "Acerca de",
         "contact": "Contacto",
         "home": "Inicio"
     },
     "hero": {
         "home": {
-            "title": "Ingeniería de sistemas desde el kernel\" o \"Soluciones de bajo nivel para problemas de alto nivel",
+            "eyebrow": "Holding de ingeniería",
+            "title": "Software desde el kernel.",
+            "subtitle": "Daniel Limón es un holding tecnológico. Construimos, financiamos y operamos empresas de software — desde kernels de sistema operativo hasta agentes autónomos.",
             "links": {
-                "view_labs": "[Explorar Labs]",
-                "hire_me": "[Contratar]"
+                "view_ventures": "Explorar empresas →",
+                "partner": "Trabaja con nosotros"
             }
         },
-        "labs": {
-            "title": "Bienvenido al laboratorio"
+        "ventures": {
+            "title": "Nuestras empresas",
+            "subtitle": "Cuatro subsidiarias, construidas y operadas como un solo grupo."
+        },
+        "contact": {
+            "title": "Hablemos",
+            "subtitle": "Línea directa con el operador — no un formulario a una cola."
         }
     },
+    "philosophy": {
+        "eyebrow": "Filosofía",
+        "title": "Un operador. Cuatro empresas. Un estándar.",
+        "lede": "Un holding sólo se gana el nombre cuando opera lo que posee.",
+        "principles": [
+            {
+                "kicker": "01",
+                "title": "Construimos, no revendemos.",
+                "body": "Cada subsidiaria se construye y opera bajo el mismo estándar de ingeniería. Sin núcleo tercerizado, sin producto de marca blanca — la parte difícil es nuestra."
+            },
+            {
+                "kicker": "02",
+                "title": "Desde el kernel.",
+                "body": "Kernels de sistema, stacks automotrices, agentes autónomos. Invertimos donde el trabajo es más difícil y las capas, más bajas."
+            },
+            {
+                "kicker": "03",
+                "title": "Honestidad sobre hype.",
+                "body": "Nuestros agentes de IA razonan dentro de sandboxes y se auto-depuran bajo un microscopio. Construimos para la verdad verificable, no para demos."
+            }
+        ]
+    },
+    "model": {
+        "eyebrow": "Cómo operamos",
+        "title": "Invertir. Construir. Operar.",
+        "items": [
+            {
+                "kicker": "Invertir",
+                "body": "Financiamos las empresas que operamos — capital alineado a la ingeniería, no al pitch."
+            },
+            {
+                "kicker": "Construir",
+                "body": "Kernels, firmware, agentes, dashboards — entregados al estándar que nos exigimos."
+            },
+            {
+                "kicker": "Operar",
+                "body": "No vendemos lo que construimos. Operamos nuestras empresas a largo plazo."
+            }
+        ]
+    },
+    "ventures": {
+        "eyebrow": "El portafolio"
+    },
+    "cta": {
+        "title": "¿Construyes algo difícil?",
+        "body": "Si tu trabajo vive cerca del metal — un kernel, una flota, un agente — queremos saber de ello.",
+        "button": "Iniciar una conversación →"
+    },
     "footer": {
-        "tagline": "Soluciones de bajo nivel para problemas de alto nivel.",
-        "links_title": "Enlaces Rápidos",
-        "status_title": "Estado",
-        "status_available": "Disponible para nuevos proyectos",
-        "handcraft": "Orgullosamente Mexicano",
-        "donot": "© 2026 Daniel Limón. Todos los derechos reservados."
+        "tagline": "Impulsando la innovación a través de empresas tecnológicas.",
+        "links_title": "Enlaces rápidos",
+        "status_title": "Estado del holding",
+        "status_available": "Invirtiendo y construyendo activamente",
+        "handcraft": "Oficinas centrales en México",
+        "donot": "© 2026 Daniel Limón Holdings. Todos los derechos reservados."
+    },
+    "about": {
+        "eyebrow": "Acerca de",
+        "title": "Daniel Limón opera lo que posee.",
+        "lede": "Ingeniero primero, operador segundo — el holding es el estándar de una persona aplicado a cuatro empresas.",
+        "body1": "Daniel Limón es el operador detrás del holding. El grupo no compra participación en empresas ajenas; es un solo estándar de ingeniería aplicado al software que el holding construye y opera por sí mismo — kernels, stacks automotrices, agentes autónomos y el brazo de diseño que fija la barra visual para todos.",
+        "body2": "El trabajo vive cerca del metal: kernels de sistema, firmware y drivers, manejo autónomo y agentes de IA que razonan dentro de sandboxes. Nada aquí se revende ni se repinta de marca blanca.",
+        "hq_label": "Oficinas centrales",
+        "hq": "México",
+        "focus_label": "Enfoque",
+        "focus": "Kernel → Nube"
     }
 }

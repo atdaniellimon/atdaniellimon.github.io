@@ -1,55 +1,71 @@
+// ============================================
+// Labs — premium venture cards from XML
+// Grids marked [data-reveal][data-stagger] get
+// scroll-staggered children via motion.js.
+// ============================================
 (async function(){
-    let experiments;
-    async function getExperiments(){
-        const request = new Request('/labs/experiments.json');
-        
-        await fetch(request).then((response) => {
-            if(!response.ok){
-                throw new Error("HTTP Error");
+    let ventures = [];
+
+    async function getVentures(){
+        const response = await fetch('/labs/experiments.xml');
+        if(!response.ok) throw new Error("Failed to fetch XML");
+        const text = await response.text();
+
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(text, "text/xml");
+        const ventureNodes = xmlDoc.querySelectorAll('venture');
+
+        ventures = Array.from(ventureNodes).map(node => ({
+            id: node.getAttribute('id'),
+            name: node.querySelector('name')?.textContent || 'Unnamed',
+            href: node.querySelector('href')?.textContent || '#',
+            github: node.querySelector('github')?.textContent || '#',
+            short_desc: node.querySelector('short_desc')?.textContent || '',
+            description: node.querySelector('description')?.textContent || '',
+            langs: Array.from(node.querySelectorAll('langs lang')).map(l => l.textContent)
+        }));
+
+        Moke.Hydration.register({ ventures });
+    }
+
+    function cardMarkup(venture, i){
+        const repo = venture.github.split('/').filter(Boolean).pop() || 'repository';
+        return `
+            <article class="lab-card" style="--stagger:${i}">
+                <div class="lab-header">
+                    <span class="status-tag">Active</span>
+                    <span class="subsidiary-badge">${String(i + 1).padStart(2, '0')} · Subsidiary</span>
+                </div>
+                <div class="lab-content">
+                    <h2>${venture.name}</h2>
+                    <p class="lab-desc-short">${venture.short_desc}</p>
+                    <p class="lab-desc-long">${venture.description}</p>
+                </div>
+                <a href="${venture.github}" target="_blank" rel="noopener noreferrer" class="view-button">
+                    ${repo} <span class="v-arrow">→</span>
+                </a>
+            </article>
+        `;
+    }
+
+    async function renderVentures(){
+        const grids = document.querySelectorAll('.labs-grid');
+        if(!grids.length || !ventures.length) return;
+
+        const html = ventures.map((v, i) => cardMarkup(v, i)).join('');
+
+        grids.forEach((grid) => {
+            grid.innerHTML += html;
+            // Re-evaluate stagger so the CSS delay calc sees fresh children
+            if(grid.hasAttribute('data-stagger')){
+                Array.from(grid.children).forEach((child, i) => child.style.setProperty('--stagger', i));
+                if(grid.hasAttribute('data-reveal') && grid.classList.contains('is-revealed')){
+                    // already revealed (late insert): reveal now
+                }
             }
-            return response.json();
-        }).then((json) => {
-            experiments = json;
-            Moke.Hydration.register(experiments);
         });
     }
 
-    async function renderExperiments(){
-        if(!experiments || typeof experiments !== 'object') return;
-
-        for(const [projectId, experiment] of Object.entries(experiments)){
-            const lab_card = document.createElement('div');
-            lab_card.classList.add('lab-card', 'glass');
-            
-            lab_card.innerHTML = `
-            <div class="lab-header">
-                <span class="status-tag pulse-green">${experiment.status}</span>
-                <span class="version-tag">${experiment.version}</span>
-            </div>
-            <div class="lab-content">
-                <h2>${experiment.name}</h2>
-                <p>${experiment.short_desc}</p>
-            </div>
-            
-            <div class="tech-stack"></div>
-            <a href="/labs/project/?id=${projectId}" class="view-button">
-                View
-            </a>`;
-
-            if(experiment.langs && Array.isArray(experiment.langs)){
-                for(const lang of experiment.langs){
-                    const lab_lang = document.createElement('span');
-                    lab_lang.classList.add('tech');
-                    lab_lang.innerText = lang;
-
-                    lab_card.querySelector('.tech-stack').appendChild(lab_lang);
-                }
-            }
-            document.querySelector('.labs-grid').appendChild(lab_card);
-        }
-    }
-
-
-    await getExperiments();
-    await renderExperiments();
+    await getVentures();
+    await renderVentures();
 })();

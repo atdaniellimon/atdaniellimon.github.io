@@ -1,56 +1,94 @@
 {
     "header": {
-        "labs": "Labs",
-        "services": "Services",
-        "about_me": "About me",
+        "labs": "Ventures",
+        "about_me": "About",
         "contact": "Contact",
         "home": "Home"
     },
     "hero": {
         "home": {
-            "title": "Building low-level solutions for high-level problems",
+            "eyebrow": "Engineering holding",
+            "title": "Software from the kernel up.",
+            "subtitle": "Daniel Limón is a technology holding company. We build, fund, and operate software ventures — from operating-system kernels to autonomous agents.",
             "links": {
-                "view_labs": "[View labs]",
-                "hire_me": "[Hire me]"
+                "view_ventures": "Explore ventures →",
+                "partner": "Partner with us"
             }
         },
-        "labs": {
-            "title": "Welcome to Daniel's lab"
+        "ventures": {
+            "title": "Our companies",
+            "subtitle": "Four subsidiaries, built and operated as one group."
         },
         "contact": {
-            "title": "Contact Daniel"
-        },
-        "mokeos": {
-            "title": "mokeOS."
+            "title": "Let's talk",
+            "subtitle": "Direct line to the operator — not a form into a queue."
         }
+    },
+    "philosophy": {
+        "eyebrow": "Philosophy",
+        "title": "One operator. Four companies. One standard.",
+        "lede": "A holding only earns the name when it runs what it owns.",
+        "principles": [
+            {
+                "kicker": "01",
+                "title": "Build, don't resell.",
+                "body": "Every subsidiary is built and run to the same engineering standard. No outsourced core, no white-labelled product — the hard parts are ours."
+            },
+            {
+                "kicker": "02",
+                "title": "From the kernel up.",
+                "body": "Operating-system kernels, automotive stacks, autonomous agents. We invest where the work is hardest and the layers are lowest."
+            },
+            {
+                "kicker": "03",
+                "title": "Honesty over hype.",
+                "body": "Our AI agents reason inside sandboxes and self-debug under a microscope. We build for verifiable truth, not for demos."
+            }
+        ]
+    },
+    "model": {
+        "eyebrow": "How we operate",
+        "title": "Invest. Build. Operate.",
+        "items": [
+            {
+                "kicker": "Invest",
+                "body": "We fund the companies we run — capital aligned to engineering, not to a pitch deck."
+            },
+            {
+                "kicker": "Build",
+                "body": "Kernels, firmware, agents, dashboards — shipped to the standard we hold ourselves to."
+            },
+            {
+                "kicker": "Operate",
+                "body": "We don't flip what we build. We run our companies for the long term."
+            }
+        ]
+    },
+    "ventures": {
+        "eyebrow": "The portfolio"
+    },
+    "cta": {
+        "title": "Building something hard?",
+        "body": "If your work lives close to the metal — a kernel, a fleet, an agent — we'd like to hear about it.",
+        "button": "Start a conversation →"
     },
     "footer": {
-        "tagline": "Building low-level solutions for high-level problems.",
-        "links_title": "Quick Links",
-        "status_title": "Availability",
-        "status_available": "Available for new projects",
-        "handcraft": "Handcrafted in Mexico",
-        "donot": "© 2026 Daniel Limón. All rights reserved."
+        "tagline": "Empowering innovation through technology ventures.",
+        "links_title": "Quick links",
+        "status_title": "Holding status",
+        "status_available": "Actively investing & building",
+        "handcraft": "Headquartered in Mexico",
+        "donot": "© 2026 Daniel Limón Holdings. All rights reserved."
     },
-    "labs": {
-        "mokeos": {
-            "short_desc": "A custom monolithic kernel and operating system built from the ground up, focusing on high-performance memory management and a minimalist skeuomorphic interface.",
-            "description": "mokeOS is an ambitious systems engineering project dedicated to exploring the fundamentals of low-level computing. Developed as a custom monolithic kernel, it features a proprietary file system (MFS), advanced encrypted messaging protocols, and a dedicated system architecture designed for x86 platforms. Beyond the kernel, mokeOS bridges the gap between hardware and user experience by implementing a unique visual language. Inspired by early Apple design principles, the OS utilizes a 'Liquid Glass' UI engine, proving that high-performance system code can coexist with sophisticated, fluid aesthetics."
-        },
-        "lemonrepo": {
-            "short_desc": "LemonRepo is a curated library of high-quality iOS apps and games, focused on performance, stability, and real-world usability.\n\nNo clutter. No junk. Just the essentials."
-        },
-        "moketube": {
-            "short_desc": "MokeTube is a native tvOS application designed to provide a seamless, ad-free viewing experience by leveraging decentralized Invidious instances. Built with SwiftUI and Combine, the project demonstrates advanced architectural patterns for handling asynchronous media streaming and polymorphic data parsing."
-        },
-        "mokeinfotainment": {
-            "short_desc": "MokeCar (or Moke Infotainment) is a mock infotainment system based on web technologies with the goal of researching and testing out how they work."
-        },
-        "newton": {
-            "short_desc": "Newton is an AI assistant created by Daniel Limón. Unlike most models, Newton is trained to prioritize honesty over usefulness — he will explicitly say \"I don't know\" rather than invent an answer. Newton can also operate autonomously: given a goal, he can plan, execute code in a sandboxed environment, detect bugs with his \"Microscope\" tool, and iterate until success or graceful failure."
-        },
-        "glaze": {
-            "short_desc": "Glaze is a social media platform focused on posts, photos and videos. With its included photo editor, it makes Glaze good for instant photos."
-        }
+    "about": {
+        "eyebrow": "About",
+        "title": "Daniel Limón runs what he owns.",
+        "lede": "Engineer first, operator second — the holding is one person's standard applied to four companies.",
+        "body1": "Daniel Limón is the operator behind the holding. The group doesn't buy equity in other people's companies; it's one engineering standard applied to the software the holding builds and runs itself — kernels, automotive stacks, autonomous agents, and the design arm that sets the visual bar for all of them.",
+        "body2": "The work sits close to the metal: operating-system kernels, firmware and drivers, autonomous driving, and AI agents that reason inside sandboxes. Nothing here is resold or relabelled.",
+        "hq_label": "Headquartered",
+        "hq": "Mexico",
+        "focus_label": "Focus",
+        "focus": "Kernel → Cloud"
     }
 }

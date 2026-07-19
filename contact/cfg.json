@@ -1,3 +1,4 @@
 {
-    "footer": false
+    "header": true,
+    "footer": true
 }
