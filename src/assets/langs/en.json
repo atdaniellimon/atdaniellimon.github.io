@@ -8,8 +8,8 @@
     "hero": {
         "home": {
             "eyebrow": "Engineering holding",
-            "title": "Software from the kernel up.",
-            "subtitle": "Daniel Limón is a technology holding company. We build, fund, and operate software ventures — from operating-system kernels to autonomous agents.",
+            "title": "Built to be kept.",
+            "subtitle": "Daniel Limón is a holding company. We build, fund, and operate the companies we own — from operating-system kernels to furniture and architecture.",
             "links": {
                 "view_ventures": "Explore ventures →",
                 "partner": "Partner with us"
@@ -36,8 +36,8 @@
             },
             {
                 "kicker": "02",
-                "title": "From the kernel up.",
-                "body": "Operating-system kernels, automotive stacks, autonomous agents. We invest where the work is hardest and the layers are lowest."
+                "title": "Bits and material.",
+                "body": "Operating-system kernels and autonomous agents on one side, furniture and architecture on the other. We build the hard things — whether they ship in code or in material."
             },
             {
                 "kicker": "03",
@@ -51,7 +51,7 @@
         "title": "Invest. Build. Operate.",
         "items": [
             { "kicker": "Invest", "body": "We fund the companies we run — capital aligned to engineering, not to a pitch deck." },
-            { "kicker": "Build", "body": "Kernels, firmware, agents, dashboards — shipped to the standard we hold ourselves to." },
+            { "kicker": "Build", "body": "Kernels, agents, dashboards, and the furniture and rooms around them — built to one standard, ours." },
             { "kicker": "Operate", "body": "We don't flip what we build. We run our companies for the long term." }
         ]
     },
@@ -60,11 +60,11 @@
     },
     "cta": {
         "title": "Building something hard?",
-        "body": "If your work lives close to the metal — a kernel, a fleet, an agent — we'd like to hear about it.",
+        "body": "If your work is hard to copy — a kernel, a fleet, an agent, or a building — we'd like to hear about it.",
         "button": "Start a conversation →"
     },
     "footer": {
-        "tagline": "Empowering innovation through technology ventures.",
+        "tagline": "One operator. Four companies. One standard.",
         "links_title": "Quick links",
         "status_title": "Holding status",
         "status_available": "Actively investing & building",
@@ -74,13 +74,31 @@
     "about": {
         "eyebrow": "About",
         "title": "I'm Daniel Limón.",
-        "lede": "An engineer who decided to run what he builds. Four companies, one standard — mine.",
-        "body1": "I work close to the metal. Operating-system kernels, automotive stacks, autonomous agents, and a design arm that holds the line on how all of it looks. I don't buy equity in other people's companies and I don't relabel other people's work — if my name is on it, I built it and I operate it.",
+        "lede": "An engineer who decided to run what he builds. Because people deserve the best.",
+        "body1": "I work on almost all the hard things you can imagine, from operating-system to an studio that builds the furniture and architecture around them. I don't buy equity in other people's companies and I don't relabel other people's work, if my name is on it, I built it and I operate it.",
         "body2": "I think a holding only earns the name when it runs what it owns. So that's what this is: one operator, four companies, held to one standard. Not flipped, not resold, not pitched to a deck.",
-        "body3": "I fund the companies I run, I ship the parts that are hardest, and I stay on them. Capital aligned to engineering, not to a pitch. The hard layers are mine; the long term is the point.",
+        "body3": "I fund the companies I run, I ship the parts that are hardest, and I stay on them. Capital aligned to engineering, not to a pitch. The hard parts are mine; the long term is the point.",
         "hq_label": "Headquartered",
         "hq": "Mexico",
         "focus_label": "Focus",
-        "focus": "Kernel → Cloud"
+        "focus": "Software → Structure"
+    },
+    "contact": {
+        "eyebrow": "Contact",
+        "card_title": "Tell me more.",
+        "label_name": "Name",
+        "placeholder_name": "Name",
+        "label_project": "Project",
+        "placeholder_project": "Describe your project. What you're building, the stack, the timeline.",
+        "send": "Send",
+        "alert_name": "Please enter your name.",
+        "alert_body": "Please describe your project.",
+        "alert_thanks": "Thanks {n}! I'll get back to you soon."
+    },
+    "meta": {
+        "home": { "title": "Daniel Limón — Operating Holding", "description": "Daniel Limón is a holding company. We build, fund, and operate the companies we own — from operating-system kernels and autonomous agents to furniture and architecture." },
+        "labs": { "title": "Daniel Limón — Ventures", "description": "The portfolio of Daniel Limón Holdings — four subsidiaries, built and operated as one group." },
+        "about": { "title": "Daniel Limón — About", "description": "Daniel Limón — the operator behind the holding. First-person: who I am, how I work, and why a holding only earns the name when it runs what it owns." },
+        "contact": { "title": "Daniel Limón — Contact", "description": "Direct line to Daniel Limón — partnerships, investment, and hard things to build." }
     }
 }

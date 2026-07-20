@@ -8,8 +8,8 @@
     "hero": {
         "home": {
             "eyebrow": "Holding de ingeniería",
-            "title": "Software desde el kernel.",
-            "subtitle": "Daniel Limón es un holding tecnológico. Construimos, financiamos y operamos empresas de software — desde kernels de sistema operativo hasta agentes autónomos.",
+            "title": "Construimos lo que operamos.",
+            "subtitle": "Daniel Limón es un holding. Construimos, financiamos y operamos las empresas que poseemos — desde kernels de sistema operativo y agentes autónomos hasta el mobiliario y la arquitectura que los rodea.",
             "links": {
                 "view_ventures": "Explorar empresas →",
                 "partner": "Trabaja con nosotros"
@@ -36,8 +36,8 @@
             },
             {
                 "kicker": "02",
-                "title": "Desde el kernel.",
-                "body": "Kernels de sistema, stacks automotrices, agentes autónomos. Invertimos donde el trabajo es más difícil y las capas, más bajas."
+                "title": "Bits y material.",
+                "body": "Kernels de sistema y agentes autónomos por un lado; mobiliario y arquitectura por el otro. Construimos lo difícil — sea en código o en material."
             },
             {
                 "kicker": "03",
@@ -51,7 +51,7 @@
         "title": "Invertir. Construir. Operar.",
         "items": [
             { "kicker": "Invertir", "body": "Financiamos las empresas que operamos — capital alineado a la ingeniería, no al pitch." },
-            { "kicker": "Construir", "body": "Kernels, firmware, agentes, dashboards — entregados al estándar que nos exigimos." },
+            { "kicker": "Construir", "body": "Kernels, agentes, dashboards y el mobiliario y los espacios que los rodean — construidos a un estándar, el nuestro." },
             { "kicker": "Operar", "body": "No vendemos lo que construimos. Operamos nuestras empresas a largo plazo." }
         ]
     },
@@ -60,12 +60,12 @@
     },
     "cta": {
         "title": "¿Construyes algo difícil?",
-        "body": "Si tu trabajo vive cerca del metal — un kernel, una flota, un agente — queremos saber de ello.",
+        "body": "Si tu trabajo es difícil de imitar — un kernel, una flota, un agente o un edificio — queremos saber de ello.",
         "button": "Iniciar una conversación →"
     },
     "footer": {
-        "tagline": "Impulsando la innovación a través de empresas tecnológicas.",
-        "links_title": "Enlaces ráctos",
+        "tagline": "Un operador. Cuatro empresas. Un estándar.",
+        "links_title": "Enlaces rápidos",
         "status_title": "Estado del holding",
         "status_available": "Invirtiendo y construyendo activamente",
         "handcraft": "Oficinas centrales en México",
@@ -75,12 +75,30 @@
         "eyebrow": "Acerca de",
         "title": "Soy Daniel Limón.",
         "lede": "Un ingeniero que decidió operar lo que construye. Cuatro empresas, un estándar — el mío.",
-        "body1": "Trabajo cerca del metal. Kernels de sistema, stacks automotrices, agentes autónomos y un brazo de diseño que cuida cómo se ve todo. No compro participación en empresas ajenas y no repinto el trabajo de otros — si está mi nombre, lo construí y lo opero.",
+        "body1": "Trabajo en lo difícil — kernels de sistema, stacks automotrices, agentes autónomos y un estudio que construye el mobiliario y la arquitectura que los rodea. No compro participación en empresas ajenas y no repinto el trabajo de otros — si está mi nombre, lo construí y lo opero.",
         "body2": "Creo que un holding sólo se gana el nombre cuando opera lo que posee. Así que esto es eso: un operador, cuatro empresas, sostenidas a un estándar. Sin revenderlas, sin remarcarlas, sin presentarlas en un pitch deck.",
-        "body3": "Financio las empresas que opero, entrego las partes más difíciles y me quedo en ellas. Capital alineado a la ingeniería, no a un discurso. Las capas difíciles son mías; el largo plazo es el punto.",
+        "body3": "Financio las empresas que opero, entrego las partes más difíciles y me quedo en ellas. Capital alineado a la ingeniería, no a un discurso. Lo difícil es mío; el largo plazo es el punto.",
         "hq_label": "Oficinas centrales",
         "hq": "México",
         "focus_label": "Enfoque",
-        "focus": "Kernel → Nube"
+        "focus": "Software → Estructura"
+    },
+    "contact": {
+        "eyebrow": "Contacto",
+        "card_title": "Cuéntame más.",
+        "label_name": "Nombre",
+        "placeholder_name": "Nombre",
+        "label_project": "Proyecto",
+        "placeholder_project": "Describe tu proyecto — qué construyes, el stack, el timeline.",
+        "send": "Enviar",
+        "alert_name": "Por favor escribe tu nombre.",
+        "alert_body": "Por favor describe tu proyecto.",
+        "alert_thanks": "¡Gracias {n}! Te responderé pronto."
+    },
+    "meta": {
+        "home": { "title": "Daniel Limón — Holding Operativo", "description": "Daniel Limón es un holding. Construimos, financiamos y operamos las empresas que poseemos — desde kernels de sistema operativo y agentes autónomos hasta mobiliario y arquitectura." },
+        "labs": { "title": "Daniel Limón — Empresas", "description": "El portafolio de Daniel Limón Holdings — cuatro subsidiarias, construidas y operadas como un solo grupo." },
+        "about": { "title": "Daniel Limón — Acerca de", "description": "Daniel Limón — el operador detrás del holding. En primera persona: quién soy, cómo trabajo y por qué un holding sólo se gana el nombre cuando opera lo que posee." },
+        "contact": { "title": "Daniel Limón — Contacto", "description": "Línea directa con Daniel Limón — alianzas, inversión y cosas difíciles de construir." }
     }
 }

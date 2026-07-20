@@ -11,7 +11,6 @@
         <nav class="nav-primary">
             <a href="/labs/" class="nav-link" data-page="/labs/">${translation.header.labs}</a>
             <a href="/aboutme/" class="nav-link" data-page="/aboutme/">${translation.header.about_me}</a>
-            <a href="/contact/" class="nav-link" data-page="/contact/">${translation.header.contact}</a>
         </nav>
         <a href="/contact/" class="nav-cta">${translation.header.contact} →</a>
         <button class="hamburger" aria-label="Menu" aria-expanded="false">☰</button>
@@ -184,21 +183,17 @@
         if (a.dataset.page === path) a.classList.add('active');
     });
 
-    // Smooth internal navigation (page fade)
+    // Smooth internal navigation (page fade). stopPropagation keeps the
+    // global injector handler from re-firing on these (which would reload
+    // the page on a same-route click instead of scrolling to top).
     header.querySelectorAll('a[data-page]').forEach(a => {
         a.addEventListener('click', (e) => {
-            if (a.dataset.page === path) { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
-            e.preventDefault();
+            if (menu?.classList.contains('open')) { menu.classList.remove('open'); burger.textContent = '☰'; burger.setAttribute('aria-expanded', 'false'); }
+            if (a.dataset.page === path) { e.preventDefault(); e.stopPropagation(); window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+            e.preventDefault(); e.stopPropagation();
             document.body.classList.remove('ready');
             setTimeout(() => { window.location.href = a.dataset.page; }, 280);
         });
-    });
-
-    // Brand click → home (or scroll top on home)
-    header.querySelector('.brand').addEventListener('click', (e) => {
-        if (path === '/') { window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
-        document.body.classList.remove('ready');
-        setTimeout(() => { window.location.href = '/'; }, 280);
     });
 
     // Scrolled state (nav intensifies)
@@ -220,6 +215,13 @@
     });
     document.addEventListener('click', (e) => {
         if (!header.contains(e.target)) {
+            menu.classList.remove('open');
+            burger.textContent = '☰';
+            burger.setAttribute('aria-expanded', 'false');
+        }
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && menu.classList.contains('open')) {
             menu.classList.remove('open');
             burger.textContent = '☰';
             burger.setAttribute('aria-expanded', 'false');

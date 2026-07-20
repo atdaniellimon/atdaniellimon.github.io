@@ -14,6 +14,12 @@ var translation = null;
             return response.json();
         }).then((json) => {
             translation = json;
+            // Reflect the active language on <html> so screen readers
+            // pronounce the (now Spanish) text with Spanish phonetics, and
+            // match the og:locale used by social scrapers.
+            document.documentElement.lang = lang;
+            const ogLocale = document.querySelector('meta[property="og:locale"]');
+            if(ogLocale) ogLocale.setAttribute('content', lang === 'es' ? 'es_MX' : 'en_US');
             window.dispatchEvent(new CustomEvent('Translations_Ready'));
         })
     }

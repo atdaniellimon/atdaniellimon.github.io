@@ -1,82 +1,90 @@
 (async function(){
+    const routeKey = (function(){
+        const p = window.location.pathname;
+        if(p === '/') return 'home';
+        if(p === '/labs/') return 'labs';
+        if(p === '/aboutme/') return 'about';
+        if(p === '/contact/') return 'contact';
+        return null;
+    })();
+
     const pagesList = {
         "/": "Daniel Limón — Technology Holding",
         "/labs/": "Daniel Limón — Ventures",
         "/aboutme/": "Daniel Limón — About",
         "/contact/": "Daniel Limón — Contact",
-        "/404.html": "Not found — Daniel Limón",
-        "/project/": "Daniel Limón — Project"
-    }
-    const currentTitle = pagesList[window.location.pathname];
-    
-    if(currentTitle){
-        document.title = currentTitle; 
-    } else {
-        document.title = "Daniel Limon";
-    }
+        "/404.html": "Not found — Daniel Limón"
+    };
+    document.title = pagesList[window.location.pathname] || "Daniel Limón";
 
-    var icn, touch, translations, header, footer, MokeSDK;
-    icn = document.createElement('link');
+    // Favicon + apple-touch
+    const icn = document.createElement('link');
     icn.setAttribute('rel', 'shortcut icon');
     icn.href = '/src/assets/img/logo_min.png';
-    icn.setAttribute('type', 'image/x-icon')
-
-    touch = document.createElement('link');
+    icn.setAttribute('type', 'image/x-icon');
+    const touch = document.createElement('link');
     touch.setAttribute('rel', 'apple-touch-icon');
     touch.href = '/src/assets/img/logo_min.png';
+    document.head.appendChild(icn);
+    document.head.appendChild(touch);
 
-    const cfgRequest = new Request(`${window.location.pathname}cfg.json`);
-    var settings;
+    // Per-directory cfg.json (header/footer toggle). Never blocks:
+    // resolves in parallel; defaults to both header+footer on when the
+    // file is missing or malformed.
+    const dir = window.location.pathname.replace(/[^/]*$/, '');
+    const settingsPromise = fetch(dir + 'cfg.json')
+        .then(r => r.ok ? r.json() : Promise.reject('no cfg'))
+        .catch(() => ({ header: true, footer: true }));
 
-    fetch(cfgRequest).then((response) => {
-        if(!response.ok){
-            throw new Error("No cfg file found or http error");
-
-            settings = {
-                'header': false,
-                'footer': false
-            }
-        }
-        return response.json();
-    }).then((json) => {
-        settings = json;
-    })
+    // Localise <title>, meta description, and OG/Twitter cards to the
+    // loaded language. Static English values in the HTML serve crawlers
+    // that don't run JS; this updates them once translations land.
+    function applySEO(t){
+        if(!t?.meta || !routeKey) return;
+        const m = t.meta[routeKey];
+        if(!m) return;
+        if(m.title) document.title = m.title;
+        const setMeta = (sel, val) => { if(!val) return; const el = document.querySelector(sel); if(el) el.setAttribute('content', val); };
+        setMeta('meta[name="description"]', m.description);
+        setMeta('meta[property="og:description"]', m.description);
+        setMeta('meta[property="og:title"]', m.title);
+        setMeta('meta[name="twitter:title"]', m.title);
+        setMeta('meta[name="twitter:description"]', m.description);
+    }
 
     window.addEventListener("Translations_Ready", async () => {
         Moke.Hydration.register(translation);
-        if(settings?.header !== false){
-            await Moke.import({
-                piece: 'Header',
-                def_route: true
-            });
-        }
+        applySEO(translation);
 
+        const settings = await settingsPromise;
+        if(settings?.header !== false){
+            await Moke.import({ piece: 'Header', def_route: true });
+        }
         if(settings?.footer !== false){
-            await Moke.import({
-                piece: 'Footer',
-                def_route: true
-            });
+            await Moke.import({ piece: 'Footer', def_route: true });
         }
 
         document.body.classList.add('ready');
-        /* 
-            Kidnap browser's default callback and change it with my own
-        */
+
+        // Global internal-link navigation with a soft fade.
+        // In-page anchors, mailto/tel, external, and target=_blank links
+        // are left to the browser so they open/resolve natively.
+        // (Header nav links stopPropagation on their own handler so they
+        //  get same-route→scroll-top instead of a reload, and aren't run twice.)
         document.body.addEventListener('click', (e) => {
             const el = e.target.closest('a');
-            if(el && !el.getAttribute('href').startsWith('#')){
-                e.preventDefault();
-                const href = el.getAttribute('href') || el.dataset.href; 
-                document.body.classList.remove('ready');
-                setTimeout(() => {
-                    window.location.href = href;
-                }, 300);
-            }
+            if(!el) return;
+            const href = el.getAttribute('href');
+            if(!href || !href.trim() || href.startsWith('#')) return;
+            const target = (el.target || '').toLowerCase();
+            if(target === '_blank') return;
+            if(href.startsWith('mailto:') || href.startsWith('tel:')) return;
+            if(/^(https?:)?\/\//.test(href) && !href.startsWith(window.location.origin)) return;
+            e.preventDefault();
+            document.body.classList.remove('ready');
+            setTimeout(() => { window.location.href = href; }, 280);
         });
     });
 
-    Moke.import({
-        piece: 'Translations',
-        def_route: true
-    });
+    Moke.import({ piece: 'Translations', def_route: true });
 })();

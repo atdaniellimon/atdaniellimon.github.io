@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+/* Fonts are loaded via <link> in each page <head> so the browser fetches
+   them in parallel with this stylesheet (a CSS @import would serialise). */
 
 /* ============================================
    TOKENS — Dark premium · Champagne brass
@@ -15,7 +16,7 @@
     --brass: #CDAE63;
     --brass-2: #9C8240;
     --steel: #8A93A0;
-    --steel-2: #5C6470;
+    --steel-2: #7B838F;
     --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
     --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
     --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -616,10 +617,19 @@ h1, h2, h3 {
     padding: 38px 34px;
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset;
 }
-.contact-card h1 {
+.contact-card h2 {
     font-size: 1.5rem;
     margin: 0 0 24px;
     color: var(--platinum);
+}
+.contact-card label.field-label {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--steel);
+    margin: 0 0 8px;
 }
 .contact-card input, .contact-card textarea {
     width: 100%;
@@ -676,6 +686,22 @@ h1, h2, h3 {
     .about-meta { gap: 40px; }
     .cta-band { padding: 48px 24px; }
     .contact-card { padding: 30px 22px; }
+    /* blur is expensive to repaint on scroll for large panels; let the
+       near-black background carry these on small screens instead. */
+    .lab-card, .contact-card, .cta-band {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+}
+
+/* Touch devices have no hover, so the ::after hairline never shows and a
+   card feels inert when tapped. Give a small, explicit press cue. */
+@media (hover: none) {
+    .lab-card:active {
+        transform: translateY(-2px);
+        border-color: var(--line-2);
+    }
+    .lab-card:active::after { opacity: 0.5; }
 }
 
 /* ============================================

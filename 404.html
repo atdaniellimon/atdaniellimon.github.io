@@ -1,30 +1,94 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Not found — Daniel Limón</title>
+    <meta name="robots" content="noindex, follow">
+    <meta name="theme-color" content="#0A0B0D">
     <link rel="stylesheet" href="/src/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        .error-container {
-            height: 100vh;
+        /* This page loads style.css for its tokens, but never the injector /
+           MokeSDK (there's no content to hydrate). body{opacity:0} from the
+           stylesheet would hide us forever with no JS to add .ready — so
+           force the page visible here. */
+        body { opacity: 1 !important; }
+        .error {
+            width: 92vw;
+            max-width: 1400px;
+            margin: 0 auto;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
+            align-items: flex-start;
             justify-content: center;
-            align-items: center;
-            text-align: center;
+            gap: 26px;
+            position: relative;
         }
-        h1 { font-size: 5rem; margin: 0; opacity: 0.8; }
-        p { font-size: 1.2rem; color: #666; }
-        a{ position: absolute; bottom: 30px; left: 30px;}
+        .error .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            color: var(--brass);
+        }
+        .error .eyebrow::before {
+            content: '';
+            width: 22px;
+            height: 1px;
+            background: var(--brass);
+            opacity: 0.55;
+        }
+        .error h1 {
+            font-family: 'Instrument Serif', serif;
+            font-weight: 400;
+            font-size: clamp(3.6rem, 11vw, 8rem);
+            line-height: 1;
+            letter-spacing: -2px;
+            margin: 0;
+            background: linear-gradient(110deg, var(--platinum) 45%, var(--brass));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .error p {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+            line-height: 1.5;
+            color: var(--platinum-2);
+            max-width: 44ch;
+            margin: 0;
+        }
+        .error .links { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 8px; }
+        .error .meta {
+            position: absolute;
+            top: clamp(28px, 6vh, 64px);
+            right: clamp(16px, 4vw, 48px);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.58rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--steel-2);
+        }
     </style>
 </head>
 <body>
-    <div class="error-container">
-        <h1>404</h1>
-        <p>Looks like that route doesn't exist</p>
-        <a href="/" style="color: black; text-decoration: underline;">Go back to root</a>
-    </div>
-
-    <script src="/src/utils/injector.js"></script>
+    <main class="error">
+        <span class="eyebrow">404 · Off-route</span>
+        <h1>Lost the line.</h1>
+        <p>That route isn't part of the holding. Nothing here to build on — head back to the operator.</p>
+        <div class="links">
+            <a href="/" class="btn-primary">Back to the holding →</a>
+            <a href="/contact/" class="btn-secondary">Contact</a>
+        </div>
+        <span class="meta">Kernel → Cloud</span>
+    </main>
 </body>
 </html>

@@ -7,13 +7,38 @@
     <link rel="stylesheet" href="/src/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <meta name="description" content="Direct line to Daniel Limón — partnerships, investment, and engineering conversations.">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Direct line to Daniel Limón — partnerships, investment, and hard things to build.">
     <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0A0B0D">
+    <link rel="canonical" href="https://atdaniellimon.github.io/contact/">
+    <meta property="og:site_name" content="Daniel Limón Holdings">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="https://atdaniellimon.github.io/contact/">
+    <meta property="og:title" content="Daniel Limón — Contact">
+    <meta property="og:description" content="Direct line to Daniel Limón — partnerships, investment, and hard things to build.">
+    <meta property="og:image" content="https://atdaniellimon.github.io/src/assets/img/logo.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Daniel Limón — Contact">
+    <meta name="twitter:description" content="Direct line to Daniel Limón — partnerships, investment, and hard things to build.">
+    <meta name="twitter:image" content="https://atdaniellimon.github.io/src/assets/img/logo.png">
 </head>
 <body>
+    <noscript>
+        <style>body{opacity:1 !important}.hero,.banner,.philosophy,.model,.ventures-home,.cta-band,.about-prose,.contact-container{display:none !important}</style>
+        <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:8vh 8vw;text-align:center">
+            <div>
+                <h2 style="font-family:'Instrument Serif',serif;font-size:2.4rem;color:#CDAE63;margin:0 0 14px;font-weight:400">Daniel Limón</h2>
+                <p style="font-family:serif;color:#C7C4BD;max-width:46ch;margin:0 auto 20px;line-height:1.5">This site is rendered as an interactive shell and needs JavaScript enabled to show its content. You can still reach the operator directly.</p>
+                <a href="mailto:d4nilin0n@icloud.com" style="font-family:'JetBrains Mono',monospace;color:#CDAE63;text-decoration:none;border:1px solid #CDAE63;padding:9px 16px;border-radius:6px">d4nilin0n@icloud.com</a>
+            </div>
+        </div>
+    </noscript>
     <section class="banner" data-reveal>
-        <span class="eyebrow">{{hero.contact.title}}</span>
-        <h1>{{hero.contact.subtitle}}</h1>
+        <span class="eyebrow">{{contact.eyebrow}}</span>
+        <h1>{{hero.contact.title}}</h1>
+        <p>{{hero.contact.subtitle}}</p>
         <div class="links">
             <a href="https://wa.me/12148968727" class="btn-secondary" target="_blank" rel="noopener">WhatsApp</a>
             <a href="mailto:d4nilin0n@icloud.com" class="btn-secondary">Email</a>
@@ -23,10 +48,12 @@
 
     <div class="contact-container">
         <div class="email-form contact-card" data-reveal>
-            <h1>Tell me more.</h1>
-            <input type="text" id="customer_name" placeholder="Name" autocomplete="name">
-            <textarea id="request_body" placeholder="Describe your project — what you're building, the stack, the timeline." rows="6"></textarea>
-            <button onclick="sendMailForm()">Send</button>
+            <h2 id="contact-card-title"></h2>
+            <label for="customer_name" id="lbl-name" class="field-label"></label>
+            <input type="text" id="customer_name" autocomplete="name">
+            <label for="request_body" id="lbl-project" class="field-label"></label>
+            <textarea id="request_body" rows="6"></textarea>
+            <button id="contact-send" onclick="sendMailForm()"></button>
         </div>
     </div>
 
@@ -35,15 +62,28 @@
     <script src="/src/utils/motion.js"></script>
     <script>
         function sendMailForm() {
+            const t = (window.translation && translation.contact) || {};
             const name = document.getElementById('customer_name').value.trim();
             const body = document.getElementById('request_body').value.trim();
-            if (!name) { Moke.alert('Please enter your name.'); return; }
-            if (!body || body.length < 10) { Moke.alert('Please describe your project.'); return; }
+            if (!name) { Moke.alert(t.alert_name || 'Please enter your name.'); return; }
+            if (!body || body.length < 10) { Moke.alert(t.alert_body || 'Please describe your project.'); return; }
             const mailURL = `mailto:d4nilin0n@icloud.com?subject=${encodeURIComponent('Consult from ' + name)}&body=${encodeURIComponent(body)}`;
             window.location.href = mailURL;
-            Moke.alert(`Thanks ${name}! I'll get back to you soon.`);
+            Moke.alert((t.alert_thanks || "Thanks {n}! I'll get back to you soon.").replace('{n}', name));
         }
         window.sendMailForm = sendMailForm;
+        // The MokeSDK hydrator covers h1/p/span/input but not <label>,
+        // <textarea>, or a <button>'s inner text — so populate the form
+        // fields from translation once it's ready.
+        window.addEventListener('Translations_Ready', () => {
+            const t = (window.translation && translation.contact) || {};
+            document.getElementById('contact-card-title').textContent = t.card_title || 'Tell me more.';
+            document.getElementById('lbl-name').textContent = t.label_name || 'Name';
+            document.getElementById('lbl-project').textContent = t.label_project || 'Project';
+            document.getElementById('customer_name').placeholder = t.placeholder_name || 'Name';
+            document.getElementById('request_body').placeholder = t.placeholder_project || "Describe your project — what you're building, the stack, the timeline.";
+            document.getElementById('contact-send').textContent = t.send || 'Send';
+        });
     </script>
 </body>
 </html>
