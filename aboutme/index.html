@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <meta name="description" content="Daniel Limón is the operator behind the holding — an engineer who builds and runs the companies he owns.">
+    <meta name="description" content="Daniel Limón — the engineer behind the holding. First-person: who I am, how I work, and why a holding only earns the name when it runs what it owns.">
     <meta name="robots" content="index, follow">
 
     <script type="importmap">
@@ -35,27 +35,16 @@
     <section class="about-prose" data-reveal>
         <p>{{about.body1}}</p>
         <p>{{about.body2}}</p>
+        <p>{{about.body3}}</p>
         <div class="about-meta">
             <div><span class="about-k">{{about.hq_label}}</span><span class="about-v">{{about.hq}}</span></div>
             <div><span class="about-k">{{about.focus_label}}</span><span class="about-v">{{about.focus}}</span></div>
         </div>
     </section>
 
-    <section class="ventures-home">
-        <header class="section-head" data-reveal>
-            <span class="eyebrow">{{ventures.eyebrow}}</span>
-            <h2>{{hero.ventures.title}}</h2>
-            <p class="lede">{{hero.ventures.subtitle}}</p>
-        </header>
-        <div class="labs-grid" data-reveal data-stagger></div>
-    </section>
-
     <script src="/src/components/MokeSDK/index.js"></script>
     <script src="/src/utils/injector.js"></script>
     <script src="/src/utils/motion.js"></script>
-    <script>
-        Moke.import({ piece: 'Labs', def_route: true });
-    </script>
     <script type="module" src="/src/components/Hero3D/index.js"></script>
 </body>
 </html>

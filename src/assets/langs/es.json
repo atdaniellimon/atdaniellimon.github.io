@@ -50,18 +50,9 @@
         "eyebrow": "Cómo operamos",
         "title": "Invertir. Construir. Operar.",
         "items": [
-            {
-                "kicker": "Invertir",
-                "body": "Financiamos las empresas que operamos — capital alineado a la ingeniería, no al pitch."
-            },
-            {
-                "kicker": "Construir",
-                "body": "Kernels, firmware, agentes, dashboards — entregados al estándar que nos exigimos."
-            },
-            {
-                "kicker": "Operar",
-                "body": "No vendemos lo que construimos. Operamos nuestras empresas a largo plazo."
-            }
+            { "kicker": "Invertir", "body": "Financiamos las empresas que operamos — capital alineado a la ingeniería, no al pitch." },
+            { "kicker": "Construir", "body": "Kernels, firmware, agentes, dashboards — entregados al estándar que nos exigimos." },
+            { "kicker": "Operar", "body": "No vendemos lo que construimos. Operamos nuestras empresas a largo plazo." }
         ]
     },
     "ventures": {
@@ -74,7 +65,7 @@
     },
     "footer": {
         "tagline": "Impulsando la innovación a través de empresas tecnológicas.",
-        "links_title": "Enlaces rápidos",
+        "links_title": "Enlaces ráctos",
         "status_title": "Estado del holding",
         "status_available": "Invirtiendo y construyendo activamente",
         "handcraft": "Oficinas centrales en México",
@@ -82,10 +73,11 @@
     },
     "about": {
         "eyebrow": "Acerca de",
-        "title": "Daniel Limón opera lo que posee.",
-        "lede": "Ingeniero primero, operador segundo — el holding es el estándar de una persona aplicado a cuatro empresas.",
-        "body1": "Daniel Limón es el operador detrás del holding. El grupo no compra participación en empresas ajenas; es un solo estándar de ingeniería aplicado al software que el holding construye y opera por sí mismo — kernels, stacks automotrices, agentes autónomos y el brazo de diseño que fija la barra visual para todos.",
-        "body2": "El trabajo vive cerca del metal: kernels de sistema, firmware y drivers, manejo autónomo y agentes de IA que razonan dentro de sandboxes. Nada aquí se revende ni se repinta de marca blanca.",
+        "title": "Soy Daniel Limón.",
+        "lede": "Un ingeniero que decidió operar lo que construye. Cuatro empresas, un estándar — el mío.",
+        "body1": "Trabajo cerca del metal. Kernels de sistema, stacks automotrices, agentes autónomos y un brazo de diseño que cuida cómo se ve todo. No compro participación en empresas ajenas y no repinto el trabajo de otros — si está mi nombre, lo construí y lo opero.",
+        "body2": "Creo que un holding sólo se gana el nombre cuando opera lo que posee. Así que esto es eso: un operador, cuatro empresas, sostenidas a un estándar. Sin revenderlas, sin remarcarlas, sin presentarlas en un pitch deck.",
+        "body3": "Financio las empresas que opero, entrego las partes más difíciles y me quedo en ellas. Capital alineado a la ingeniería, no a un discurso. Las capas difíciles son mías; el largo plazo es el punto.",
         "hq_label": "Oficinas centrales",
         "hq": "México",
         "focus_label": "Enfoque",

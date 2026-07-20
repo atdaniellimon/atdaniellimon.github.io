@@ -6,8 +6,7 @@
 (async function(){
     const headerHTML = `
         <a class="brand" data-page="/" aria-label="Daniel Limón">
-            <span class="brand-dot"></span>
-            <span class="brand-name">Daniel Limón</span>
+            <img src="/src/assets/img/logo.png">
         </a>
         <nav class="nav-primary">
             <a href="/labs/" class="nav-link" data-page="/labs/">${translation.header.labs}</a>
@@ -52,19 +51,12 @@
             text-decoration: none;
             cursor: pointer;
             margin-right: auto;
+            height: 90%;
         }
-        .brand-dot {
-            width: 9px; height: 9px; border-radius: 50%;
-            background: linear-gradient(135deg, var(--brass), var(--brass-2));
-            box-shadow: 0 0 0 3px rgba(205, 174, 99, 0.16);
-            flex-shrink: 0;
-        }
-        .brand-name {
-            font-family: 'Instrument Serif', serif;
-            font-size: 1.2rem;
-            color: var(--platinum);
-            letter-spacing: -0.3px;
-            line-height: 1;
+
+        header.main-lemons-header img{
+            height: 80%;
+            filter: invert();
         }
 
         .nav-primary {

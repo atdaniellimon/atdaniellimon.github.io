@@ -50,18 +50,9 @@
         "eyebrow": "How we operate",
         "title": "Invest. Build. Operate.",
         "items": [
-            {
-                "kicker": "Invest",
-                "body": "We fund the companies we run — capital aligned to engineering, not to a pitch deck."
-            },
-            {
-                "kicker": "Build",
-                "body": "Kernels, firmware, agents, dashboards — shipped to the standard we hold ourselves to."
-            },
-            {
-                "kicker": "Operate",
-                "body": "We don't flip what we build. We run our companies for the long term."
-            }
+            { "kicker": "Invest", "body": "We fund the companies we run — capital aligned to engineering, not to a pitch deck." },
+            { "kicker": "Build", "body": "Kernels, firmware, agents, dashboards — shipped to the standard we hold ourselves to." },
+            { "kicker": "Operate", "body": "We don't flip what we build. We run our companies for the long term." }
         ]
     },
     "ventures": {
@@ -82,10 +73,11 @@
     },
     "about": {
         "eyebrow": "About",
-        "title": "Daniel Limón runs what he owns.",
-        "lede": "Engineer first, operator second — the holding is one person's standard applied to four companies.",
-        "body1": "Daniel Limón is the operator behind the holding. The group doesn't buy equity in other people's companies; it's one engineering standard applied to the software the holding builds and runs itself — kernels, automotive stacks, autonomous agents, and the design arm that sets the visual bar for all of them.",
-        "body2": "The work sits close to the metal: operating-system kernels, firmware and drivers, autonomous driving, and AI agents that reason inside sandboxes. Nothing here is resold or relabelled.",
+        "title": "I'm Daniel Limón.",
+        "lede": "An engineer who decided to run what he builds. Four companies, one standard — mine.",
+        "body1": "I work close to the metal. Operating-system kernels, automotive stacks, autonomous agents, and a design arm that holds the line on how all of it looks. I don't buy equity in other people's companies and I don't relabel other people's work — if my name is on it, I built it and I operate it.",
+        "body2": "I think a holding only earns the name when it runs what it owns. So that's what this is: one operator, four companies, held to one standard. Not flipped, not resold, not pitched to a deck.",
+        "body3": "I fund the companies I run, I ship the parts that are hardest, and I stay on them. Capital aligned to engineering, not to a pitch. The hard layers are mine; the long term is the point.",
         "hq_label": "Headquartered",
         "hq": "Mexico",
         "focus_label": "Focus",

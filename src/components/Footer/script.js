@@ -27,7 +27,7 @@
             </div>
             <div class="footer-social">
                 <a href="https://github.com/atdaniellimon" target="_blank" rel="noopener">GitHub</a>
-                <a href="https://linkedin.com/in/daniel-limon" target="_blank" rel="noopener">LinkedIn</a>
+                <a href="https://linkedin.com/in/daniel-limón-525298421" target="_blank" rel="noopener">LinkedIn</a>
                 <a href="https://twitter.com/atdaniellimon" target="_blank" rel="noopener">Twitter</a>
             </div>
         </div>

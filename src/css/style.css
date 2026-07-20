@@ -475,6 +475,16 @@ h1, h2, h3 {
     color: var(--steel-2);
     text-transform: uppercase;
 }
+.lab-sector {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.58rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--brass);
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+}
 .lab-content h2 {
     font-family: 'Instrument Serif', serif;
     font-size: 2rem;
