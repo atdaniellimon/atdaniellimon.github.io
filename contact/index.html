@@ -31,7 +31,7 @@
             <div>
                 <h2 style="font-family:'Instrument Serif',serif;font-size:2.4rem;color:#CDAE63;margin:0 0 14px;font-weight:400">Daniel Limón</h2>
                 <p style="font-family:serif;color:#C7C4BD;max-width:46ch;margin:0 auto 20px;line-height:1.5">This site is rendered as an interactive shell and needs JavaScript enabled to show its content. You can still reach the operator directly.</p>
-                <a href="mailto:d4nilin0n@icloud.com" style="font-family:'JetBrains Mono',monospace;color:#CDAE63;text-decoration:none;border:1px solid #CDAE63;padding:9px 16px;border-radius:6px">d4nilin0n@icloud.com</a>
+                <a href="mailto:look@daniellimon.uk" style="font-family:'JetBrains Mono',monospace;color:#CDAE63;text-decoration:none;border:1px solid #CDAE63;padding:9px 16px;border-radius:6px">d4nilin0n@icloud.com</a>
             </div>
         </div>
     </noscript>
@@ -41,8 +41,8 @@
         <p>{{hero.contact.subtitle}}</p>
         <div class="links">
             <a href="https://wa.me/522311477876" class="btn-secondary" target="_blank" rel="noopener">WhatsApp</a>
-            <a href="mailto:d4nilin0n@icloud.com" class="btn-secondary">Email</a>
-            <a href="https://instagram.com/d.limvn" class="btn-secondary" target="_blank" rel="noopener">Instagram</a>
+            <a href="mailto:look@daniellimon.uk" class="btn-secondary">Email</a>
+            <a href="https://instagram.com/dlimvn" class="btn-secondary" target="_blank" rel="noopener">Instagram</a>
         </div>
     </section>
 
@@ -67,7 +67,7 @@
             const body = document.getElementById('request_body').value.trim();
             if (!name) { Moke.alert(t.alert_name || 'Please enter your name.'); return; }
             if (!body || body.length < 10) { Moke.alert(t.alert_body || 'Please describe your project.'); return; }
-            const mailURL = `mailto:d4nilin0n@icloud.com?subject=${encodeURIComponent('Consult from ' + name)}&body=${encodeURIComponent(body)}`;
+            const mailURL = `mailto:look@daniellimon.uk?subject=${encodeURIComponent('Consult from ' + name)}&body=${encodeURIComponent(body)}`;
             window.location.href = mailURL;
             Moke.alert((t.alert_thanks || "Thanks {n}! I'll get back to you soon.").replace('{n}', name));
         }
