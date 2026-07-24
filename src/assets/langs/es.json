@@ -1,15 +1,15 @@
 {
     "header": {
         "labs": "Empresas",
-        "about_me": "Acerca de",
+        "about_me": "Sobre mí",
         "contact": "Contacto",
         "home": "Inicio"
     },
     "hero": {
         "home": {
             "eyebrow": "Holding de ingeniería",
-            "title": "Construimos lo que operamos.",
-            "subtitle": "Daniel Limón es un holding. Construimos, financiamos y operamos las empresas que poseemos — desde kernels de sistema operativo y agentes autónomos hasta el mobiliario y la arquitectura que los rodea.",
+            "title": "Construido para perdurar.",
+            "subtitle": "Daniel Limón es un holding operativo. Construimos, financiamos y operamos las empresas que poseemos, desde núcleos de sistemas operativos hasta mobiliario y arquitectura.",
             "links": {
                 "view_ventures": "Explorar empresas →",
                 "partner": "Trabaja con nosotros"
@@ -21,28 +21,28 @@
         },
         "contact": {
             "title": "Hablemos",
-            "subtitle": "Línea directa con el operador — no un formulario a una cola."
+            "subtitle": "Línea directa con el operador, no un formulario en una cola de espera."
         }
     },
     "philosophy": {
         "eyebrow": "Filosofía",
         "title": "Un operador. Cuatro empresas. Un estándar.",
-        "lede": "Un holding sólo se gana el nombre cuando opera lo que posee.",
+        "lede": "Un holding solo se gana el nombre cuando opera lo que posee.",
         "principles": [
             {
                 "kicker": "01",
-                "title": "Construimos, no revendemos.",
-                "body": "Cada subsidiaria se construye y opera bajo el mismo estándar de ingeniería. Sin núcleo tercerizado, sin producto de marca blanca — la parte difícil es nuestra."
+                "title": "Construir, no revender.",
+                "body": "Cada subsidiaria se construye y opera bajo el mismo estándar de ingeniería. Sin núcleos subcontratados ni productos de marca blanca: las partes difíciles son nuestras."
             },
             {
                 "kicker": "02",
-                "title": "Bits y material.",
-                "body": "Kernels de sistema y agentes autónomos por un lado; mobiliario y arquitectura por el otro. Construimos lo difícil — sea en código o en material."
+                "title": "Código y materia.",
+                "body": "Núcleos de sistemas operativos y agentes autónomos por un lado; mobiliario y arquitectura por el otro. Construimos las cosas difíciles, ya sea que se entreguen en código o en materia."
             },
             {
                 "kicker": "03",
-                "title": "Honestidad sobre hype.",
-                "body": "Nuestros agentes de IA razonan dentro de sandboxes y se auto-depuran bajo un microscopio. Construimos para la verdad verificable, no para demos."
+                "title": "Honestidad antes que exageración.",
+                "body": "Nuestros agentes de IA razonan dentro de entornos aislados y se autodepuran bajo el microscopio. Construimos para la verdad verificable, no para demostraciones."
             }
         ]
     },
@@ -50,17 +50,17 @@
         "eyebrow": "Cómo operamos",
         "title": "Invertir. Construir. Operar.",
         "items": [
-            { "kicker": "Invertir", "body": "Financiamos las empresas que operamos — capital alineado a la ingeniería, no al pitch." },
-            { "kicker": "Construir", "body": "Kernels, agentes, dashboards y el mobiliario y los espacios que los rodean — construidos a un estándar, el nuestro." },
-            { "kicker": "Operar", "body": "No vendemos lo que construimos. Operamos nuestras empresas a largo plazo." }
+            { "kicker": "Invertir", "body": "Financiamos las empresas que operamos: capital alineado a la ingeniería, no a una presentación de ventas." },
+            { "kicker": "Construir", "body": "Núcleos, agentes, paneles de control, así como los muebles y espacios a su alrededor: todo construido bajo un mismo estándar, el nuestro." },
+            { "kicker": "Operar", "body": "No revendemos lo que construimos. Operamos nuestras empresas a largo plazo." }
         ]
     },
     "ventures": {
         "eyebrow": "El portafolio"
     },
     "cta": {
-        "title": "¿Construyes algo difícil?",
-        "body": "Si tu trabajo es difícil de imitar — un kernel, una flota, un agente o un edificio — queremos saber de ello.",
+        "title": "¿Estás construyendo algo difícil?",
+        "body": "Si tu trabajo es difícil de copiar (un núcleo, una flota, un agente o un edificio), nos gustaría saber de ello.",
         "button": "Iniciar una conversación →"
     },
     "footer": {
@@ -68,17 +68,20 @@
         "links_title": "Enlaces rápidos",
         "status_title": "Estado del holding",
         "status_available": "Invirtiendo y construyendo activamente",
-        "handcraft": "Oficinas centrales en México",
+        "handcraft": "Sede principal en México",
         "donot": "© 2026 Daniel Limón Holdings. Todos los derechos reservados."
     },
     "about": {
-        "eyebrow": "Acerca de",
+        "eyebrow": "Sobre mí",
         "title": "Soy Daniel Limón.",
-        "lede": "Un ingeniero que decidió operar lo que construye. Cuatro empresas, un estándar — el mío.",
-        "body1": "Trabajo en lo difícil — kernels de sistema, stacks automotrices, agentes autónomos y un estudio que construye el mobiliario y la arquitectura que los rodea. No compro participación en empresas ajenas y no repinto el trabajo de otros — si está mi nombre, lo construí y lo opero.",
-        "body2": "Creo que un holding sólo se gana el nombre cuando opera lo que posee. Así que esto es eso: un operador, cuatro empresas, sostenidas a un estándar. Sin revenderlas, sin remarcarlas, sin presentarlas en un pitch deck.",
-        "body3": "Financio las empresas que opero, entrego las partes más difíciles y me quedo en ellas. Capital alineado a la ingeniería, no a un discurso. Lo difícil es mío; el largo plazo es el punto.",
-        "hq_label": "Oficinas centrales",
+        "lede": "Un ingeniero que decidió operar lo que construye. Porque las personas merecen lo mejor.",
+        "body1": "Soy un operador y creador con sede en México. Mi camino comenzó en el momento en que mi mamá me enseñó a dibujar con la librería Turtle de Python; ver cómo el código se traducía en formas físicas en la pantalla me cautivó al instante. A los seis años ya me había sumergido en las tecnologías web, dominando HTML, CSS y JavaScript a los nueve y obteniendo varias certificaciones puramente por curiosidad y aburrimiento. Trabajo en casi todas las cosas difíciles que puedas imaginar, desde sistemas operativos hasta un estudio que diseña y construye el mobiliario y la arquitectura a su alrededor. No compro participación en empresas ajenas ni reetiqueto el trabajo de otros: si mi nombre está en ello, yo lo construí y yo lo opero.",
+        "body2": "La programación se convirtió rápidamente en mi terreno de juego principal. Empecé a desarrollar sistemas operativos de juguete en HTML como un pasatiempo, iterando en proyectos iniciales como RedOS, PixelOS, mokeOS y ShimmerOS. Esa experimentación temprana sentó las bases para mi actual sistema operativo bare-metal, Galileo. Cuando emergió el auge de la IA con ChatGPT, me propuse entrenar mis propios LLMs usando Google Colab para superar las limitaciones del hardware local. Creo que un holding solo se gana el nombre cuando opera lo que posee. De eso se trata esto: un operador, cuatro empresas, bajo un mismo estándar. Sin especular, sin revender y sin discursos de ventas.",
+        "body3": "Impulsado por el instinto de crear sistemas desde cero, mi trabajo se expandió en 2025 hacia el sector inmobiliario, la construcción, el diseño arquitectónico, el diseño de interiores y la fabricación de muebles, motivado por el impulso de mi padrino, Sinesio René Hernández.",
+        "body4": "Trabajo en casi todas las cosas difíciles que puedas imaginar, desde sistemas operativos de bajo nivel hasta el estudio que construye los muebles y la arquitectura a su alrededor. No compro participación en empresas ajenas ni reetiqueto el trabajo de otros: si mi nombre está en ello, yo lo construí y yo lo opero.",
+        "body5": "Creo que un holding solo se gana el nombre cuando opera lo que posee. De eso se trata esto: un operador, cuatro empresas, bajo un mismo estándar. Sin especular, sin revender y sin discursos de ventas.",
+        "body6": "Financio las empresas que opero, entrego las partes más complejas y me mantengo al frente. El capital está estrictamente alineado con la ingeniería, no con una presentación. Las partes difíciles son mías; el largo plazo es el objetivo.",
+        "hq_label": "Sede principal",
         "hq": "México",
         "focus_label": "Enfoque",
         "focus": "Software → Estructura"
@@ -89,16 +92,16 @@
         "label_name": "Nombre",
         "placeholder_name": "Nombre",
         "label_project": "Proyecto",
-        "placeholder_project": "Describe tu proyecto — qué construyes, el stack, el timeline.",
+        "placeholder_project": "Describe tu proyecto. Qué estás construyendo, el stack técnico, los tiempos.",
         "send": "Enviar",
-        "alert_name": "Por favor escribe tu nombre.",
+        "alert_name": "Por favor ingresa tu nombre.",
         "alert_body": "Por favor describe tu proyecto.",
-        "alert_thanks": "¡Gracias {n}! Te responderé pronto."
+        "alert_thanks": "¡Gracias {n}! Me pondré en contacto contigo pronto."
     },
     "meta": {
-        "home": { "title": "Daniel Limón — Holding Operativo", "description": "Daniel Limón es un holding. Construimos, financiamos y operamos las empresas que poseemos — desde kernels de sistema operativo y agentes autónomos hasta mobiliario y arquitectura." },
-        "labs": { "title": "Daniel Limón — Empresas", "description": "El portafolio de Daniel Limón Holdings — cuatro subsidiarias, construidas y operadas como un solo grupo." },
-        "about": { "title": "Daniel Limón — Acerca de", "description": "Daniel Limón — el operador detrás del holding. En primera persona: quién soy, cómo trabajo y por qué un holding sólo se gana el nombre cuando opera lo que posee." },
-        "contact": { "title": "Daniel Limón — Contacto", "description": "Línea directa con Daniel Limón — alianzas, inversión y cosas difíciles de construir." }
+        "home": { "title": "Daniel Limón — Holding Operativo", "description": "Daniel Limón es un holding operativo. Construimos, financiamos y operamos las empresas que poseemos, desde núcleos de sistemas operativos y agentes autónomos hasta mobiliario y arquitectura." },
+        "labs": { "title": "Daniel Limón — Empresas", "description": "El portafolio de Daniel Limón Holdings: cuatro subsidiarias, construidas y operadas como un solo grupo." },
+        "about": { "title": "Daniel Limón — Sobre mí", "description": "Daniel Limón: el operador detrás del holding. En primera persona: quién soy, cómo trabajo y por qué un holding solo se gana el nombre cuando opera lo que posee." },
+        "contact": { "title": "Daniel Limón — Contacto", "description": "Línea directa con Daniel Limón: alianzas, inversión y proyectos complejos por construir." }
     }
 }
