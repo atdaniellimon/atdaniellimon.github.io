@@ -66,11 +66,6 @@
 
         document.body.classList.add('ready');
 
-        // Global internal-link navigation with a soft fade.
-        // In-page anchors, mailto/tel, external, and target=_blank links
-        // are left to the browser so they open/resolve natively.
-        // (Header nav links stopPropagation on their own handler so they
-        //  get same-route→scroll-top instead of a reload, and aren't run twice.)
         document.body.addEventListener('click', (e) => {
             const el = e.target.closest('a');
             if(!el) return;
@@ -84,6 +79,8 @@
             document.body.classList.remove('ready');
             setTimeout(() => { window.location.href = href; }, 280);
         });
+
+        document.title = pagesList[window.location.pathname] || "Daniel Limón";
     });
 
     Moke.import({ piece: 'Translations', def_route: true });
