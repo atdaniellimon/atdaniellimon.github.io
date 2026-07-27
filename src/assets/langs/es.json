@@ -96,12 +96,12 @@
         "send": "Enviar",
         "alert_name": "Por favor ingresa tu nombre.",
         "alert_body": "Por favor describe tu proyecto.",
-        "alert_thanks": "¡Gracias {n}! Me pondré en contacto contigo pronto."
+        "alert_thanks": "Gracias, {n}. Me pondré en contacto contigo pronto."
     },
     "meta": {
-        "home": { "title": "Daniel Limón — Holding Operativo", "description": "Daniel Limón es un holding operativo. Construimos, financiamos y operamos las empresas que poseemos, desde núcleos de sistemas operativos y agentes autónomos hasta mobiliario y arquitectura." },
-        "labs": { "title": "Daniel Limón — Empresas", "description": "El portafolio de Daniel Limón Holdings: cuatro subsidiarias, construidas y operadas como un solo grupo." },
-        "about": { "title": "Daniel Limón — Sobre mí", "description": "Daniel Limón: el operador detrás del holding. En primera persona: quién soy, cómo trabajo y por qué un holding solo se gana el nombre cuando opera lo que posee." },
-        "contact": { "title": "Daniel Limón — Contacto", "description": "Línea directa con Daniel Limón: alianzas, inversión y proyectos complejos por construir." }
+        "home": { "title": "Daniel Limón", "description": "Daniel Limón es un holding operativo. Construimos, financiamos y operamos las empresas que poseemos, desde núcleos de sistemas operativos y agentes autónomos hasta mobiliario y arquitectura." },
+        "labs": { "title": "Empresas en Daniel Limón", "description": "El portafolio de Daniel Limón Holdings: cuatro subsidiarias, construidas y operadas como un solo grupo." },
+        "about": { "title": "Sobre Daniel Limón", "description": "Daniel Limón: el operador detrás del holding. En primera persona: quién soy, cómo trabajo y por qué un holding solo se gana el nombre cuando opera lo que posee." },
+        "contact": { "title": "Contacta a Daniel Limón", "description": "Línea directa con Daniel Limón: alianzas, inversión y proyectos complejos por construir." }
     }
 }
