@@ -10,13 +10,13 @@
     })();
 
     const pagesList = {
-        "/": "Daniel Limón",
-        "/labs/": "Ventures @ Daniel Limón",
-        "/aboutme/": "About Daniel Limón",
-        "/contact/": "Contact Daniel Limón",
-        "/404.html": "404 @ Daniel Limón"
+        "/": "Daniel Limon & Co.",
+        "/labs/": "Ventures @ Daniel Limon",
+        "/aboutme/": "About Daniel Limon",
+        "/contact/": "Contact Daniel Limon",
+        "/404.html": "404 @ Daniel Limon"
     };
-    document.title = pagesList[window.location.pathname] || "Daniel Limón";
+    document.title = pagesList[window.location.pathname] || "Daniel Limon & Co.";
 
     // Favicon + apple-touch
     const icn = document.createElement('link');
@@ -81,7 +81,7 @@
             setTimeout(() => { window.location.href = href; }, 280);
         });
 
-        document.title = pagesList[window.location.pathname] || "Daniel Limón";
+        document.title = pagesList[window.location.pathname] || "Daniel Limon & Co.";
     });
 
     Moke.import({ piece: 'Translations', def_route: true });
