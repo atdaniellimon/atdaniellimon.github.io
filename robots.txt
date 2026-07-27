@@ -1,28 +1,16 @@
 User-agent: *
 Allow: /
-Disallow: /404.html
-Disallow: /services/
-Disallow: /src/
-Disallow: /assets/
 
 User-agent: GPTBot
-Allow: /$
-Allow: /aboutme
-Disallow: /
+Allow: /
 
 User-agent: ClaudeBot
-Allow: /$
-Allow: /aboutme
-Disallow: /
+Allow: /
 
 User-agent: PerplexityBot
-Allow: /$
-Allow: /aboutme
-Disallow: /
+Allow: /
 
 User-agent: Applebot-Extended
-Allow: /$
-Allow: /aboutme
-Disallow: /
+Allow: /
 
 Sitemap: https://daniellimon.uk
