@@ -2,5 +2,27 @@ User-agent: *
 Allow: /
 Disallow: /404.html
 Disallow: /services/
+Disallow: /src/
+Disallow: /assets/
 
-Sitemap: https://daniellimon.uk/sitemap.xml
+User-agent: GPTBot
+Allow: /$
+Allow: /aboutme
+Disallow: /
+
+User-agent: ClaudeBot
+Allow: /$
+Allow: /aboutme
+Disallow: /
+
+User-agent: PerplexityBot
+Allow: /$
+Allow: /aboutme
+Disallow: /
+
+User-agent: Applebot-Extended
+Allow: /$
+Allow: /aboutme
+Disallow: /
+
+Sitemap: https://daniellimon.uk
