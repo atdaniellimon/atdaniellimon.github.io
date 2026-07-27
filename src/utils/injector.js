@@ -9,11 +9,11 @@
     })();
 
     const pagesList = {
-        "/": "Daniel Limón — Technology Holding",
-        "/labs/": "Daniel Limón — Ventures",
-        "/aboutme/": "Daniel Limón — About",
-        "/contact/": "Daniel Limón — Contact",
-        "/404.html": "Not found — Daniel Limón"
+        "/": "Daniel Limón",
+        "/labs/": "Ventures @ Daniel Limón",
+        "/aboutme/": "About @ Daniel Limón",
+        "/contact/": "Contact @ Daniel Limón",
+        "/404.html": "404 @ Daniel Limón"
     };
     document.title = pagesList[window.location.pathname] || "Daniel Limón";
 
