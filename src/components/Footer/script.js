@@ -1,5 +1,5 @@
 /*
-    Footer — Sleek slim
+    Footer
     Version 3.0  ·  Made by Daniel Limón
 */
 (async function(){
@@ -19,16 +19,12 @@
                     <a href="/aboutme/">${translation.header.about_me}</a>
                     <a href="/contact/">${translation.header.contact}</a>
                 </div>
-                <div class="footer-col">
-                    <h4>${translation.footer.status_title}</h4>
-                    <span class="fb-status"><span class="fb-pulse"></span>${translation.footer.status_available}</span>
-                    <span class="fb-loc">${translation.footer.handcraft}</span>
-                </div>
             </div>
             <div class="footer-social">
+                <a href="https://x.com/atdaniellimon" target="_blank" rel="noopener">x.com</a>
                 <a href="https://github.com/atdaniellimon" target="_blank" rel="noopener">GitHub</a>
                 <a href="https://linkedin.com/in/daniel-limón-525298421" target="_blank" rel="noopener">LinkedIn</a>
-                <a href="https://twitter.com/atdaniellimon" target="_blank" rel="noopener">Twitter</a>
+                <a href="https://instagram.com/d.limvn" target="_blank" rel="noopener">Instagram</a>
             </div>
         </div>
         <div class="footer-bottom">

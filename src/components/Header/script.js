@@ -5,7 +5,7 @@
 
 (async function(){
     const headerHTML = `
-        <a class="brand" data-page="/" aria-label="Daniel Limón">
+        <a class="brand" data-page="/" aria-label="Daniel Limon">
             <img src="/src/assets/img/logo.png">
         </a>
         <nav class="nav-primary">
