@@ -3,4 +3,4 @@ Allow: /
 Disallow: /404.html
 Disallow: /services/
 
-Sitemap: https://atdaniellimon.github.io/sitemap.xml
+Sitemap: https://daniellimon.uk/sitemap.xml
