@@ -12,8 +12,8 @@
     const pagesList = {
         "/": "Daniel Limón",
         "/labs/": "Ventures @ Daniel Limón",
-        "/aboutme/": "About @ Daniel Limón",
-        "/contact/": "Contact @ Daniel Limón",
+        "/aboutme/": "About Daniel Limón",
+        "/contact/": "Contact Daniel Limón",
         "/404.html": "404 @ Daniel Limón"
     };
     document.title = pagesList[window.location.pathname] || "Daniel Limón";
