@@ -13,4 +13,4 @@ Allow: /
 User-agent: Applebot-Extended
 Allow: /
 
-Sitemap: https://daniellimon.uk
+Sitemap: https://daniellimon.uk/
