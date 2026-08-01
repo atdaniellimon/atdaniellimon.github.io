@@ -4,19 +4,22 @@
         <name>Moke Systems</name>
         <sector>Systems</sector>
         <short_desc>Operating systems and kernel-level infrastructure for secure, high-performance environments.</short_desc>
-        <description>Moke is the group's systems company. It ships the operating foundations — kernels, drivers, protocols — that the rest of the group is built on.</description>
+        <description>Moke is the group's systems company. It ships the operating foundations: kernels, compilers, CPU ISAs — that the rest of the group is built on.</description>
+        <redirect>https://moke.daniellimon.uk</redirect>
     </venture>
     <venture id="mokeAutomotive">
         <name>Moke Automotive</name>
         <sector>Mobility</sector>
         <short_desc>In-car software and autonomous driving for the next generation of vehicles.</short_desc>
         <description>Moke Automotive builds the software that lives inside the vehicle — dashboards, driver assistance, and autonomous systems designed to keep the driver focused and the car honest.</description>
+        <redirect>https://moke.daniellimon.uk/automotive/</redirect>
     </venture>
     <venture id="newtonIntelligence">
         <name>Newton Labs</name>
         <sector>Artificial Intelligence</sector>
         <short_desc>Autonomous AI agents built for honest, verifiable decisions.</short_desc>
         <description>Newton AI builds agents that are expected to tell the truth. They plan, verify, and act inside controlled environments — engineered for decisions you can actually trust.</description>
+        <redirect>https://newton.daniellimon.uk</redirect>
     </venture>
     <venture id="ztrn">
         <name>ZTRN</name>

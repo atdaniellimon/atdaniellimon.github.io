@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>ZTRN</title>
+    <link rel="stylesheet" href="/src/css/style.css">
+    <style>
+        .error-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        h1 { font-size: 5rem; margin: 0; opacity: 0.8; }
+        p { font-size: 1.2rem; color: #666; }
+        a{ position: absolute; bottom: 30px; left: 30px;}
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <h1>Redirecting you</h1>
+        <p>Leaving daniellimon.uk</p>
+    </div>
+
+    <script src="/src/components/MokeSDK/index.js"></script>
+    <script>
+    	window.addEventListener('load', () => document.body.classList.add('ready'));
+
+    	setTimeout(() => {
+    		document.body.classList.remove('ready');
+            
+    		setTimeout(() => {
+    			const destination = window.location.search.replace('?to=', '');
+
+                window.location.href = destination;
+    		}, 300);
+    	}, 2000);
+    </script>
+</body>
+</html>

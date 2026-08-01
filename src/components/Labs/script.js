@@ -23,7 +23,7 @@
             sector: node.querySelector('sector')?.textContent || '',
             short_desc: node.querySelector('short_desc')?.textContent || '',
             description: node.querySelector('description')?.textContent || '',
-            redirect: node.querySelector('redirect')?.textContent || ''
+            redirect: node.querySelector('redirect')?.textContent || '/',
         }));
 
         if (window.Moke && Moke.Hydration) Moke.Hydration.register({ ventures });
@@ -37,7 +37,7 @@
         }
 
         return `
-            <article class="lab-card" style="${styleString}" ${venture.redirect ? `onclick="window.open('${venture.redirect}')"` : ''}>
+            <article class="lab-card" style="${styleString}" onclick="document.body.classList.remove('ready'); setTimeout(() => {window.location.href = '/redirect/?to=${venture.redirect}';}, 300);">
                 <div class="lab-header">
                     <span class="lab-sector">${venture.sector}</span>
                     <span class="subsidiary-badge">${String(i + 1).padStart(2, '0')} · Subsidiary</span>

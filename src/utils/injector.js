@@ -6,6 +6,7 @@
         if(p === '/labs/') return 'labs';
         if(p === '/aboutme/') return 'about';
         if(p === '/contact/') return 'contact';
+        if(p === '/ztrn/') return 'ztrn';
         return null;
     })();
 
@@ -29,13 +30,24 @@
     document.head.appendChild(icn);
     document.head.appendChild(touch);
 
-    // Per-directory cfg.json (header/footer toggle). Never blocks:
-    // resolves in parallel; defaults to both header+footer on when the
-    // file is missing or malformed.
-    const dir = window.location.pathname.replace(/[^/]*$/, '');
-    const settingsPromise = fetch(dir + 'cfg.json')
-        .then(r => r.ok ? r.json() : Promise.reject('no cfg'))
-        .catch(() => ({ header: true, footer: true }));
+    
+    const cfgRequest = new Request(`${window.location.pathname}cfg.json`);
+    var settings;
+
+    fetch(cfgRequest).then((response) => {
+        if(!response.ok){
+            throw new Error("No cfg file found or http error");
+
+            settings = {
+                'header': false,
+                'footer': false
+            }
+        }
+        return response.json();
+    }).then((json) => {
+        settings = json;
+    });
+
 
     // Localise <title>, meta description, and OG/Twitter cards to the
     // loaded language. Static English values in the HTML serve crawlers
@@ -57,7 +69,6 @@
         Moke.Hydration.register(translation);
         applySEO(translation);
 
-        const settings = await settingsPromise;
         if(settings?.header !== false){
             await Moke.import({ piece: 'Header', def_route: true });
         }
