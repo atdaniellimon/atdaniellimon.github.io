@@ -1,5 +1,4 @@
 (async function(){
-    if(window.location.href.includes("atdaniellimon.github.io")) window.location.href = "https://daniellimon.uk" + window.location.pathname;
     const routeKey = (function(){
         const p = window.location.pathname;
         if(p === '/') return 'home';
