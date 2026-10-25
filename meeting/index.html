@@ -3,60 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Daniel Limón — Private Session / 15th</title>
+    <title>Daniel Limón — Private Session</title>
     
-    <!-- Preconnect & High-End Typefaces -->
+    <!-- Editorial & Architectural Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     
-    <meta name="description" content="Convocatoria privada y exclusiva. Daniel Limón 15th Birthday. Sábado 07 Noviembre, 1:30 PM. Lomas del Lencero.">
+    <meta name="description" content="Convocatoria privada. Daniel Limón. Sábado 07 Noviembre, 1:30 PM. Lomas del Lencero.">
     <meta name="robots" content="noindex, nofollow">
-    <meta name="theme-color" content="#040507">
-    <meta property="og:title" content="Daniel Limón — Private Session / 15th">
-    <meta property="og:description" content="Acceso estrictamente reservado. Dress code: Warm Beige & Monochrome.">
+    <meta name="theme-color" content="#090A0D">
+    <meta property="og:title" content="Daniel Limón — Private Session">
+    <meta property="og:description" content="Acceso por lista cerrada. Dress code: Beige & Neutral Monochrome.">
 
     <style>
         /* ==========================================================================
-           DESIGN TOKENS & LIQUID GLASS CONSTANTS
+           DESIGN TOKENS — QUIET LUXURY / EDITORIAL ARCHITECTURAL
            ========================================================================== */
         :root {
-            --bg-void: #040507;
-            --bg-surface: #0A0C11;
-            --bg-elevated: #11141D;
+            --bg-canvas: #090A0D;
+            --bg-surface: #0E1015;
+            --bg-elevated: #14171E;
             
-            /* High-End Champagne & Earth Pigments */
-            --champagne: #D6BD8A;
-            --champagne-light: #F0DEB7;
-            --champagne-glow: rgba(214, 189, 138, 0.22);
-            --champagne-hairline: rgba(214, 189, 138, 0.35);
+            /* Calibrated Warm Pigments */
+            --brass-soft: #D4B982;
+            --brass-deep: #A0834B;
+            --brass-subtle: rgba(212, 185, 130, 0.16);
 
-            /* Beige Reference Spectrum */
-            --beige-linen: #FAF6F0;
-            --beige-sand: #F2E8DC;
-            --beige-ecru: #E3D2BE;
-            --beige-taupe: #C2AF94;
-            --beige-camel: #9C8567;
+            /* Beige Spectrum for Dress Code */
+            --tone-linen: #FAF6F0;
+            --tone-sand: #EFE4D6;
+            --tone-ecru: #DFCEB9;
+            --tone-taupe: #BEAC95;
+            --tone-camel: #998369;
 
-            /* Platinum & Metallics */
-            --metal-white: #FFFFFF;
-            --metal-pure: #F4F3EF;
-            --metal-subtle: #A2AAB8;
-            --metal-mute: #586171;
+            /* Monochromes */
+            --ivory: #FDFBF7;
+            --smoke-light: #C5CBD3;
+            --smoke-mute: #707988;
+            --border-hairline: rgba(255, 255, 255, 0.08);
+            --border-elevated: rgba(255, 255, 255, 0.14);
 
-            /* Liquid Glass Physics */
-            --glass-sheen: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 100%);
-            --glass-highlight: inset 0 1px 1px 0 rgba(255, 255, 255, 0.22);
-            --glass-border: 1px solid rgba(255, 255, 255, 0.09);
-            --glass-card: rgba(14, 17, 24, 0.72);
-
-            /* Custom Fluid Springs (Emil Kowalski & Apple HIG) */
-            --ease-spring: cubic-bezier(0.19, 1, 0.22, 1);
-            --ease-dock: cubic-bezier(0.32, 0.72, 0, 1);
-            --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+            /* Timing & Motion */
+            --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-fluid: cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        /* Reset & Canvas */
+        /* Reset */
         *, *::before, *::after {
             margin: 0;
             padding: 0;
@@ -66,33 +59,27 @@
 
         html {
             scroll-behavior: smooth;
-            background: var(--bg-void);
-            color: var(--metal-pure);
-            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-canvas);
+            color: var(--ivory);
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
             font-size: 16px;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
         body {
             min-height: 100dvh;
-            background: var(--bg-void);
+            background: var(--bg-canvas);
             overflow-x: hidden;
             position: relative;
         }
 
-        /* Noise Texture for Physical Print Substance */
-        .noise-veil {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 99;
-            opacity: 0.035;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        ::selection {
+            background: var(--brass-soft);
+            color: var(--bg-canvas);
         }
 
-        /* Ambient Parallax Mesh Orbs (Cinematic Atmospheric Depth) */
-        .ambient-mesh {
+        /* Parallax Background Canvas */
+        .ambient-field {
             position: fixed;
             inset: 0;
             pointer-events: none;
@@ -100,654 +87,515 @@
             overflow: hidden;
         }
 
-        .orb {
+        .halo {
             position: absolute;
             border-radius: 50%;
-            filter: blur(140px);
-            opacity: 0.2;
+            filter: blur(120px);
+            opacity: 0.14;
             will-change: transform;
-            transition: transform 0.25s var(--ease-spring);
+            transition: transform 0.25s var(--ease-fluid);
         }
 
-        .orb-aurora {
+        .halo-top {
             width: 700px;
             height: 700px;
-            background: radial-gradient(circle, var(--champagne), rgba(214, 189, 138, 0.05) 60%, transparent 80%);
-            top: -15%;
+            background: radial-gradient(circle, var(--brass-soft), transparent 70%);
+            top: -200px;
             left: 50%;
             transform: translateX(-50%);
         }
 
-        .orb-earth {
-            width: 550px;
-            height: 550px;
-            background: radial-gradient(circle, #A88F6D, rgba(168, 143, 109, 0.06) 60%, transparent 80%);
-            bottom: 5%;
-            right: -10%;
+        .halo-bottom {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #31425C, transparent 75%);
+            bottom: -100px;
+            right: 0;
         }
 
-        .orb-slate {
-            width: 480px;
-            height: 480px;
-            background: radial-gradient(circle, #243048, transparent 75%);
-            top: 40%;
-            left: -10%;
-        }
-
-        /* Layout Container */
-        .viewport-shell {
+        /* Layout Architecture */
+        .layout {
             position: relative;
             z-index: 2;
-            max-width: 960px;
+            max-width: 880px;
             margin: 0 auto;
-            padding: 80px 24px 160px;
+            padding: 80px 24px 120px;
         }
 
-        /* Micro-Eyebrow Badge */
-        .vip-eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.65rem;
-            letter-spacing: 3.5px;
+        /* Top Watermark */
+        .session-mark {
+            text-align: center;
+            font-size: 0.72rem;
+            letter-spacing: 0.35em;
             text-transform: uppercase;
-            color: var(--champagne);
-            background: rgba(214, 189, 138, 0.06);
-            border: 1px solid var(--champagne-hairline);
-            padding: 8px 18px;
-            border-radius: 100px;
-            margin-bottom: 32px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
-
-        .pulse-core {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--champagne);
-            box-shadow: 0 0 10px var(--champagne);
-            animation: core-pulse 2.4s infinite var(--ease-spring);
-        }
-
-        @keyframes core-pulse {
-            0%, 100% { transform: scale(1); opacity: 0.9; }
-            50% { transform: scale(1.6); opacity: 0.4; }
+            color: var(--brass-soft);
+            margin-bottom: 54px;
+            font-weight: 500;
         }
 
         /* ==========================================================================
-           DOUBLE-BEZEL PARALLAX VIP PASS (HIGH-END INVITATION HERO)
+           ARCHITECTURAL INVITATION SURFACE (Clean, Refined, Uncluttered)
            ========================================================================== */
-        .stage-anchor {
-            perspective: 1800px;
-            margin: 0 auto 60px;
-            max-width: 660px;
+        .card-stage {
+            perspective: 1600px;
+            margin-bottom: 70px;
         }
 
-        /* Outer Double-Bezel Shell */
-        .bezel-outer {
-            background: linear-gradient(170deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0.01) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.14);
-            border-radius: 36px;
-            padding: 12px;
-            box-shadow: 0 50px 120px -20px rgba(0, 0, 0, 0.95),
-                        0 20px 40px -10px rgba(0, 0, 0, 0.7),
-                        inset 0 1px 1px 0 rgba(255, 255, 255, 0.35);
-            transition: transform 0.15s ease-out, box-shadow 0.25s ease-out;
+        .monolith-card {
+            background: linear-gradient(175deg, #12141A 0%, #0A0B0E 100%);
+            border: 1px solid var(--border-elevated);
+            border-radius: 16px;
+            padding: 70px 50px 60px;
+            box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.9);
+            text-align: center;
+            position: relative;
             transform-style: preserve-3d;
+            transition: transform 0.2s var(--ease-fluid), border-color 0.3s;
             will-change: transform;
         }
 
-        /* Inner Precision Core */
-        .bezel-inner {
-            background: linear-gradient(160deg, #0F1219 0%, #080A0E 100%);
-            border-radius: 26px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 56px 44px 48px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.08), inset 0 -2px 6px rgba(0,0,0,0.8);
+        .monolith-card:hover {
+            border-color: rgba(212, 185, 130, 0.35);
         }
 
-        /* Top Corner Specular Reflection */
-        .bezel-inner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 20%;
-            right: 20%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(214, 189, 138, 0.6), transparent);
+        @media (max-width: 600px) {
+            .monolith-card {
+                padding: 44px 22px 38px;
+            }
+            .layout {
+                padding: 50px 18px 90px;
+            }
         }
 
-        /* 15th Hero Composition */
-        .badge-15th {
-            display: inline-block;
-            position: relative;
-            margin-bottom: 8px;
-        }
-
-        .num-15 {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(6.5rem, 16vw, 10.5rem);
-            font-weight: 700;
-            letter-spacing: -4px;
-            line-height: 0.9;
-            background: linear-gradient(180deg, #FFFFFF 25%, #E2DDD5 70%, #A29B8E 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
-            filter: drop-shadow(0 15px 30px rgba(0,0,0,0.8));
-        }
-
-        .suffix-th {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+        .year-numeral {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(6.5rem, 16vw, 11rem);
             font-weight: 300;
-            font-size: clamp(2rem, 5vw, 3.2rem);
-            letter-spacing: 2px;
-            color: var(--champagne);
-            position: absolute;
-            top: 8px;
-            right: -42px;
-            text-transform: lowercase;
+            line-height: 0.85;
+            letter-spacing: -0.03em;
+            color: var(--ivory);
+            margin-bottom: 12px;
         }
 
-        .title-session {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(1.2rem, 3.2vw, 2rem);
-            font-weight: 600;
-            letter-spacing: 12px;
-            text-transform: uppercase;
-            color: var(--metal-pure);
-            margin: 6px 0 22px;
-            padding-left: 12px;
-            opacity: 0.95;
-        }
-
-        .celebrating-slug {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.68rem;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            color: var(--metal-mute);
-            margin-bottom: 8px;
-        }
-
-        .host-signature {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(2.4rem, 6vw, 3.8rem);
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            color: #FFFFFF;
-            margin-bottom: 28px;
-        }
-
-        /* Precision Schedule Pill */
-        .schedule-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 16px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.09);
-            border-radius: 100px;
-            padding: 10px 24px;
-            margin-bottom: 36px;
-            box-shadow: var(--glass-highlight);
-        }
-
-        .pill-date {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: var(--champagne);
-            font-weight: 500;
-        }
-
-        .pill-sep {
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.25);
-        }
-
-        .pill-time {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            color: var(--metal-pure);
-            font-weight: 500;
-        }
-
-        /* Pass Direct Quick-Actions */
-        .pass-actions {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            padding-top: 24px;
-            border-top: 1px solid rgba(255, 255, 255, 0.07);
-        }
-
-        @media (max-width: 580px) {
-            .pass-actions {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-            .bezel-inner {
-                padding: 40px 20px 32px;
-            }
-        }
-
-        .action-chip {
-            background: rgba(255, 255, 255, 0.025);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 16px 18px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            text-decoration: none;
-            color: inherit;
-            cursor: pointer;
-            transition: all 0.2s var(--ease-out);
-        }
-
-        .action-chip:hover {
-            background: rgba(214, 189, 138, 0.08);
-            border-color: var(--champagne-hairline);
-            transform: translateY(-2px);
-        }
-
-        .action-chip:active {
-            transform: scale(0.98);
-        }
-
-        .chip-text {
-            text-align: left;
-        }
-
-        .chip-text .meta {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.62rem;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: var(--metal-mute);
-            display: block;
-            margin-bottom: 2px;
-        }
-
-        .chip-text .main {
-            font-family: 'Cinzel', serif;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #FFFFFF;
-        }
-
-        /* Button-in-Button Icon Anchor (Skill: High-End Agency Micro-Aesthetics) */
-        .chip-icon-bezel {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--champagne);
-            transition: transform 0.2s var(--ease-out), background 0.2s;
-        }
-
-        .action-chip:hover .chip-icon-bezel {
-            transform: scale(1.1) rotate(-8deg);
-            background: var(--champagne);
-            color: var(--bg-void);
-        }
-
-        /* ==========================================================================
-           ARROGANT / EXECUTIVE EDITORIAL CALLOUT
-           ========================================================================== */
-        .manifesto-block {
-            text-align: center;
-            max-width: 680px;
-            margin: 0 auto 70px;
-            padding: 0 16px;
-        }
-
-        .manifesto-quote {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(1.4rem, 3.4vw, 2.1rem);
-            font-weight: 400;
-            line-height: 1.45;
-            color: #FAF8F5;
-            margin-bottom: 16px;
-            letter-spacing: -0.2px;
-        }
-
-        .manifesto-quote em {
+        .year-numeral sup {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 0.35em;
             font-style: italic;
-            color: var(--champagne);
+            color: var(--brass-soft);
+            top: -0.9em;
+            margin-left: 2px;
         }
 
-        .manifesto-sub {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.72rem;
-            letter-spacing: 2.5px;
+        .headline-sub {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+            font-weight: 400;
+            letter-spacing: 0.25em;
             text-transform: uppercase;
-            color: var(--metal-mute);
+            color: var(--smoke-light);
+            margin-bottom: 28px;
+            padding-left: 0.25em; /* alignment fix */
         }
 
-        /* ==========================================================================
-           REAL-TIME TELEMETRY HUD (PRECISION COUNTDOWN)
-           ========================================================================== */
-        .telemetry-row {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            max-width: 540px;
-            margin: 0 auto 70px;
-        }
-
-        .telemetry-node {
-            background: rgba(14, 17, 24, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 18px;
-            padding: 18px 10px;
-            text-align: center;
-            box-shadow: var(--glass-highlight);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-        }
-
-        .telemetry-node .digit {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: clamp(1.8rem, 3.8vw, 2.5rem);
-            font-weight: 600;
-            line-height: 1;
-            color: var(--champagne);
-            display: block;
+        .dedication {
+            font-size: 0.78rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--smoke-mute);
             margin-bottom: 6px;
         }
 
-        .telemetry-node .unit {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.65rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--metal-mute);
+        .host-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(2.6rem, 6.5vw, 4.4rem);
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            color: var(--ivory);
+            margin-bottom: 36px;
         }
 
-        /* ==========================================================================
-           ASYMMETRIC BENTO GRID (DRESS CODE, LOCATION & DIRECTIVES)
-           ========================================================================== */
-        .bento-constellation {
+        .separator {
+            width: 120px;
+            height: 1px;
+            background: var(--brass-soft);
+            margin: 0 auto 36px;
+            opacity: 0.4;
+        }
+
+        .event-schedule {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(1.2rem, 2.8vw, 1.7rem);
+            font-weight: 400;
+            color: var(--brass-soft);
+            letter-spacing: 0.06em;
+            margin-bottom: 44px;
+        }
+
+        .event-schedule span {
+            color: var(--smoke-light);
+            margin: 0 10px;
+            font-weight: 300;
+        }
+
+        /* Direct Action Grid */
+        .card-actions-grid {
             display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 22px;
-            margin-bottom: 60px;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            max-width: 520px;
+            margin: 0 auto;
         }
 
-        .bento-cell {
-            background: var(--glass-card);
-            border: var(--glass-border);
-            border-radius: 28px;
-            padding: 38px 34px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), var(--glass-highlight);
-            backdrop-filter: blur(24px) saturate(180%);
-            -webkit-backdrop-filter: blur(24px) saturate(180%);
-            position: relative;
-            overflow: hidden;
-            transition: border-color 0.25s var(--ease-out);
-        }
-
-        .bento-cell:hover {
-            border-color: rgba(214, 189, 138, 0.35);
-        }
-
-        .cell-dresscode {
-            grid-column: span 12;
-        }
-
-        .cell-map {
-            grid-column: span 7;
-        }
-
-        .cell-terms {
-            grid-column: span 5;
-        }
-
-        @media (max-width: 860px) {
-            .cell-map, .cell-terms {
-                grid-column: span 12;
-            }
-            .bento-cell {
-                padding: 28px 22px;
+        @media (max-width: 520px) {
+            .card-actions-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
             }
         }
 
-        .cell-kicker {
-            display: inline-flex;
+        .action-plate {
+            background: transparent;
+            border: 1px solid var(--border-elevated);
+            border-radius: 8px;
+            padding: 16px 20px;
+            text-decoration: none;
+            color: var(--ivory);
+            display: flex;
             align-items: center;
-            gap: 8px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.68rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--champagne);
-            margin-bottom: 12px;
+            justify-content: space-between;
+            transition: all 0.2s var(--ease-fluid);
+            cursor: pointer;
         }
 
-        .cell-headline {
-            font-family: 'Cinzel', serif;
-            font-size: 1.9rem;
-            font-weight: 600;
-            color: #FFFFFF;
-            margin-bottom: 12px;
+        .action-plate:hover {
+            border-color: var(--brass-soft);
+            background: var(--brass-subtle);
+            transform: translateY(-2px);
         }
 
-        .cell-body {
-            font-size: 0.95rem;
-            color: var(--metal-subtle);
-            line-height: 1.65;
-            max-width: 65ch;
+        .action-plate:active {
+            transform: scale(0.98);
         }
 
-        /* Beige Chromatic Gallery Swatches */
-        .swatch-mosaic {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 14px;
-            margin: 28px 0 18px;
+        .action-plate .label {
+            text-align: left;
         }
 
-        .swatch-item {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 18px;
-            padding: 14px;
-            text-align: center;
-            transition: transform 0.2s var(--ease-out), border-color 0.2s;
-        }
-
-        .swatch-item:hover {
-            transform: translateY(-3px);
-            border-color: var(--champagne-hairline);
-        }
-
-        .swatch-droplet {
-            height: 60px;
-            border-radius: 12px;
-            margin-bottom: 10px;
-            box-shadow: inset 0 2px 4px rgba(255,255,255,0.25), 0 8px 16px rgba(0,0,0,0.4);
-            border: 1px solid rgba(0,0,0,0.1);
-        }
-
-        .swatch-item .tag {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #FAF8F5;
+        .action-plate .label-meta {
             display: block;
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--smoke-mute);
             margin-bottom: 2px;
         }
 
-        .swatch-item .code {
-            font-family: 'JetBrains Mono', monospace;
+        .action-plate .label-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+        }
+
+        .action-plate svg {
+            color: var(--brass-soft);
+            transition: transform 0.2s;
+        }
+
+        .action-plate:hover svg {
+            transform: translateX(3px);
+        }
+
+        /* ==========================================================================
+           EDITORIAL ARROGANCE (PROVOCATIVE COPY)
+           ========================================================================== */
+        .manifesto-section {
+            margin: 80px auto;
+            text-align: center;
+            max-width: 680px;
+            padding: 0 16px;
+        }
+
+        .manifesto-section p {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(1.6rem, 3.8vw, 2.3rem);
+            font-weight: 300;
+            line-height: 1.45;
+            color: var(--ivory);
+            margin-bottom: 18px;
+        }
+
+        .manifesto-section p em {
+            font-style: italic;
+            color: var(--brass-soft);
+        }
+
+        .manifesto-section .author {
+            font-size: 0.72rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--smoke-mute);
+        }
+
+        /* ==========================================================================
+           COUNTDOWN TELEMETRY (ARCHITECTURAL NUMBERS)
+           ========================================================================== */
+        .countdown-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin: 60px 0 90px;
+            border-top: 1px solid var(--border-hairline);
+            border-bottom: 1px solid var(--border-hairline);
+            padding: 36px 0;
+        }
+
+        .countdown-col {
+            text-align: center;
+        }
+
+        .countdown-col .val {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: clamp(2.4rem, 5vw, 4rem);
+            font-weight: 300;
+            color: var(--ivory);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .countdown-col .tag {
+            font-size: 0.65rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--smoke-mute);
+        }
+
+        /* ==========================================================================
+           CONTENT STRUCTURE (DRESS CODE, LOCATION, RULES)
+           ========================================================================== */
+        .section-block {
+            margin-bottom: 80px;
+        }
+
+        .section-header {
+            margin-bottom: 24px;
+        }
+
+        .section-header h3 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 2.2rem;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            color: var(--ivory);
+            margin-bottom: 12px;
+        }
+
+        .section-header p {
+            color: var(--smoke-light);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            max-width: 62ch;
+        }
+
+        /* Palette Swatches — Clean Minimal Architectural Format */
+        .palette-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 16px;
+            margin: 32px 0 16px;
+        }
+
+        .swatch-brick {
+            border: 1px solid var(--border-hairline);
+            border-radius: 8px;
+            padding: 12px;
+            background: var(--bg-surface);
+            transition: border-color 0.2s;
+        }
+
+        .swatch-brick:hover {
+            border-color: var(--brass-soft);
+        }
+
+        .swatch-tone {
+            height: 64px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+        }
+
+        .swatch-title {
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--ivory);
+            margin-bottom: 2px;
+        }
+
+        .swatch-hex {
             font-size: 0.68rem;
-            color: var(--metal-mute);
+            color: var(--smoke-mute);
+            letter-spacing: 0.05em;
         }
 
-        .dress-warning {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.78rem;
-            color: var(--champagne-light);
-            background: rgba(214, 189, 138, 0.06);
-            border-left: 2px solid var(--champagne);
-            padding: 10px 16px;
-            border-radius: 0 10px 10px 0;
-            margin-top: 14px;
+        .dresscode-note {
+            font-size: 0.8rem;
+            color: var(--brass-soft);
+            margin-top: 12px;
+            line-height: 1.5;
         }
 
-        /* Apple Maps Frame Container */
-        .map-carrier {
-            margin-top: 22px;
-            border-radius: 18px;
+        /* Location Frame */
+        .venue-carrier {
+            margin-top: 24px;
+            border-radius: 12px;
             overflow: hidden;
-            height: 250px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
+            border: 1px solid var(--border-hairline);
+            height: 280px;
         }
 
-        .map-carrier iframe {
+        .venue-carrier iframe {
             width: 100%;
             height: 100%;
             border: none;
-            filter: invert(90%) hue-rotate(180deg) contrast(1.15) opacity(0.85);
+            filter: invert(90%) hue-rotate(180deg) contrast(1.1) opacity(0.85);
             transition: filter 0.3s;
         }
 
-        .map-carrier:hover iframe {
-            filter: invert(90%) hue-rotate(180deg) contrast(1.15) opacity(1);
+        .venue-carrier:hover iframe {
+            filter: invert(90%) hue-rotate(180deg) contrast(1.1) opacity(0.98);
         }
 
-        /* Directives List */
-        .decree-list {
-            list-style: none;
-            margin-top: 20px;
+        .venue-links {
             display: flex;
-            flex-direction: column;
             gap: 16px;
+            margin-top: 18px;
         }
 
-        .decree-list li {
-            padding-left: 24px;
-            position: relative;
-            font-size: 0.92rem;
-            color: var(--metal-subtle);
-            line-height: 1.55;
-        }
-
-        .decree-list li::before {
-            content: '✦';
-            position: absolute;
-            left: 0;
-            top: 2px;
-            color: var(--champagne);
-            font-size: 0.75rem;
-        }
-
-        .decree-list li strong {
-            color: #FFFFFF;
-            font-weight: 600;
-        }
-
-        /* ==========================================================================
-           FLOATING APPLE ISLAND DOCK (ALWAYS ACCESSIBLE, MINIMALIST MASS)
-           ========================================================================== */
-        .island-dock {
-            position: fixed;
-            bottom: 28px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 100;
-            background: rgba(14, 17, 24, 0.88);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            border-radius: 100px;
-            padding: 8px 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            backdrop-filter: blur(28px) saturate(200%);
-            -webkit-backdrop-filter: blur(28px) saturate(200%);
-            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8),
-                        inset 0 1px 1px rgba(255, 255, 255, 0.3);
-            max-width: 94vw;
-        }
-
-        .dock-cta-main {
-            background: #FFFFFF;
-            color: #040507;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.78rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            padding: 12px 24px;
-            border-radius: 100px;
-            border: none;
-            cursor: pointer;
-            transition: transform 0.16s var(--ease-out), background 0.2s, box-shadow 0.2s;
-            white-space: nowrap;
-        }
-
-        .dock-cta-main:hover {
-            background: var(--beige-sand);
-            transform: scale(1.02);
-            box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
-        }
-
-        .dock-cta-main:active {
-            transform: scale(0.97);
-        }
-
-        .dock-cta-ghost {
+        .btn-clean {
             background: transparent;
-            color: var(--metal-pure);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            letter-spacing: 1px;
-            padding: 10px 18px;
-            border-radius: 100px;
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: var(--ivory);
+            border: 1px solid var(--border-elevated);
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
             text-decoration: none;
             cursor: pointer;
-            transition: all 0.2s var(--ease-out);
-            white-space: nowrap;
+            transition: all 0.2s var(--ease-fluid);
         }
 
-        .dock-cta-ghost:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.25);
-            color: #FFFFFF;
+        .btn-clean:hover {
+            border-color: var(--brass-soft);
+            background: var(--brass-subtle);
         }
 
-        .dock-cta-ghost:active {
-            transform: scale(0.97);
+        .btn-clean-solid {
+            background: var(--ivory);
+            color: var(--bg-canvas);
+            border: 1px solid var(--ivory);
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s var(--ease-fluid);
         }
 
-        /* ==========================================================================
-           RSVP MODAL SHEET (APPLE SYSTEM MODALITY)
-           ========================================================================== */
-        .modal-backcloth {
+        .btn-clean-solid:hover {
+            background: var(--brass-soft);
+            border-color: var(--brass-soft);
+        }
+
+        /* Directives list */
+        .rules-stack {
+            list-style: none;
+            margin-top: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .rules-stack li {
+            padding-left: 20px;
+            position: relative;
+            color: var(--smoke-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .rules-stack li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--brass-soft);
+        }
+
+        .rules-stack li strong {
+            color: var(--ivory);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding-top: 60px;
+            border-top: 1px solid var(--border-hairline);
+            font-size: 0.72rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--smoke-mute);
+        }
+
+        /* Floating RSVP Strip */
+        .rsvp-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(14, 16, 21, 0.92);
+            border-top: 1px solid var(--border-elevated);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 100;
+            max-width: 880px;
+            margin: 0 auto;
+            border-radius: 12px 12px 0 0;
+        }
+
+        @media (max-width: 600px) {
+            .rsvp-bar {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+        }
+
+        .rsvp-bar .callout-text {
+            font-size: 0.85rem;
+            color: var(--smoke-light);
+        }
+
+        .rsvp-bar .callout-text strong {
+            color: var(--ivory);
+        }
+
+        .rsvp-bar .btn-group {
+            display: flex;
+            gap: 12px;
+        }
+
+        /* RSVP Modal */
+        .modal-wrap {
             position: fixed;
             inset: 0;
             background: rgba(0, 0, 0, 0.88);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             z-index: 1000;
             display: flex;
             align-items: center;
@@ -755,359 +603,320 @@
             padding: 20px;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.25s var(--ease-out);
+            transition: opacity 0.2s var(--ease-fluid);
         }
 
-        .modal-backcloth.active {
+        .modal-wrap.active {
             opacity: 1;
             pointer-events: auto;
         }
 
-        .modal-pod {
-            background: #0E1118;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 30px;
-            max-width: 500px;
+        .modal-box {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-elevated);
+            border-radius: 14px;
+            max-width: 480px;
             width: 100%;
-            padding: 44px 38px;
-            box-shadow: 0 50px 120px rgba(0, 0, 0, 0.95), var(--glass-highlight);
-            transform: translateY(20px) scale(0.97);
-            transition: transform 0.25s var(--ease-spring);
+            padding: 40px 36px;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9);
         }
 
-        .modal-backcloth.active .modal-pod {
-            transform: translateY(0) scale(1);
-        }
-
-        .modal-pod h3 {
-            font-family: 'Cinzel', serif;
+        .modal-box h4 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
             font-size: 2.2rem;
-            color: #FFFFFF;
-            margin-bottom: 6px;
-        }
-
-        .modal-pod p.lead {
-            font-size: 0.92rem;
-            color: var(--metal-subtle);
-            margin-bottom: 26px;
-        }
-
-        .form-group {
-            margin-bottom: 18px;
-        }
-
-        .form-group label {
-            display: block;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.68rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--metal-mute);
+            font-weight: 400;
             margin-bottom: 8px;
         }
 
-        .form-group input, .form-group select {
-            width: 100%;
-            background: #141822;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 14px 16px;
-            color: #FFFFFF;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.88rem;
-            outline: none;
-            transition: border-color 0.2s, background 0.2s;
+        .modal-box p {
+            font-size: 0.9rem;
+            color: var(--smoke-light);
+            margin-bottom: 24px;
+            line-height: 1.5;
         }
 
-        .form-group input:focus, .form-group select:focus {
-            border-color: var(--champagne);
-            background: #191E2B;
+        .input-row {
+            margin-bottom: 18px;
+        }
+
+        .input-row label {
+            display: block;
+            font-size: 0.68rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--smoke-mute);
+            margin-bottom: 8px;
+        }
+
+        .input-row input, .input-row select {
+            width: 100%;
+            background: #14171E;
+            border: 1px solid var(--border-hairline);
+            border-radius: 8px;
+            padding: 12px 14px;
+            color: var(--ivory);
+            font-family: inherit;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .input-row input:focus, .input-row select:focus {
+            border-color: var(--brass-soft);
         }
     </style>
 </head>
 <body>
 
-    <!-- Substance Noise Layer -->
-    <div class="noise-veil"></div>
-
-    <!-- Atmospheric Parallax Aurora Orbs -->
-    <div class="ambient-mesh">
-        <div class="orb orb-aurora" id="orbAurora"></div>
-        <div class="orb orb-earth" id="orbEarth"></div>
-        <div class="orb orb-slate" id="orbSlate"></div>
+    <!-- Ambient Glow Field (Real Physics Parallax) -->
+    <div class="ambient-field">
+        <div class="halo halo-top" id="haloTop"></div>
+        <div class="halo halo-bottom" id="haloBottom"></div>
     </div>
 
-    <div class="viewport-shell">
+    <div class="layout">
 
-        <!-- Top Status Indicator -->
-        <header style="text-align: center;">
-            <div class="vip-eyebrow">
-                <span class="pulse-core"></span>
-                SESIÓN PRIVADA · ACCESO ESTRICTAMENTE NOMINAL
-            </div>
-        </header>
+        <!-- Top Header Status -->
+        <div class="session-mark">
+            Sesión Privada · Convocatoria Cerrada
+        </div>
 
-        <!-- 3D Double-Bezel Parallax VIP Pass -->
-        <div class="stage-anchor" id="stageAnchor">
-            <div class="bezel-outer" id="bezelCard">
-                <div class="bezel-inner">
+        <!-- 3D Monolith Architectural Card -->
+        <div class="card-stage" id="cardStage">
+            <div class="monolith-card" id="monolith">
+                
+                <div class="year-numeral">
+                    15<sup>th</sup>
+                </div>
 
-                    <div class="badge-15th">
-                        <span class="num-15">15</span>
-                        <span class="suffix-th">th</span>
-                    </div>
+                <div class="headline-sub">
+                    Birthday
+                </div>
 
-                    <div class="title-session">Birthday</div>
+                <div class="dedication">Celebrando a</div>
+                <div class="host-title">Daniel Limón</div>
 
-                    <div class="celebrating-slug">Convocatoria oficial para celebrar a</div>
-                    <div class="host-signature">Daniel Limón</div>
+                <div class="separator"></div>
 
-                    <!-- Precision Schedule Pill -->
-                    <div class="schedule-pill">
-                        <span class="pill-date">Sábado 07 Noviembre</span>
-                        <span class="pill-sep"></span>
-                        <span class="pill-time">1:30 PM (Puntual)</span>
-                    </div>
+                <div class="event-schedule">
+                    Noviembre 07 <span>·</span> 1:30 p.m.
+                </div>
 
-                    <!-- Pass Quick Actions -->
-                    <div class="pass-actions">
-                        <a href="https://www.google.com/maps/place/19.501432,-96.821491" target="_blank" rel="noopener" class="action-chip">
-                            <div class="chip-text">
-                                <span class="meta">Punto de Acceso</span>
-                                <span class="main">Lomas del Lencero</span>
-                            </div>
-                            <div class="chip-icon-bezel">
-                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                            </div>
-                        </a>
-
-                        <div onclick="openRSVP()" class="action-chip">
-                            <div class="chip-text">
-                                <span class="meta">Confirmación</span>
-                                <span class="main">Validar RSVP</span>
-                            </div>
-                            <div class="chip-icon-bezel">
-                                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"></path></svg>
-                            </div>
+                <div class="card-actions-grid">
+                    <a href="https://www.google.com/maps/place/19.501432,-96.821491" target="_blank" rel="noopener" class="action-plate">
+                        <div class="label">
+                            <span class="label-meta">Ubicación</span>
+                            <span class="label-title">Lomas del Lencero</span>
                         </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <!-- Arrogant / High-Agency Callout -->
-        <div class="manifesto-block">
-            <h2 class="manifesto-quote">
-                "El tiempo es el único capital que jamás se recompra. Si este enlace está en tu pantalla, <em>tienes el privilegio</em> de estar entre las contadas personas con las que decido celebrarlo."
-            </h2>
-            <span class="manifesto-sub">— Sesión Exclusiva · Daniel Limón & Co.</span>
-        </div>
-
-        <!-- Telemetry Countdown HUD -->
-        <div class="telemetry-row">
-            <div class="telemetry-node">
-                <span class="digit" id="valDays">--</span>
-                <span class="unit">Días</span>
-            </div>
-            <div class="telemetry-node">
-                <span class="digit" id="valHours">--</span>
-                <span class="unit">Horas</span>
-            </div>
-            <div class="telemetry-node">
-                <span class="digit" id="valMins">--</span>
-                <span class="unit">Minutos</span>
-            </div>
-            <div class="telemetry-node">
-                <span class="digit" id="valSecs">--</span>
-                <span class="unit">Segundos</span>
-            </div>
-        </div>
-
-        <!-- Asymmetric Bento Constellation -->
-        <div class="bento-constellation">
-
-            <!-- Dress Code Warm Beige Palette -->
-            <article class="bento-cell cell-dresscode">
-                <span class="cell-kicker">
-                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                    Estética Obligatoria
-                </span>
-                <h3 class="cell-headline">Dress Code: Warm Beige & Quiet Luxury</h3>
-                <p class="cell-body">
-                    La atmósfera visual de la reunión fue curada con obsesión. Sin colores chillantes, sin logos invasivos, sin patrones caóticos. Mantente estrictamente dentro de la paleta tierra, lino y arena.
-                </p>
-
-                <div class="swatch-mosaic">
-                    <div class="swatch-item">
-                        <div class="swatch-droplet" style="background: var(--beige-linen);"></div>
-                        <span class="tag">Lino Crudo</span>
-                        <span class="code">#FAF6F0</span>
-                    </div>
-                    <div class="swatch-item">
-                        <div class="swatch-droplet" style="background: var(--beige-sand);"></div>
-                        <span class="tag">Sand Beige</span>
-                        <span class="code">#F2E8DC</span>
-                    </div>
-                    <div class="swatch-item">
-                        <div class="swatch-droplet" style="background: var(--beige-ecru);"></div>
-                        <span class="tag">Écru</span>
-                        <span class="code">#E3D2BE</span>
-                    </div>
-                    <div class="swatch-item">
-                        <div class="swatch-droplet" style="background: var(--beige-taupe);"></div>
-                        <span class="tag">Warm Taupe</span>
-                        <span class="code">#C2AF94</span>
-                    </div>
-                    <div class="swatch-item">
-                        <div class="swatch-droplet" style="background: var(--beige-camel);"></div>
-                        <span class="tag">Camel Brass</span>
-                        <span class="code">#9C8567</span>
-                    </div>
-                </div>
-
-                <div class="dress-warning">
-                    <span>⚠ Nota: Quien no acate la paleta beige será cordialmente excluido de las tomas y fotografías oficiales.</span>
-                </div>
-            </article>
-
-            <!-- Location & Approach -->
-            <article class="bento-cell cell-map">
-                <span class="cell-kicker">Geolocalización</span>
-                <h3 class="cell-headline">Lomas del Lencero</h3>
-                <p class="cell-body">
-                    Punto privado de encuentro. Coordenadas de navegación por satélite:
-                </p>
-                <p style="font-family:'JetBrains Mono', monospace; color: var(--champagne); font-size: 0.95rem; margin-top: 6px;">
-                    19.501432, -96.821491
-                </p>
-
-                <div style="display: flex; gap: 12px; margin-top: 16px;">
-                    <a href="https://www.google.com/maps/place/19.501432,-96.821491" target="_blank" rel="noopener" class="dock-cta-main" style="padding: 10px 18px; font-size: 0.72rem;">
-                        Google Maps
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                     </a>
-                    <a href="https://waze.com/ul?ll=19.501432,-96.821491&navigate=yes" target="_blank" rel="noopener" class="dock-cta-ghost" style="padding: 10px 18px; font-size: 0.72rem;">
-                        Waze
-                    </a>
+
+                    <div onclick="openRSVP()" class="action-plate">
+                        <div class="label">
+                            <span class="label-meta">Confirmación</span>
+                            <span class="label-title">Validar Asistencia</span>
+                        </div>
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+                    </div>
                 </div>
 
-                <div class="map-carrier">
-                    <iframe 
-                        loading="lazy" 
-                        allowfullscreen 
-                        referrerpolicy="no-referrer-when-downgrade" 
-                        src="https://maps.google.com/maps?q=19.501432,-96.8214909&hl=es&z=15&output=embed">
-                    </iframe>
-                </div>
-            </article>
-
-            <!-- Rules of Engagement -->
-            <article class="bento-cell cell-terms">
-                <span class="cell-kicker">Protocolo</span>
-                <h3 class="cell-headline">Términos de Acceso</h3>
-
-                <ul class="decree-list">
-                    <li>
-                        <strong>Puntualidad Absoluta:</strong> La recepción y la propuesta gastronómica abren 1:30 PM en punto. La cortesía empieza a tiempo.
-                    </li>
-                    <li>
-                        <strong>Capacidad Estricta:</strong> Acceso reservado solo a quienes confirmen por WhatsApp con nombre registrado.
-                    </li>
-                    <li>
-                        <strong>Selección Gastronómica:</strong> Menú y barra seleccionados por la casa.
-                    </li>
-                </ul>
-            </article>
-
+            </div>
         </div>
 
-        <!-- Minimalist Luxury Footer -->
-        <footer style="text-align: center; padding: 40px 0 100px; border-top: 1px solid rgba(255, 255, 255, 0.08);">
-            <p style="font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--metal-mute); letter-spacing: 3px;">
-                DANIEL LIMÓN & CO. · PRIVATE SESSION · 2026
+        <!-- Provocative Manifesto -->
+        <div class="manifesto-section">
+            <p>
+                "El tiempo es el único activo que no se negocia. Si este enlace llegó a ti, considérate dentro de las pocas personas con las que <em>decido compartirlo</em>."
             </p>
+            <span class="author">Daniel Limón & Co. · Privilegio Exclusivo</span>
+        </div>
+
+        <!-- Architectural Countdown Strip -->
+        <div class="countdown-strip">
+            <div class="countdown-col">
+                <div class="val" id="cntDays">--</div>
+                <div class="tag">Días</div>
+            </div>
+            <div class="countdown-col">
+                <div class="val" id="cntHours">--</div>
+                <div class="tag">Horas</div>
+            </div>
+            <div class="countdown-col">
+                <div class="val" id="cntMins">--</div>
+                <div class="tag">Minutos</div>
+            </div>
+            <div class="countdown-col">
+                <div class="val" id="cntSecs">--</div>
+                <div class="tag">Segundos</div>
+            </div>
+        </div>
+
+        <!-- Section: Dress Code (Beige Spectrum) -->
+        <div class="section-block">
+            <div class="section-header">
+                <h3>Dress Code: Warm Beige & Quiet Luxury</h3>
+                <p>
+                    La estética del evento fue diseñada con exactitud. Tonalidades tierra, lino, arena y camel sin contrastes discordantes ni estampados ruidosos.
+                </p>
+            </div>
+
+            <div class="palette-row">
+                <div class="swatch-brick">
+                    <div class="swatch-tone" style="background: var(--tone-linen);"></div>
+                    <div class="swatch-title">Lino Crudo</div>
+                    <div class="swatch-hex">#FAF6F0</div>
+                </div>
+                <div class="swatch-brick">
+                    <div class="swatch-tone" style="background: var(--tone-sand);"></div>
+                    <div class="swatch-title">Sand Beige</div>
+                    <div class="swatch-hex">#EFE4D6</div>
+                </div>
+                <div class="swatch-brick">
+                    <div class="swatch-tone" style="background: var(--tone-ecru);"></div>
+                    <div class="swatch-title">Écru</div>
+                    <div class="swatch-hex">#DFCEB9</div>
+                </div>
+                <div class="swatch-brick">
+                    <div class="swatch-tone" style="background: var(--tone-taupe);"></div>
+                    <div class="swatch-title">Warm Taupe</div>
+                    <div class="swatch-hex">#BEAC95</div>
+                </div>
+                <div class="swatch-brick">
+                    <div class="swatch-tone" style="background: var(--tone-camel);"></div>
+                    <div class="swatch-title">Camel</div>
+                    <div class="swatch-hex">#998369</div>
+                </div>
+            </div>
+
+            <p class="dresscode-note">
+                * Asistir fuera de la paleta alterará la estética de las memorias visuales del evento.
+            </p>
+        </div>
+
+        <!-- Section: Location -->
+        <div class="section-block">
+            <div class="section-header">
+                <h3>Lomas del Lencero</h3>
+                <p>
+                    Coordenadas exactas para tu llegada: <strong>19.501432, -96.821491</strong>.
+                </p>
+            </div>
+
+            <div class="venue-links">
+                <a href="https://www.google.com/maps/place/19.501432,-96.821491" target="_blank" rel="noopener" class="btn-clean-solid">
+                    Google Maps
+                </a>
+                <a href="https://waze.com/ul?ll=19.501432,-96.821491&navigate=yes" target="_blank" rel="noopener" class="btn-clean">
+                    Waze
+                </a>
+            </div>
+
+            <div class="venue-carrier">
+                <iframe 
+                    loading="lazy" 
+                    allowfullscreen 
+                    referrerpolicy="no-referrer-when-downgrade" 
+                    src="https://maps.google.com/maps?q=19.501432,-96.8214909&hl=es&z=15&output=embed">
+                </iframe>
+            </div>
+        </div>
+
+        <!-- Section: Protocol -->
+        <div class="section-block">
+            <div class="section-header">
+                <h3>Directrices de Admisión</h3>
+            </div>
+
+            <ul class="rules-stack">
+                <li>
+                    <strong>Puntualidad Absoluta:</strong> La comida y la recepción comienzan a la 1:30 p.m. en punto. No habrá esperas.
+                </li>
+                <li>
+                    <strong>Lista Cerrada:</strong> La entrada es estrictamente nominal. Si no confirmas en WhatsApp antes, tu lugar no estará contemplado.
+                </li>
+                <li>
+                    <strong>Bar & Menú:</strong> Selección reservada por la casa para toda la tarde.
+                </li>
+            </ul>
+        </div>
+
+        <footer>
+            Daniel Limón & Co. · Convocatoria Confidencial · 2026
         </footer>
 
     </div>
 
-    <!-- Apple Dynamic Island Dock -->
-    <div class="island-dock">
-        <button class="dock-cta-main" onclick="openRSVP()">
-            Confirmar Lugar
-        </button>
-        <button class="dock-cta-ghost" onclick="downloadICS()">
-            + Calendario (.ics)
-        </button>
-        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Cumplea%C3%B1os+Daniel+Lim%C3%B3n+(15th)&dates=20261107T193000Z/20261108T030000Z&details=Sesi%C3%B3n+privada+de+cumplea%C3%B1os.+Lomas+del+Lencero.+Dress+Code:+Beige.&location=19.501432,-96.821491" target="_blank" rel="noopener" class="dock-cta-ghost">
-            Google Cal
-        </a>
+    <!-- Minimalist Bottom RSVP Bar (Clean, Non-Generic) -->
+    <div class="rsvp-bar">
+        <div class="callout-text">
+            Sábado 07 Noviembre · <strong>1:30 PM</strong> en Lomas del Lencero
+        </div>
+        <div class="btn-group">
+            <button class="btn-clean" onclick="downloadICS()">
+                + Calendario
+            </button>
+            <button class="btn-clean-solid" onclick="openRSVP()">
+                Confirmar Asistencia
+            </button>
+        </div>
     </div>
 
-    <!-- RSVP Modal Sheet -->
-    <div class="modal-backcloth" id="modalBackcloth" onclick="if(event.target===this) closeRSVP()">
-        <div class="modal-pod">
-            <div class="vip-eyebrow" style="margin-bottom: 12px;">Validación de Lista</div>
-            <h3>Garantiza tu Entrada</h3>
-            <p class="lead">Envía tus datos para registrarte en el control de acceso de Lomas del Lencero.</p>
+    <!-- RSVP Modal Form -->
+    <div class="modal-wrap" id="modalWrap" onclick="if(event.target===this) closeRSVP()">
+        <div class="modal-box">
+            <h4>Confirmar Asistencia</h4>
+            <p>Registra tu nombre para validar tu lugar en la lista de acceso.</p>
 
-            <div class="form-group">
-                <label for="input_name">Nombre y Apellido</label>
-                <input type="text" id="input_name" placeholder="Ej. Carlos Mendoza" autocomplete="name" required>
+            <div class="input-row">
+                <label for="reg_name">Nombre Completo</label>
+                <input type="text" id="reg_name" placeholder="Tu nombre" autocomplete="name" required>
             </div>
 
-            <div class="form-group">
-                <label for="input_companions">Cupo Asignado</label>
-                <select id="input_companions">
-                    <option value="1 persona (Solo yo)">Solo yo (1 persona)</option>
-                    <option value="2 personas (Voy con +1)">Voy acompañado (+1)</option>
-                    <option value="3 personas (Voy con +2)">Voy acompañado (+2)</option>
+            <div class="input-row">
+                <label for="reg_count">Acompañantes</label>
+                <select id="reg_count">
+                    <option value="Solo yo (1 persona)">Solo yo (1 persona)</option>
+                    <option value="Voy con +1 (2 personas)">Voy con +1 (2 personas)</option>
+                    <option value="Voy con +2 (3 personas)">Voy con +2 (3 personas)</option>
                 </select>
             </div>
 
-            <div class="form-group">
-                <label for="input_note">Preferencia de Bebida o Nota</label>
-                <input type="text" id="input_note" placeholder="¿Bebida predilecta o alguna intolerancia?">
+            <div class="input-row">
+                <label for="reg_pref">Preferencia de Bebida o Nota</label>
+                <input type="text" id="reg_pref" placeholder="¿Bebida preferida o comentario?">
             </div>
 
-            <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 26px;">
-                <button type="button" class="dock-cta-ghost" onclick="closeRSVP()">Regresar</button>
-                <button type="button" class="dock-cta-main" onclick="sendWhatsAppConfirmation()">Validar en WhatsApp</button>
+            <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
+                <button type="button" class="btn-clean" onclick="closeRSVP()">Cancelar</button>
+                <button type="button" class="btn-clean-solid" onclick="sendRSVPWhatsApp()">Enviar por WhatsApp</button>
             </div>
         </div>
     </div>
 
-    <!-- Motion Physics Engine -->
+    <!-- Parallax & Logic Script -->
     <script>
-        // Smooth Parallax 3D Engine on Bezel Card & Aurora Orbs
-        const stage = document.getElementById('stageAnchor');
-        const card = document.getElementById('bezelCard');
-        const orb1 = document.getElementById('orbAurora');
-        const orb2 = document.getElementById('orbEarth');
-        const orb3 = document.getElementById('orbSlate');
+        // Smooth Parallax Card Tilt
+        const card = document.getElementById('monolith');
+        const haloTop = document.getElementById('haloTop');
+        const haloBottom = document.getElementById('haloBottom');
 
         if (window.matchMedia("(pointer: fine)").matches) {
             window.addEventListener('mousemove', (e) => {
                 const w = window.innerWidth;
                 const h = window.innerHeight;
-                const xNorm = (e.clientX - w / 2) / (w / 2);
-                const yNorm = (e.clientY - h / 2) / (h / 2);
+                const normX = (e.clientX - w / 2) / (w / 2);
+                const normY = (e.clientY - h / 2) / (h / 2);
 
-                // Deep Atmospheric Orbs Displacement
-                orb1.style.transform = `translate(${xNorm * 45}px, ${yNorm * 45}px) translateX(-50%)`;
-                orb2.style.transform = `translate(${-xNorm * 40}px, ${-yNorm * 40}px)`;
-                orb3.style.transform = `translate(${xNorm * 30}px, ${yNorm * 30}px)`;
+                haloTop.style.transform = `translate(${normX * 40}px, ${normY * 40}px) translateX(-50%)`;
+                haloBottom.style.transform = `translate(${-normX * 30}px, ${-normY * 30}px)`;
 
-                // Double-Bezel Physical Card Tilt (Spring Mass)
                 const rect = card.getBoundingClientRect();
-                const cardMidX = rect.left + rect.width / 2;
-                const cardMidY = rect.top + rect.height / 2;
-                const deltaX = (e.clientX - cardMidX) / (rect.width / 2);
-                const deltaY = (e.clientY - cardMidY) / (rect.height / 2);
+                const midX = rect.left + rect.width / 2;
+                const midY = rect.top + rect.height / 2;
+                const tiltX = (e.clientX - midX) / (rect.width / 2);
+                const tiltY = (e.clientY - midY) / (rect.height / 2);
 
-                const rotX = -deltaY * 6.5;
-                const rotY = deltaX * 6.5;
-
-                card.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(12px)`;
+                card.style.transform = `rotateX(${-tiltY * 5}deg) rotateY(${tiltX * 5}deg) translateZ(8px)`;
             });
 
             document.addEventListener('mouseleave', () => {
@@ -1115,83 +924,82 @@
             });
         }
 
-        // Live Telemetry Countdown Engine
-        const nowYear = new Date().getFullYear();
-        let targetMoment = new Date(`${nowYear}-11-07T13:30:00`);
-        if (targetMoment.getTime() < Date.now()) {
-            targetMoment = new Date(`${nowYear + 1}-11-07T13:30:00`);
+        // Live Countdown Calculation
+        const yr = new Date().getFullYear();
+        let target = new Date(`${yr}-11-07T13:30:00`);
+        if (target.getTime() < Date.now()) {
+            target = new Date(`${yr + 1}-11-07T13:30:00`);
         }
 
-        function calculateTelemetry() {
-            const difference = targetMoment.getTime() - Date.now();
-            if (difference <= 0) {
-                document.getElementById('valDays').innerText = "00";
-                document.getElementById('valHours').innerText = "00";
-                document.getElementById('valMins').innerText = "00";
-                document.getElementById('valSecs').innerText = "00";
+        function runClock() {
+            const delta = target.getTime() - Date.now();
+            if (delta <= 0) {
+                document.getElementById('cntDays').innerText = "00";
+                document.getElementById('cntHours').innerText = "00";
+                document.getElementById('cntMins').innerText = "00";
+                document.getElementById('cntSecs').innerText = "00";
                 return;
             }
 
-            const d = Math.floor(difference / (1000 * 60 * 60 * 24));
-            const h = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((difference % (1000 * 60)) / 1000);
+            const d = Math.floor(delta / (1000 * 60 * 60 * 24));
+            const h = Math.floor((delta % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((delta % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((delta % (1000 * 60)) / 1000);
 
-            document.getElementById('valDays').innerText = String(d).padStart(2, '0');
-            document.getElementById('valHours').innerText = String(h).padStart(2, '0');
-            document.getElementById('valMins').innerText = String(m).padStart(2, '0');
-            document.getElementById('valSecs').innerText = String(s).padStart(2, '0');
+            document.getElementById('cntDays').innerText = String(d).padStart(2, '0');
+            document.getElementById('cntHours').innerText = String(h).padStart(2, '0');
+            document.getElementById('cntMins').innerText = String(m).padStart(2, '0');
+            document.getElementById('cntSecs').innerText = String(s).padStart(2, '0');
         }
 
-        setInterval(calculateTelemetry, 1000);
-        calculateTelemetry();
+        setInterval(runClock, 1000);
+        runClock();
 
-        // Modal Sheet Physics
+        // Modal Controls
         function openRSVP() {
-            document.getElementById('modalBackcloth').classList.add('active');
-            setTimeout(() => document.getElementById('input_name').focus(), 80);
+            document.getElementById('modalWrap').classList.add('active');
+            setTimeout(() => document.getElementById('reg_name').focus(), 80);
         }
 
         function closeRSVP() {
-            document.getElementById('modalBackcloth').classList.remove('active');
+            document.getElementById('modalWrap').classList.remove('active');
         }
 
-        function sendWhatsAppConfirmation() {
-            const name = document.getElementById('input_name').value.trim();
-            const companions = document.getElementById('input_companions').value;
-            const note = document.getElementById('input_note').value.trim();
+        function sendRSVPWhatsApp() {
+            const name = document.getElementById('reg_name').value.trim();
+            const count = document.getElementById('reg_count').value;
+            const pref = document.getElementById('reg_pref').value.trim();
 
             if (!name) {
-                alert('Ingresa tu nombre para verificar tu lugar en la lista.');
-                document.getElementById('input_name').focus();
+                alert('Por favor ingresa tu nombre para registrarte en la lista.');
+                document.getElementById('reg_name').focus();
                 return;
             }
 
-            let text = `*REGISTRO NOMINAL · 15TH BIRTHDAY*%0A`;
-            text += `Daniel, valido mi asistencia a tu sesión privada en Lomas del Lencero.%0A%0A`;
-            text += `👤 *Invitado:* ${encodeURIComponent(name)}%0A`;
-            text += `👥 *Cupo:* ${encodeURIComponent(companions)}%0A`;
-            if (note) {
-                text += `🍸 *Nota:* ${encodeURIComponent(note)}%0A`;
+            let msg = `*CONFIRMACIÓN DE ASISTENCIA · DANIEL LIMÓN*%0A`;
+            msg += `Confirmo mi asistencia a la sesión privada en Lomas del Lencero.%0A%0A`;
+            msg += `👤 *Nombre:* ${encodeURIComponent(name)}%0A`;
+            msg += `👥 *Asistencia:* ${encodeURIComponent(count)}%0A`;
+            if (pref) {
+                msg += `🍸 *Nota:* ${encodeURIComponent(pref)}%0A`;
             }
-            text += `👔 *Dress Code:* Paleta Beige confirmada.%0A%0A`;
-            text += `Nos vemos el 7 de Noviembre, 1:30 PM puntual.`;
+            msg += `👔 *Dress Code:* Entendido, tonalidades beige.%0A%0A`;
+            msg += `Nos vemos el 7 de Noviembre a la 1:30 p.m. puntual.`;
 
-            const phone = "522311477876";
-            window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+            window.open(`https://wa.me/522311477876?text=${msg}`, '_blank');
             closeRSVP();
         }
 
-        // Calendar .ics Generator
+        // Calendar Download
         function downloadICS() {
-            const payload = 
+            const ics = 
 `BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//Daniel Limon Co//Private Session 15th//ES
+PRODID:-//Daniel Limon Co//Private Session//ES
 CALSCALE:GREGORIAN
 BEGIN:VEVENT
 SUMMARY:Daniel Limón — 15th Birthday (Private Session)
-DESCRIPTION:Sesión privada de cumpleaños. Dress code estricto: Tonos beige y lino. Puntualidad 1:30 PM.
+DESCRIPTION:Reunión privada de cumpleaños. Dress code estricto: Tonos beige y lino. Puntualidad 1:30 PM.
 LOCATION:Lomas del Lencero (19.501432, -96.821491)
 DTSTART:20261107T193000Z
 DTEND:20261108T030000Z
@@ -1199,14 +1007,14 @@ STATUS:CONFIRMED
 END:VEVENT
 END:VCALENDAR`;
 
-            const blob = new Blob([payload], { type: 'text/calendar;charset=utf-8' });
+            const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
             const url = window.URL.createObjectURL(blob);
-            const anchor = document.createElement('a');
-            anchor.href = url;
-            anchor.download = 'daniel-limon-15th-private-session.ics';
-            document.body.appendChild(anchor);
-            anchor.click();
-            document.body.removeChild(anchor);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'daniel-limon-invitacion.ics';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
         }
 
         window.addEventListener('keydown', (e) => {
