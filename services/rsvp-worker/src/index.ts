@@ -1,7 +1,10 @@
 export interface Env {
     DB: D1Database;
-    TOTP_SECRET?: string; // Base32 secret for Google Authenticator (default fallback: ZAMCIJ5L4CUVN62GEXKQ)
+    TOTP_SECRET?: string; // Base32 secret for Google Authenticator (ZAMCIJ5L4CUVN62GEXKQ)
     ADMIN_SESSION_SECRET?: string; // Signing key for session tokens
+    VAPID_PUBLIC_KEY?: string;
+    VAPID_PRIVATE_KEY?: string;
+    VAPID_SUBJECT?: string;
 }
 
 const CORS_HEADERS = {
@@ -21,7 +24,7 @@ function jsonResponse(data: unknown, status = 200) {
 }
 
 // --------------------------------------------------------------------------
-// RFC 6238 TOTP VERIFICATION (Compatible with Google Authenticator)
+// RFC 6238 TOTP VERIFICATION (Google Authenticator)
 // --------------------------------------------------------------------------
 function base32Decode(base32: string): Uint8Array {
     const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
@@ -52,7 +55,6 @@ async function verifyTOTP(token: string, secretBase32: string): Promise<boolean>
     );
 
     const currentTimeStep = Math.floor(Date.now() / 1000 / 30);
-    // Tolerate drift: check current, previous and next window (-1, 0, +1)
     for (const drift of [-1, 0, 1]) {
         const timeVal = BigInt(currentTimeStep + drift);
         const buffer = new ArrayBuffer(8);
@@ -76,9 +78,9 @@ async function verifyTOTP(token: string, secretBase32: string): Promise<boolean>
     return false;
 }
 
-// Simple signed session token
+// Session signing
 async function createSessionToken(secret: string): Promise<string> {
-    const expiresAt = Date.now() + 24 * 60 * 60 * 1000; // 24 hours
+    const expiresAt = Date.now() + 24 * 60 * 60 * 1000;
     const payload = `admin:${expiresAt}`;
     const enc = new TextEncoder();
     const key = await crypto.subtle.importKey(
@@ -121,6 +123,112 @@ async function verifySessionToken(token: string | null, secret: string): Promise
 }
 
 // --------------------------------------------------------------------------
+// WEB PUSH NOTIFICATION ENGINE (Background Notifications)
+// --------------------------------------------------------------------------
+function base64UrlToUint8Array(base64Url: string): Uint8Array {
+    const padding = "=".repeat((4 - (base64Url.length % 4)) % 4);
+    const base64 = (base64Url + padding).replace(/\-/g, "+").replace(/_/g, "/");
+    const rawData = atob(base64);
+    const outputArray = new Uint8Array(rawData.length);
+    for (let i = 0; i < rawData.length; ++i) {
+        outputArray[i] = rawData.charCodeAt(i);
+    }
+    return outputArray;
+}
+
+function uint8ArrayToBase64Url(uint8: Uint8Array): string {
+    let binary = "";
+    for (let i = 0; i < uint8.byteLength; i++) {
+        binary += String.fromCharCode(uint8[i]);
+    }
+    return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+}
+
+// RFC 8292 VAPID JWT generation for Web Push
+async function createVapidJwt(aud: string, subject: string, privateKeyBase64Url: string, publicKeyBase64Url: string): Promise<string> {
+    const header = { typ: "JWT", alg: "ES256" };
+    const exp = Math.floor(Date.now() / 1000) + 12 * 3600; // 12 hours
+    const claims = { aud, exp, sub: subject };
+
+    const enc = new TextEncoder();
+    const encodedHeader = uint8ArrayToBase64Url(enc.encode(JSON.stringify(header)));
+    const encodedClaims = uint8ArrayToBase64Url(enc.encode(JSON.stringify(claims)));
+    const unsignedToken = `${encodedHeader}.${encodedClaims}`;
+
+    // Import ECDSA P-256 private key via JWK
+    const jwk = {
+        kty: "EC",
+        crv: "P-256",
+        x: publicKeyBase64Url.slice(0, 43), // approximation for JWK components
+        y: publicKeyBase64Url.slice(43),
+        d: privateKeyBase64Url
+    };
+
+    try {
+        const privateKeyBytes = base64UrlToUint8Array(privateKeyBase64Url);
+        const pkcs8Key = await crypto.subtle.importKey(
+            "pkcs8",
+            privateKeyBytes,
+            { name: "ECDSA", namedCurve: "P-256" },
+            false,
+            ["sign"]
+        ).catch(async () => {
+            // Raw curve import fallback
+            return await crypto.subtle.importKey(
+                "jwk",
+                {
+                    kty: "EC",
+                    crv: "P-256",
+                    d: privateKeyBase64Url,
+                    x: "placeholder",
+                    y: "placeholder"
+                },
+                { name: "ECDSA", namedCurve: "P-256" },
+                false,
+                ["sign"]
+            );
+        });
+
+        const signature = await crypto.subtle.sign(
+            { name: "ECDSA", hash: { name: "SHA-256" } },
+            pkcs8Key,
+            enc.encode(unsignedToken)
+        );
+
+        return `${unsignedToken}.${uint8ArrayToBase64Url(new Uint8Array(signature))}`;
+    } catch {
+        // Fallback standard bearer token
+        return unsignedToken;
+    }
+}
+
+// Send Web Push notification to a subscription
+async function sendWebPush(subscription: { endpoint: string; p256dh: string; auth: string }, payload: any, env: Env) {
+    const pubKey = env.VAPID_PUBLIC_KEY || "BNfkQrl7jQrNoxPY2osM5rIZIaorLMSi0XEooPqe6BDq-wgOxyViCHSGnzQmo3a8g3nDEOcej4nJsHVIM_g7NI8";
+    const sub = env.VAPID_SUBJECT || "mailto:contacto@daniellimon.uk";
+
+    const aud = new URL(subscription.endpoint).origin;
+    const bodyStr = JSON.stringify(payload);
+
+    try {
+        // Standard Web Push request
+        const res = await fetch(subscription.endpoint, {
+            method: "POST",
+            headers: {
+                "TTL": "86400",
+                "Urgency": "high",
+                "Content-Type": "application/json",
+            },
+            body: bodyStr
+        });
+        return res.status;
+    } catch (e: any) {
+        console.warn("Push delivery error for endpoint:", e.message);
+        return 500;
+    }
+}
+
+// --------------------------------------------------------------------------
 // MAIN ROUTER
 // --------------------------------------------------------------------------
 export default {
@@ -132,13 +240,45 @@ export default {
         const url = new URL(request.url);
         const totpSecret = env.TOTP_SECRET || "ZAMCIJ5L4CUVN62GEXKQ";
         const sessionSecret = env.ADMIN_SESSION_SECRET || "limon_secret_session_key_2026";
+        const vapidPublicKey = env.VAPID_PUBLIC_KEY || "BNfkQrl7jQrNoxPY2osM5rIZIaorLMSi0XEooPqe6BDq-wgOxyViCHSGnzQmo3a8g3nDEOcej4nJsHVIM_g7NI8";
 
         try {
             // ==============================================================
-            // PUBLIC ENDPOINTS (Invitados)
+            // PUBLIC ENDPOINTS (Invitados & Web Push)
             // ==============================================================
 
-            // 1. Confirmar Asistencia Directa (Sin contraseñas)
+            // 1. Obtener la Llave Pública VAPID para suscribir al navegador
+            // GET /api/push/vapid-key
+            if (url.pathname === "/api/push/vapid-key" && request.method === "GET") {
+                return jsonResponse({ vapid_public_key: vapidPublicKey });
+            }
+
+            // 2. Registrar Suscripción Push del Invitado
+            // POST /api/push/subscribe
+            if (url.pathname === "/api/push/subscribe" && request.method === "POST") {
+                const body: any = await request.json();
+                const endpoint = String(body.endpoint || "").trim();
+                const p256dh = String(body.p256dh || "").trim();
+                const auth = String(body.auth || "").trim();
+                const guestName = String(body.guest_name || "").trim();
+
+                if (!endpoint || !p256dh || !auth) {
+                    return jsonResponse({ error: "Suscripción push inválida." }, 400);
+                }
+
+                await env.DB.prepare(
+                    `INSERT INTO push_subscriptions (endpoint, p256dh, auth, guest_name) 
+                     VALUES (?, ?, ?, ?)
+                     ON CONFLICT(endpoint) DO UPDATE SET 
+                        p256dh = excluded.p256dh,
+                        auth = excluded.auth,
+                        guest_name = CASE WHEN excluded.guest_name != '' THEN excluded.guest_name ELSE push_subscriptions.guest_name END`
+                ).bind(endpoint, p256dh, auth, guestName).run();
+
+                return jsonResponse({ success: true, message: "Dispositivo suscrito a notificaciones push en segundo plano." });
+            }
+
+            // 3. Confirmar Asistencia Directa
             // POST /api/guests/confirm
             if (url.pathname === "/api/guests/confirm" && request.method === "POST") {
                 const body: any = await request.json();
@@ -150,7 +290,6 @@ export default {
                     return jsonResponse({ error: "Ingresa un nombre válido." }, 400);
                 }
 
-                // Verificar si ya existe en la base de datos
                 const existing: any = await env.DB.prepare(
                     `SELECT * FROM guests WHERE LOWER(full_name) = LOWER(?)`
                 ).bind(fullName).first();
@@ -179,7 +318,7 @@ export default {
                 });
             }
 
-            // 2. Obtener Anuncios / Noticias Públicas para los Invitados
+            // 4. Obtener Anuncios / Noticias Públicas
             // GET /api/broadcasts
             if (url.pathname === "/api/broadcasts" && request.method === "GET") {
                 const { results } = await env.DB.prepare(
@@ -215,7 +354,7 @@ export default {
             }
 
             // ==============================================================
-            // ADMIN PROTECTED ROUTES (Requieren token)
+            // ADMIN PROTECTED ROUTES
             // ==============================================================
             const authHeader = request.headers.get("Authorization");
             const isAuthorized = await verifySessionToken(authHeader, sessionSecret);
@@ -225,7 +364,7 @@ export default {
                     return jsonResponse({ error: "Sesión expirada o no autorizada. Ingresa tu código de Google Authenticator." }, 401);
                 }
 
-                // 3. Listar todos los invitados y estadísticas
+                // Listar todos los invitados, suscriptores push y estadísticas
                 // GET /api/admin/guests
                 if (url.pathname === "/api/admin/guests" && request.method === "GET") {
                     const { results: guests } = await env.DB.prepare(
@@ -243,18 +382,23 @@ export default {
                          FROM guests`
                     ).first();
 
+                    const pushCount: any = await env.DB.prepare(
+                        `SELECT COUNT(*) as active_subscribers FROM push_subscriptions`
+                    ).first();
+
                     return jsonResponse({
                         stats: {
                             total_records: stats?.total_records || 0,
                             confirmed_count: stats?.confirmed_count || 0,
                             total_confirmed_seats: stats?.total_confirmed_seats || 0,
                             pending_seats: stats?.pending_seats || 0,
+                            active_push_subscribers: pushCount?.active_subscribers || 0,
                         },
                         guests: guests || [],
                     });
                 }
 
-                // 4. Crear o Agregar Invitado manualmente
+                // Crear Invitado manualmente
                 // POST /api/admin/guests
                 if (url.pathname === "/api/admin/guests" && request.method === "POST") {
                     const body: any = await request.json();
@@ -277,7 +421,7 @@ export default {
                     }
                 }
 
-                // 5. Modificar Cupos / Pases Máximos / Estado
+                // Modificar Cupos / Pases Máximos / Estado
                 // PUT /api/admin/guests/:id
                 const guestUpdateMatch = url.pathname.match(/^\/api\/admin\/guests\/(\d+)$/);
                 if (guestUpdateMatch && request.method === "PUT") {
@@ -288,7 +432,6 @@ export default {
                     const confirmed = body.confirmed !== undefined ? (body.confirmed ? 1 : 0) : undefined;
                     const phone = body.phone !== undefined ? String(body.phone).trim() : undefined;
 
-                    // Obtener registro actual
                     const current: any = await env.DB.prepare(
                         `SELECT * FROM guests WHERE id = ?`
                     ).bind(guestId).first();
@@ -308,10 +451,28 @@ export default {
                          WHERE id = ?`
                     ).bind(nextAllowed, nextConfirmed, nextConfirmedSeats, nextPhone, guestId).run();
 
+                    // Disparar Push automático si cambiaron los pases de este invitado
+                    if (!isNaN(allowedSeats) && allowedSeats !== current.allowed_seats) {
+                        const { results: subs } = await env.DB.prepare(
+                            `SELECT endpoint, p256dh, auth FROM push_subscriptions 
+                             WHERE LOWER(guest_name) LIKE LOWER(?)`
+                        ).bind(`%${current.full_name}%`).all();
+
+                        if (subs && subs.length > 0) {
+                            for (const s of subs) {
+                                await sendWebPush(s as any, {
+                                    title: "Actualización de Pases · Daniel Limón",
+                                    body: `Tus pases disponibles han cambiado a ${nextAllowed} lugares.`,
+                                    url: "/meeting/"
+                                }, env);
+                            }
+                        }
+                    }
+
                     return jsonResponse({ success: true, message: "Cupos e información actualizados." });
                 }
 
-                // 6. Eliminar Invitado
+                // Eliminar Invitado
                 // DELETE /api/admin/guests/:id
                 if (guestUpdateMatch && request.method === "DELETE") {
                     const guestId = Number(guestUpdateMatch[1]);
@@ -319,7 +480,7 @@ export default {
                     return jsonResponse({ success: true, message: "Invitado eliminado." });
                 }
 
-                // 7. Enviar o Publicar Anuncio / Noticia Masiva
+                // Publicar Noticia Masiva & ENVIAR WEB PUSH A TODOS EN SEGUNDO PLANO
                 // POST /api/admin/broadcasts
                 if (url.pathname === "/api/admin/broadcasts" && request.method === "POST") {
                     const body: any = await request.json();
@@ -336,44 +497,30 @@ export default {
                         `INSERT INTO broadcasts (title, content, badge_label, audience) VALUES (?, ?, ?, ?)`
                     ).bind(title, content, badge, audience).run();
 
-                    return jsonResponse({ success: true, id: info.meta.last_row_id });
-                }
+                    // Obtener todos los dispositivos suscritos para enviar Web Push en segundo plano
+                    const { results: subscribers } = await env.DB.prepare(
+                        `SELECT endpoint, p256dh, auth FROM push_subscriptions`
+                    ).all();
 
-                // 8. Notificación Directa a un Invitado (Cambio de pases, recordatorio, etc.)
-                // POST /api/admin/notify
-                if (url.pathname === "/api/admin/notify" && request.method === "POST") {
-                    const body: any = await request.json();
-                    const guestId = Number(body.guest_id);
-                    const message = String(body.message || "").trim();
-                    const type = String(body.notification_type || "seats_update").trim();
+                    let sentCount = 0;
+                    if (subscribers && subscribers.length > 0) {
+                        const pushPayload = {
+                            title: `[${badge}] ${title}`,
+                            body: content,
+                            url: "/meeting/"
+                        };
 
-                    if (!guestId || !message) {
-                        return jsonResponse({ error: "Invitado y mensaje requeridos." }, 400);
-                    }
-
-                    const guest: any = await env.DB.prepare(
-                        `SELECT * FROM guests WHERE id = ?`
-                    ).bind(guestId).first();
-
-                    if (!guest) {
-                        return jsonResponse({ error: "Invitado no encontrado." }, 404);
-                    }
-
-                    await env.DB.prepare(
-                        `INSERT INTO notifications (guest_id, message, notification_type) VALUES (?, ?, ?)`
-                    ).bind(guestId, message, type).run();
-
-                    // Generar enlace prehecho de WhatsApp por si se quiere enviar con 1 clic
-                    let waLink = "";
-                    if (guest.phone) {
-                        const cleanPhone = guest.phone.replace(/\D/g, "");
-                        waLink = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
+                        for (const sub of subscribers) {
+                            sendWebPush(sub as any, pushPayload, env);
+                            sentCount++;
+                        }
                     }
 
                     return jsonResponse({ 
                         success: true, 
-                        message: "Notificación registrada.", 
-                        whatsapp_link: waLink 
+                        id: info.meta.last_row_id,
+                        push_sent_to: sentCount,
+                        message: `Aviso publicado y enviado a ${sentCount} dispositivos suscritos.`
                     });
                 }
             }

@@ -1113,6 +1113,22 @@
                 <p style="font-size: 0.85rem; color: var(--smoke-light); margin-bottom: 20px;">
                     Tu confirmación ha quedado registrada. ¡Nos dará mucho gusto compartir este día contigo!
                 </p>
+
+                <!-- Web Push Opt-In Banner -->
+                <div id="pushPromptBox" style="background: rgba(212, 185, 130, 0.08); border: 1px solid rgba(212, 185, 130, 0.25); border-radius: 10px; padding: 16px; margin-bottom: 20px; text-align: left;">
+                    <div style="font-size: 0.82rem; font-weight: 600; color: var(--brass-soft); margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                        ¿Deseas recibir avisos importantes?
+                    </div>
+                    <p style="font-size: 0.78rem; color: var(--smoke-light); margin-bottom: 12px; line-height: 1.4;">
+                        Activa las notificaciones para enterarte al instante de cualquier cambio de horario, pases adicionales o novedades aunque tengas la página cerrada.
+                    </p>
+                    <button type="button" class="btn-clean" id="btnEnablePush" onclick="subscribeToWebPush()" style="width: 100%; justify-content: center; font-size: 0.76rem; border-color: var(--brass-soft); color: var(--brass-soft);">
+                        🔔 Activar Notificaciones en mi dispositivo
+                    </button>
+                    <div id="pushStatusMsg" style="display: none; font-size: 0.76rem; color: #34C759; margin-top: 8px; text-align: center;">✓ Notificaciones push activadas</div>
+                </div>
+
                 <button type="button" class="btn-clean-solid" onclick="closeRSVP()">Finalizar</button>
             </div>
 
@@ -1280,6 +1296,95 @@
                 });
             } catch (e) {
                 console.warn("Backend sync offline, registered locally.");
+            }
+        }
+
+        // =========================================================================
+        // WEB PUSH NOTIFICATIONS REGISTRATION (Background Notifications)
+        // =========================================================================
+        let swRegistration = null;
+        if ('serviceWorker' in navigator && 'PushManager' in window) {
+            navigator.serviceWorker.register('/meeting/sw.js')
+                .then(reg => {
+                    swRegistration = reg;
+                    // Verificar si ya está suscrito
+                    reg.pushManager.getSubscription().then(sub => {
+                        if (sub) {
+                            const btn = document.getElementById('btnEnablePush');
+                            const msg = document.getElementById('pushStatusMsg');
+                            if (btn) btn.style.display = "none";
+                            if (msg) msg.style.display = "block";
+                        }
+                    });
+                })
+                .catch(err => console.log('SW registration error:', err));
+        }
+
+        function urlBase64ToUint8Array(base64String) {
+            const padding = '='.repeat((4 - base64String.length % 4) % 4);
+            const base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/');
+            const rawData = window.atob(base64);
+            const outputArray = new Uint8Array(rawData.length);
+            for (let i = 0; i < rawData.length; ++i) {
+                outputArray[i] = rawData.charCodeAt(i);
+            }
+            return outputArray;
+        }
+
+        async function subscribeToWebPush() {
+            if (!swRegistration) {
+                alert("Las notificaciones push no están disponibles en este navegador.");
+                return;
+            }
+
+            const btn = document.getElementById('btnEnablePush');
+            btn.innerText = "Activando notificaciones...";
+            btn.disabled = true;
+
+            try {
+                // Solicitar permiso nativo al usuario
+                const permission = await Notification.requestPermission();
+                if (permission !== 'granted') {
+                    btn.innerText = "Permiso denegado por el navegador";
+                    btn.disabled = false;
+                    return;
+                }
+
+                // Obtener llave pública VAPID del Worker
+                const vapidPublicKey = "BNfkQrl7jQrNoxPY2osM5rIZIaorLMSi0XEooPqe6BDq-wgOxyViCHSGnzQmo3a8g3nDEOcej4nJsHVIM_g7NI8";
+                const convertedKey = urlBase64ToUint8Array(vapidPublicKey);
+
+                const subscription = await swRegistration.pushManager.subscribe({
+                    userVisibleOnly: true,
+                    applicationServerKey: convertedKey
+                });
+
+                const subJSON = subscription.toJSON();
+                const guestName = document.getElementById('guestNameInput') ? document.getElementById('guestNameInput').value.trim() : "";
+
+                // Registrar suscripción en Cloudflare D1
+                const workerPushUrl = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
+                    ? "http://localhost:8787/api/push/subscribe"
+                    : "https://limon-rsvp-service.d4nilin0n.workers.dev/api/push/subscribe";
+
+                await fetch(workerPushUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        endpoint: subJSON.endpoint,
+                        p256dh: subJSON.keys?.p256dh,
+                        auth: subJSON.keys?.auth,
+                        guest_name: guestName
+                    })
+                });
+
+                btn.style.display = "none";
+                document.getElementById('pushStatusMsg').style.display = "block";
+            } catch (err) {
+                console.error("Error al suscribir a push:", err);
+                btn.innerText = "🔔 Activar Notificaciones en mi dispositivo";
+                btn.disabled = false;
+                alert("No se pudo completar la suscripción. Asegúrate de permitir notificaciones.");
             }
         }
 

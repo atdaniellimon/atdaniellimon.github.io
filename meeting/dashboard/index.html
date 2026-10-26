@@ -634,8 +634,8 @@
                     <div class="lbl">Personas Acreditadas</div>
                 </div>
                 <div class="metric-card">
-                    <div class="val" id="statPendingSeats">0</div>
-                    <div class="lbl">Cupos Pendientes</div>
+                    <div class="val" id="statActivePush">0</div>
+                    <div class="lbl">🔔 Suscritos a Notificaciones Push</div>
                 </div>
                 <div class="metric-card">
                     <div class="val" id="statTotalGuests">0</div>
@@ -843,7 +843,9 @@
         function updateStats(stats) {
             document.getElementById('statConfirmedGuests').innerText = stats.confirmed_count || 0;
             document.getElementById('statConfirmedSeats').innerText = stats.total_confirmed_seats || 0;
-            document.getElementById('statPendingSeats').innerText = stats.pending_seats || 0;
+            if (document.getElementById('statActivePush')) {
+                document.getElementById('statActivePush').innerText = stats.active_push_subscribers || 0;
+            }
             document.getElementById('statTotalGuests').innerText = stats.total_records || 0;
         }
 

@@ -5,6 +5,9 @@ compatibility_date = "2024-10-01"
 [vars]
 ADMIN_SECRET = "limon_secret_admin_token_2026"
 TOTP_SECRET = "ZAMCIJ5L4CUVN62GEXKQ"
+VAPID_PUBLIC_KEY = "BNfkQrl7jQrNoxPY2osM5rIZIaorLMSi0XEooPqe6BDq-wgOxyViCHSGnzQmo3a8g3nDEOcej4nJsHVIM_g7NI8"
+VAPID_PRIVATE_KEY = "pV1yDE0fuHHBSVd1R9b3Q913si08EveYSCIiNJIHijI"
+VAPID_SUBJECT = "mailto:contacto@daniellimon.uk"
 
 [[d1_databases]]
 binding = "DB"
