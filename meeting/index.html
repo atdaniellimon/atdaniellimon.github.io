@@ -119,6 +119,101 @@
             right: 0;
         }
 
+        .halo-mid {
+            width: 480px;
+            height: 480px;
+            background: radial-gradient(circle, rgba(212, 185, 130, 0.18), transparent 70%);
+            top: 50%;
+            left: -120px;
+            filter: blur(130px);
+            opacity: 0.12;
+        }
+
+        /* Floating Architectural Geometry (Parallax Depth Tokens) */
+        .geo-orb {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(212, 185, 130, 0.14);
+            pointer-events: none;
+            will-change: transform;
+        }
+
+        .geo-orb-1 {
+            width: 180px;
+            height: 180px;
+            top: 140px;
+            left: -50px;
+            opacity: 0.25;
+            background: radial-gradient(circle, rgba(212, 185, 130, 0.05) 0%, transparent 80%);
+        }
+
+        .geo-orb-2 {
+            width: 110px;
+            height: 110px;
+            top: 520px;
+            right: -20px;
+            opacity: 0.2;
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .geo-orb-3 {
+            width: 220px;
+            height: 220px;
+            top: 960px;
+            left: -70px;
+            opacity: 0.15;
+            border-style: dashed;
+        }
+
+        /* Specular Dynamic Sheen on 3D Card */
+        .card-sheen {
+            position: absolute;
+            inset: 0;
+            border-radius: 16px;
+            pointer-events: none;
+            background: radial-gradient(800px circle at var(--sheen-x, 50%) var(--sheen-y, 30%), rgba(255, 255, 255, 0.08), transparent 45%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            mix-blend-mode: overlay;
+            z-index: 3;
+        }
+
+        .monolith-card:hover .card-sheen {
+            opacity: 1;
+        }
+
+        /* Parallax Scroll Items */
+        .parallax-elem {
+            will-change: transform;
+            transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Mobile Sticky RSVP Bar */
+        .mobile-rsvp-dock {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            z-index: 800;
+            background: rgba(14, 16, 21, 0.88);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-elevated);
+            border-radius: 14px;
+            padding: 12px 18px;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8);
+            align-items: center;
+            justify-content: space-between;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-rsvp-dock {
+                display: flex;
+            }
+        }
+
         /* Layout Architecture */
         .layout {
             position: relative;
@@ -908,7 +1003,20 @@
     <!-- Ambient Glow Field (Real Physics Parallax) -->
     <div class="ambient-field">
         <div class="halo halo-top" id="haloTop"></div>
+        <div class="halo halo-mid" id="haloMid"></div>
         <div class="halo halo-bottom" id="haloBottom"></div>
+        <div class="geo-orb geo-orb-1" id="geoOrb1"></div>
+        <div class="geo-orb geo-orb-2" id="geoOrb2"></div>
+        <div class="geo-orb geo-orb-3" id="geoOrb3"></div>
+    </div>
+
+    <!-- Sticky Mobile RSVP Dock -->
+    <div class="mobile-rsvp-dock" id="mobileDock">
+        <div>
+            <div style="font-size:0.62rem; color:var(--smoke-mute); text-transform:uppercase; letter-spacing:0.14em;">Asistencia</div>
+            <div style="font-size:0.86rem; font-weight:600; color:var(--ivory);">7 de Noviembre</div>
+        </div>
+        <button type="button" class="btn-clean-solid" onclick="openRSVP()" style="padding:10px 18px; font-size:0.75rem; letter-spacing:0.1em;">Confirmar Lugar</button>
     </div>
 
     <!-- Entrance Push Notification Modal (Prominent & Elegant) -->
@@ -950,6 +1058,7 @@
         <!-- 3D Monolith Architectural Card -->
         <div class="card-stage" id="cardStage">
             <div class="monolith-card" id="monolith">
+                <div class="card-sheen" id="cardSheen"></div>
                 
                 <div class="layer-deep">
                     <div class="year-numeral">
@@ -1204,34 +1313,108 @@
             }
         }
 
-        // Parallax 3D Multi-Layer Inertial Tilt
+        // =========================================================================
+        // HIGH PERFORMANCE PARALLAX & DEPTH ENGINE (Scroll, Gyroscope, Sheen)
+        // =========================================================================
         const monolith = document.getElementById('monolith');
         const haloTop = document.getElementById('haloTop');
+        const haloMid = document.getElementById('haloMid');
         const haloBottom = document.getElementById('haloBottom');
+        const geoOrb1 = document.getElementById('geoOrb1');
+        const geoOrb2 = document.getElementById('geoOrb2');
+        const geoOrb3 = document.getElementById('geoOrb3');
+        const yearNumeral = document.querySelector('.year-numeral');
+        const manifesto = document.querySelector('.manifesto-section');
 
+        let targetTiltX = 0, targetTiltY = 0;
+        let currentTiltX = 0, currentTiltY = 0;
+        let mouseX = 0, mouseY = 0;
+
+        // Pointer / Mouse Parallax & Dynamic Specular Sheen
         if (window.matchMedia("(pointer: fine)").matches) {
             window.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
                 const w = window.innerWidth;
                 const h = window.innerHeight;
                 const normX = (e.clientX - w / 2) / (w / 2);
                 const normY = (e.clientY - h / 2) / (h / 2);
 
-                haloTop.style.transform = `translate(${normX * 45}px, ${normY * 45}px) translateX(-50%)`;
-                haloBottom.style.transform = `translate(${-normX * 35}px, ${-normY * 35}px)`;
+                if (haloTop) haloTop.style.transform = `translate(${normX * 45}px, ${normY * 45}px) translateX(-50%)`;
+                if (haloBottom) haloBottom.style.transform = `translate(${-normX * 35}px, ${-normY * 35}px)`;
 
-                const rect = monolith.getBoundingClientRect();
-                const midX = rect.left + rect.width / 2;
-                const midY = rect.top + rect.height / 2;
-                const tiltX = (e.clientX - midX) / (rect.width / 2);
-                const tiltY = (e.clientY - midY) / (rect.height / 2);
+                if (monolith) {
+                    const rect = monolith.getBoundingClientRect();
+                    targetTiltX = (e.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
+                    targetTiltY = (e.clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
 
-                monolith.style.transform = `rotateX(${-tiltY * 5.5}deg) rotateY(${tiltX * 5.5}deg) translateZ(10px)`;
-            });
+                    // Specular reflection position inside the card
+                    const sheenX = ((e.clientX - rect.left) / rect.width) * 100;
+                    const sheenY = ((e.clientY - rect.top) / rect.height) * 100;
+                    monolith.style.setProperty('--sheen-x', `${sheenX}%`);
+                    monolith.style.setProperty('--sheen-y', `${sheenY}%`);
+                }
+            }, { passive: true });
 
             document.addEventListener('mouseleave', () => {
-                monolith.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(0)';
+                targetTiltX = 0;
+                targetTiltY = 0;
             });
+        } else if (window.DeviceOrientationEvent) {
+            // Gyroscope tilt parallax for mobile devices
+            window.addEventListener('deviceorientation', (e) => {
+                if (e.gamma !== null && e.beta !== null) {
+                    // Clamp mobile tilt angles
+                    const gamma = Math.max(-30, Math.min(30, e.gamma));
+                    const beta = Math.max(-30, Math.min(30, e.beta - 45)); // Calibrated for phone reading angle
+                    targetTiltX = gamma / 25;
+                    targetTiltY = beta / 25;
+                }
+            }, { passive: true });
         }
+
+        // 60FPS RAF Multi-Layer Parallax Loop (Scroll & Tilt Interpolation)
+        let lastScrollY = window.scrollY;
+        function updateParallaxFrame() {
+            const scrollY = window.scrollY;
+            
+            // Lerp tilt angles for silk-smooth feel
+            currentTiltX += (targetTiltX - currentTiltX) * 0.12;
+            currentTiltY += (targetTiltY - currentTiltY) * 0.12;
+
+            if (monolith) {
+                // Subtle scroll float combined with rotational tilt
+                monolith.style.transform = `rotateX(${-currentTiltY * 6}deg) rotateY(${currentTiltX * 6}deg) translateZ(10px)`;
+            }
+
+            // Layered Scroll-Depth Translation
+            if (geoOrb1) geoOrb1.style.transform = `translate3d(0, ${scrollY * 0.22}px, 0)`;
+            if (geoOrb2) geoOrb2.style.transform = `translate3d(0, ${scrollY * -0.16}px, 0)`;
+            if (geoOrb3) geoOrb3.style.transform = `translate3d(0, ${scrollY * 0.12}px, 0)`;
+            if (haloMid) haloMid.style.transform = `translate3d(0, ${scrollY * 0.18}px, 0)`;
+
+            // Subtle layered numeral translation relative to scroll
+            if (yearNumeral && scrollY < 900) {
+                yearNumeral.style.transform = `translate3d(0, ${scrollY * 0.08}px, 36px)`;
+            }
+
+            // Mobile Dock Appearance Management (Show only after scrolling past top hero)
+            const mobileDock = document.getElementById('mobileDock');
+            if (mobileDock) {
+                if (scrollY > 380) {
+                    mobileDock.style.transform = 'translateY(0)';
+                    mobileDock.style.opacity = '1';
+                    mobileDock.style.pointerEvents = 'auto';
+                } else {
+                    mobileDock.style.transform = 'translateY(40px)';
+                    mobileDock.style.opacity = '0';
+                    mobileDock.style.pointerEvents = 'none';
+                }
+            }
+
+            requestAnimationFrame(updateParallaxFrame);
+        }
+        requestAnimationFrame(updateParallaxFrame);
 
         // Countdown Timer Engine
         const yr = new Date().getFullYear();
