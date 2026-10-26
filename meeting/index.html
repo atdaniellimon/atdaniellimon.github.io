@@ -1245,7 +1245,7 @@
             document.getElementById('modalWrap').classList.remove('active');
         }
 
-        function submitRSVP() {
+        async function submitRSVP() {
             const guestName = document.getElementById('guestNameInput').value.trim();
             const seats = document.getElementById('guestSeatsInput').value || 1;
             const note = document.getElementById('guestNote').value.trim();
@@ -1257,11 +1257,30 @@
                 return;
             }
 
-            // Exito directo
+            // Exito visual inmediato
             errBox.style.display = "none";
             document.getElementById('rsvpFormStage').style.display = "none";
             document.getElementById('passGuestName').innerText = `${guestName} · ${seats} ${seats == 1 ? 'lugar' : 'lugares'}`;
             document.getElementById('rsvpSuccessStage').classList.add('active');
+
+            // Enviar registro al backend en segundo plano
+            const workerUrl = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
+                ? "http://localhost:8787/api/guests/confirm"
+                : "https://limon-rsvp-service.daniellimon.workers.dev/api/guests/confirm";
+
+            try {
+                await fetch(workerUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        full_name: guestName,
+                        seats: Number(seats),
+                        note: note
+                    })
+                });
+            } catch (e) {
+                console.warn("Backend sync offline, registered locally.");
+            }
         }
 
         window.addEventListener('keydown', (e) => {

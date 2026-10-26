@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard · Daniel Limón Hernández</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@300;400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-canvas: #090A0D;
+            --bg-surface: #101217;
+            --bg-elevated: #161920;
+            --border-hairline: rgba(255, 255, 255, 0.07);
+            --border-elevated: rgba(255, 255, 255, 0.14);
+            --brass-soft: #D4B982;
+            --brass-subtle: rgba(212, 185, 130, 0.15);
+            --ivory: #F5F5F7;
+            --smoke-light: #A1A1A6;
+            --smoke-mute: #636366;
+            --danger: #FF6B6B;
+            --success: #34C759;
+            --ease-fluid: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-canvas);
+            color: var(--ivory);
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Ambient Glow Field */
+        .ambient-field {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .halo {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.22;
+        }
+
+        .halo-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, #D4B982 0%, transparent 70%);
+            top: -200px;
+            right: -100px;
+        }
+
+        .halo-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #3B4252 0%, transparent 70%);
+            bottom: -150px;
+            left: -100px;
+        }
+
+        .wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+
+        /* -------------------------------------------------------------
+           AUTH SCREEN (Google Authenticator TOTP)
+           ------------------------------------------------------------- */
+        .auth-card {
+            max-width: 440px;
+            margin: 100px auto 0;
+            background: linear-gradient(175deg, #14171E 0%, #0B0D12 100%);
+            border: 1px solid var(--border-elevated);
+            border-radius: 16px;
+            padding: 44px 36px;
+            text-align: center;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.85);
+        }
+
+        .auth-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--brass-soft);
+            background: var(--brass-subtle);
+            padding: 6px 14px;
+            border-radius: 999px;
+            margin-bottom: 22px;
+        }
+
+        .auth-card h2 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 2.2rem;
+            font-weight: 400;
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+        }
+
+        .auth-card p {
+            font-size: 0.88rem;
+            color: var(--smoke-light);
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+
+        .pin-inputs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .pin-digit {
+            width: 48px;
+            height: 58px;
+            background: #090A0D;
+            border: 1px solid var(--border-elevated);
+            border-radius: 10px;
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.6rem;
+            color: var(--ivory);
+            outline: none;
+            transition: all 0.2s var(--ease-fluid);
+        }
+
+        .pin-digit:focus {
+            border-color: var(--brass-soft);
+            box-shadow: 0 0 0 2px rgba(212, 185, 130, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            width: 100%;
+            background: var(--ivory);
+            color: var(--bg-canvas);
+            border: none;
+            border-radius: 10px;
+            padding: 14px 20px;
+            font-size: 0.85rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s var(--ease-fluid);
+        }
+
+        .btn-primary:hover {
+            background: var(--brass-soft);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--smoke-light);
+            border: 1px solid var(--border-hairline);
+            border-radius: 8px;
+            padding: 10px 18px;
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--ivory);
+            color: var(--ivory);
+        }
+
+        /* -------------------------------------------------------------
+           DASHBOARD MAIN VIEW
+           ------------------------------------------------------------- */
+        #dashboardView {
+            display: none;
+        }
+
+        .dash-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 36px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border-hairline);
+        }
+
+        .dash-header h1 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 2.6rem;
+            font-weight: 400;
+            margin-bottom: 4px;
+        }
+
+        .dash-header p {
+            font-size: 0.85rem;
+            color: var(--smoke-light);
+            letter-spacing: 0.05em;
+        }
+
+        /* Metric Bento Cards */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+            margin-bottom: 36px;
+        }
+
+        .metric-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-hairline);
+            border-radius: 14px;
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card .val {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 3rem;
+            font-weight: 400;
+            line-height: 1;
+            color: var(--ivory);
+            margin-bottom: 8px;
+        }
+
+        .metric-card .lbl {
+            font-size: 0.72rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--smoke-mute);
+        }
+
+        .metric-card.accent {
+            border-color: rgba(212, 185, 130, 0.3);
+            background: linear-gradient(175deg, #161A22 0%, #101217 100%);
+        }
+
+        .metric-card.accent .val {
+            color: var(--brass-soft);
+        }
+
+        /* Tabs & Actions Bar */
+        .controls-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+
+        .tab-group {
+            display: flex;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-hairline);
+            border-radius: 10px;
+            padding: 4px;
+            gap: 4px;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--smoke-light);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: var(--bg-elevated);
+            color: var(--ivory);
+        }
+
+        .search-box {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-hairline);
+            border-radius: 10px;
+            padding: 10px 16px;
+            color: var(--ivory);
+            font-family: inherit;
+            font-size: 0.85rem;
+            width: 280px;
+            outline: none;
+        }
+
+        .search-box:focus {
+            border-color: var(--brass-soft);
+        }
+
+        /* Guests Table */
+        .table-wrap {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-hairline);
+            border-radius: 14px;
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        thead {
+            background: #0C0E12;
+            border-bottom: 1px solid var(--border-hairline);
+        }
+
+        th {
+            padding: 16px 20px;
+            font-size: 0.68rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--smoke-mute);
+            font-weight: 600;
+        }
+
+        td {
+            padding: 18px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            font-size: 0.88rem;
+            vertical-align: middle;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.015);
+        }
+
+        .guest-name {
+            font-weight: 600;
+            color: var(--ivory);
+            margin-bottom: 4px;
+        }
+
+        .guest-phone {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.76rem;
+            color: var(--smoke-mute);
+        }
+
+        .guest-note {
+            font-size: 0.78rem;
+            color: var(--smoke-light);
+            font-style: italic;
+            max-width: 260px;
+        }
+
+        .badge-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .badge-status.confirmed {
+            background: rgba(52, 199, 89, 0.15);
+            color: #34C759;
+            border: 1px solid rgba(52, 199, 89, 0.3);
+        }
+
+        .badge-status.pending {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--smoke-light);
+            border: 1px solid var(--border-hairline);
+        }
+
+        /* Seats Controller in table */
+        .seats-stepper {
+            display: inline-flex;
+            align-items: center;
+            background: #090A0D;
+            border: 1px solid var(--border-hairline);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .stepper-btn {
+            background: transparent;
+            border: none;
+            color: var(--smoke-light);
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s;
+        }
+
+        .stepper-btn:hover {
+            color: var(--ivory);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .stepper-val {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            font-weight: 600;
+            min-width: 28px;
+            text-align: center;
+            color: var(--brass-soft);
+        }
+
+        /* Action Buttons */
+        .row-action-btn {
+            background: transparent;
+            border: 1px solid var(--border-hairline);
+            border-radius: 6px;
+            color: var(--smoke-light);
+            padding: 6px 10px;
+            font-size: 0.72rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .row-action-btn:hover {
+            border-color: var(--brass-soft);
+            color: var(--brass-soft);
+        }
+
+        /* -------------------------------------------------------------
+           BROADCAST / NOTIFICATIONS PANEL
+           ------------------------------------------------------------- */
+        .broadcast-panel {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-hairline);
+            border-radius: 14px;
+            padding: 28px;
+            margin-top: 32px;
+        }
+
+        .broadcast-panel h3 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 6px;
+        }
+
+        .broadcast-panel p {
+            font-size: 0.85rem;
+            color: var(--smoke-light);
+            margin-bottom: 20px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .form-input, .form-textarea, .form-select {
+            width: 100%;
+            background: #090A0D;
+            border: 1px solid var(--border-hairline);
+            border-radius: 8px;
+            padding: 12px 14px;
+            color: var(--ivory);
+            font-family: inherit;
+            font-size: 0.88rem;
+            outline: none;
+        }
+
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            border-color: var(--brass-soft);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 80px;
+            margin-bottom: 16px;
+        }
+
+        /* Modal Overlay for Fast Add */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(14px);
+            z-index: 100;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-elevated);
+            border-radius: 16px;
+            max-width: 480px;
+            width: 100%;
+            padding: 36px 30px;
+        }
+
+        .modal-card h4 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 6px;
+        }
+
+        .modal-card p {
+            font-size: 0.85rem;
+            color: var(--smoke-light);
+            margin-bottom: 24px;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--brass-soft);
+            color: var(--ivory);
+            padding: 14px 22px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            z-index: 200;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s var(--ease-fluid);
+            pointer-events: none;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-field">
+        <div class="halo halo-1"></div>
+        <div class="halo halo-2"></div>
+    </div>
+
+    <div class="wrapper">
+        
+        <!-- =========================================================
+             1. AUTHENTICATOR LOGIN (GOOGLE AUTHENTICATOR PIN)
+             ========================================================= -->
+        <div id="authView" class="auth-card">
+            <div class="auth-badge">
+                <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+                Google Authenticator
+            </div>
+            <h2>Acceso Privado</h2>
+            <p>Ingresa el código de 6 dígitos generado por tu app de autenticación para gestionar la lista de asistentes.</p>
+
+            <form id="authForm" onsubmit="handleLogin(event)">
+                <div class="pin-inputs">
+                    <input type="text" class="pin-digit" maxlength="1" pattern="[0-9]" inputmode="numeric" required autofocus>
+                    <input type="text" class="pin-digit" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+                    <input type="text" class="pin-digit" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+                    <input type="text" class="pin-digit" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+                    <input type="text" class="pin-digit" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+                    <input type="text" class="pin-digit" maxlength="1" pattern="[0-9]" inputmode="numeric" required>
+                </div>
+                <div id="authErrorMsg" style="color: var(--danger); font-size: 0.82rem; margin-bottom: 16px; display: none;"></div>
+                <button type="submit" class="btn-primary" id="btnLogin">Verificar & Entrar</button>
+            </form>
+        </div>
+
+        <!-- =========================================================
+             2. MAIN DASHBOARD VIEW
+             ========================================================= -->
+        <div id="dashboardView">
+            
+            <div class="dash-header">
+                <div>
+                    <h1>Asistencias & Control de Pases</h1>
+                    <p>Celebración Daniel Limón Hernández · 7 de Noviembre</p>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn-secondary" onclick="openAddGuestModal()">+ Agregar Invitado</button>
+                    <button class="btn-secondary" onclick="handleLogout()">Salir</button>
+                </div>
+            </div>
+
+            <!-- Bento Stats -->
+            <div class="metrics-grid">
+                <div class="metric-card accent">
+                    <div class="val" id="statConfirmedGuests">0</div>
+                    <div class="lbl">Invitaciones Confirmadas</div>
+                </div>
+                <div class="metric-card accent">
+                    <div class="val" id="statConfirmedSeats">0</div>
+                    <div class="lbl">Personas Acreditadas</div>
+                </div>
+                <div class="metric-card">
+                    <div class="val" id="statPendingSeats">0</div>
+                    <div class="lbl">Cupos Pendientes</div>
+                </div>
+                <div class="metric-card">
+                    <div class="val" id="statTotalGuests">0</div>
+                    <div class="lbl">Total en Convocatoria</div>
+                </div>
+            </div>
+
+            <!-- Table Controls -->
+            <div class="controls-bar">
+                <div class="tab-group">
+                    <button class="tab-btn active" onclick="setFilter('all', this)">Todos</button>
+                    <button class="tab-btn" onclick="setFilter('confirmed', this)">Confirmados</button>
+                    <button class="tab-btn" onclick="setFilter('pending', this)">Pendientes</button>
+                </div>
+                <input type="text" class="search-box" id="tableSearch" placeholder="Buscar por nombre o familia..." oninput="renderTable()">
+            </div>
+
+            <!-- Guests Table -->
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Invitado / Familia</th>
+                            <th>Estado</th>
+                            <th>Pases Máximos</th>
+                            <th>Asistentes Registrados</th>
+                            <th>Nota / Mensaje</th>
+                            <th style="text-align: right;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="guestsTableBody">
+                        <tr>
+                            <td colspan="6" style="text-align: center; color: var(--smoke-mute); padding: 40px;">Cargando lista de invitados...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Broadcast & Notifications Panel -->
+            <div class="broadcast-panel">
+                <h3>Worker de Notificaciones & Anuncios</h3>
+                <p>Publica avisos oficiales visibles para los asistentes en la web o prepara notificaciones con enlace directo a WhatsApp.</p>
+                
+                <form onsubmit="handleSendBroadcast(event)">
+                    <div class="form-grid">
+                        <input type="text" class="form-input" id="broadcastTitle" placeholder="Título del aviso (ej. Recordatorio de Horario)" required>
+                        <select class="form-select" id="broadcastBadge">
+                            <option value="AVISO">Etiqueta: AVISO</option>
+                            <option value="IMPORTANTE">Etiqueta: IMPORTANTE</option>
+                            <option value="RECORDATORIO">Etiqueta: RECORDATORIO</option>
+                        </select>
+                    </div>
+                    <textarea class="form-textarea" id="broadcastContent" placeholder="Escribe el mensaje o noticia que recibirán los asistentes..." required></textarea>
+                    <div style="display: flex; justify-content: flex-end;">
+                        <button type="submit" class="btn-primary" style="width: auto; padding: 12px 28px;">Publicar Notificación</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Modal: Agregar Invitado -->
+    <div class="modal-overlay" id="addGuestModal">
+        <div class="modal-card">
+            <h4>Nuevo Invitado</h4>
+            <p>Agrega un invitado individual o familia y asígnale su cupo de pases máximo.</p>
+            <form onsubmit="handleAddGuest(event)">
+                <div style="margin-bottom: 16px;">
+                    <label style="display: block; font-size: 0.7rem; color: var(--smoke-mute); text-transform: uppercase; margin-bottom: 6px;">Nombre o Familia</label>
+                    <input type="text" class="form-input" id="newGuestName" placeholder="Ej. Familia Gómez / Ana Sofía" required>
+                </div>
+                <div style="margin-bottom: 16px;">
+                    <label style="display: block; font-size: 0.7rem; color: var(--smoke-mute); text-transform: uppercase; margin-bottom: 6px;">Teléfono (Opcional para notificaciones WhatsApp)</label>
+                    <input type="tel" class="form-input" id="newGuestPhone" placeholder="Ej. 522281234567">
+                </div>
+                <div style="margin-bottom: 24px;">
+                    <label style="display: block; font-size: 0.7rem; color: var(--smoke-mute); text-transform: uppercase; margin-bottom: 6px;">Pases Máximos Permitidos</label>
+                    <input type="number" class="form-input" id="newGuestSeats" value="2" min="1" max="15" required>
+                </div>
+                <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                    <button type="button" class="btn-secondary" onclick="closeAddGuestModal()">Cancelar</button>
+                    <button type="submit" class="btn-primary" style="width: auto; padding: 10px 22px;">Guardar Invitado</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="toast" id="toastBox">Acción realizada</div>
+
+    <script>
+        // API Base URL (Apunta a Cloudflare Worker)
+        const API_BASE = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+            ? "http://localhost:8787"
+            : "https://limon-rsvp-service.daniellimon.workers.dev"; // Se actualizará al desplegar el Worker
+
+        let authToken = localStorage.getItem("limon_admin_token") || null;
+        let allGuests = [];
+        let currentFilter = 'all';
+
+        // PIN Inputs Navigation Auto-focus
+        const pinInputs = document.querySelectorAll('.pin-digit');
+        pinInputs.forEach((input, idx) => {
+            input.addEventListener('input', (e) => {
+                if (input.value.length === 1 && idx < pinInputs.length - 1) {
+                    pinInputs[idx + 1].focus();
+                }
+            });
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && !input.value && idx > 0) {
+                    pinInputs[idx - 1].focus();
+                }
+            });
+        });
+
+        // Initialize view
+        if (authToken) {
+            checkAuthAndLoad();
+        }
+
+        async function handleLogin(e) {
+            e.preventDefault();
+            const pin = Array.from(pinInputs).map(i => i.value).join('');
+            const errBox = document.getElementById('authErrorMsg');
+
+            if (pin.length !== 6) {
+                errBox.innerText = "Ingresa los 6 dígitos.";
+                errBox.style.display = "block";
+                return;
+            }
+
+            try {
+                const res = await fetch(`${API_BASE}/api/admin/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ pin })
+                });
+                const data = await res.json();
+
+                if (!res.ok || !data.success) {
+                    errBox.innerText = data.error || "Código incorrecto.";
+                    errBox.style.display = "block";
+                    return;
+                }
+
+                authToken = data.token;
+                localStorage.setItem("limon_admin_token", authToken);
+                errBox.style.display = "none";
+                showDashboard();
+            } catch (err) {
+                errBox.innerText = "Error al conectar con el servidor.";
+                errBox.style.display = "block";
+            }
+        }
+
+        async function checkAuthAndLoad() {
+            try {
+                const res = await fetch(`${API_BASE}/api/admin/guests`, {
+                    headers: { 'Authorization': `Bearer ${authToken}` }
+                });
+                if (res.status === 401) {
+                    handleLogout();
+                    return;
+                }
+                const data = await res.json();
+                showDashboard();
+                updateStats(data.stats);
+                allGuests = data.guests || [];
+                renderTable();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        function showDashboard() {
+            document.getElementById('authView').style.display = "none";
+            document.getElementById('dashboardView').style.display = "block";
+            loadData();
+        }
+
+        function handleLogout() {
+            authToken = null;
+            localStorage.removeItem("limon_admin_token");
+            document.getElementById('authView').style.display = "block";
+            document.getElementById('dashboardView').style.display = "none";
+            pinInputs.forEach(i => i.value = "");
+            pinInputs[0].focus();
+        }
+
+        async function loadData() {
+            try {
+                const res = await fetch(`${API_BASE}/api/admin/guests`, {
+                    headers: { 'Authorization': `Bearer ${authToken}` }
+                });
+                const data = await res.json();
+                if (data.stats) updateStats(data.stats);
+                allGuests = data.guests || [];
+                renderTable();
+            } catch (err) {
+                showToast("Error al cargar datos.");
+            }
+        }
+
+        function updateStats(stats) {
+            document.getElementById('statConfirmedGuests').innerText = stats.confirmed_count || 0;
+            document.getElementById('statConfirmedSeats').innerText = stats.total_confirmed_seats || 0;
+            document.getElementById('statPendingSeats').innerText = stats.pending_seats || 0;
+            document.getElementById('statTotalGuests').innerText = stats.total_records || 0;
+        }
+
+        function setFilter(filter, btn) {
+            currentFilter = filter;
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderTable();
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById('guestsTableBody');
+            const search = document.getElementById('tableSearch').value.toLowerCase().trim();
+
+            let list = allGuests.filter(g => {
+                if (search && !g.full_name.toLowerCase().includes(search)) return false;
+                if (currentFilter === 'confirmed') return g.confirmed === 1;
+                if (currentFilter === 'pending') return g.confirmed === 0;
+                return true;
+            });
+
+            if (list.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--smoke-mute); padding: 40px;">No se encontraron registros.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = list.map(g => {
+                const statusBadge = g.confirmed === 1
+                    ? `<span class="badge-status confirmed">Confirmado</span>`
+                    : `<span class="badge-status pending">Pendiente</span>`;
+
+                return `
+                    <tr>
+                        <td>
+                            <div class="guest-name">${escapeHTML(g.full_name)}</div>
+                            ${g.phone ? `<div class="guest-phone">${escapeHTML(g.phone)}</div>` : ''}
+                        </td>
+                        <td>${statusBadge}</td>
+                        <td>
+                            <div class="seats-stepper">
+                                <button class="stepper-btn" onclick="updateSeats(${g.id}, ${g.allowed_seats - 1})">-</button>
+                                <span class="stepper-val">${g.allowed_seats}</span>
+                                <button class="stepper-btn" onclick="updateSeats(${g.id}, ${g.allowed_seats + 1})">+</button>
+                            </div>
+                        </td>
+                        <td>
+                            ${g.confirmed === 1 ? `<span style="font-weight: 600; color: #34C759;">${g.confirmed_seats} personas</span>` : '<span style="color: var(--smoke-mute);">—</span>'}
+                        </td>
+                        <td>
+                            <div class="guest-note">${g.note ? `"${escapeHTML(g.note)}"` : '<span style="color: var(--smoke-mute);">Sin nota</span>'}</div>
+                        </td>
+                        <td style="text-align: right;">
+                            <div style="display: inline-flex; gap: 8px;">
+                                ${g.phone ? `
+                                    <button class="row-action-btn" onclick="notifyGuestWA(${g.id}, '${escapeHTML(g.full_name)}', '${g.phone}', ${g.allowed_seats})">
+                                        WhatsApp
+                                    </button>
+                                ` : ''}
+                                <button class="row-action-btn" onclick="toggleConfirmed(${g.id}, ${g.confirmed === 1 ? 0 : 1})">
+                                    ${g.confirmed === 1 ? 'Marcar Pendiente' : 'Acreditar'}
+                                </button>
+                                <button class="row-action-btn" style="color: var(--danger); border-color: rgba(255,107,107,0.3);" onclick="deleteGuest(${g.id})">
+                                    ✕
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        async function updateSeats(guestId, newAllowed) {
+            if (newAllowed < 1) return;
+            try {
+                const res = await fetch(`${API_BASE}/api/admin/guests/${guestId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: JSON.stringify({ allowed_seats: newAllowed })
+                });
+                if (res.ok) {
+                    showToast("Pases máximos actualizados.");
+                    loadData();
+                }
+            } catch {
+                showToast("Error al actualizar cupo.");
+            }
+        }
+
+        async function toggleConfirmed(guestId, newStatus) {
+            try {
+                const res = await fetch(`${API_BASE}/api/admin/guests/${guestId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: JSON.stringify({
+                        confirmed: newStatus,
+                        confirmed_seats: newStatus === 1 ? 1 : 0
+                    })
+                });
+                if (res.ok) {
+                    showToast(newStatus === 1 ? "Invitado acreditado." : "Marcado como pendiente.");
+                    loadData();
+                }
+            } catch {
+                showToast("Error al cambiar estado.");
+            }
+        }
+
+        async function deleteGuest(guestId) {
+            if (!confirm("¿Deseas eliminar este invitado de la lista?")) return;
+            try {
+                const res = await fetch(`${API_BASE}/api/admin/guests/${guestId}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${authToken}` }
+                });
+                if (res.ok) {
+                    showToast("Invitado eliminado.");
+                    loadData();
+                }
+            } catch {
+                showToast("Error al eliminar.");
+            }
+        }
+
+        function notifyGuestWA(guestId, name, phone, seats) {
+            const cleanPhone = phone.replace(/\D/g, "");
+            const msg = `Hola ${name}, te comparto la actualización de tu invitación para el cumpleaños de Daniel Limón Hernández. Tienes ${seats} ${seats === 1 ? 'pase disponible' : 'pases disponibles'}. Puedes confirmar en https://daniellimon.uk/meeting/`;
+            window.open(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        async function handleSendBroadcast(e) {
+            e.preventDefault();
+            const title = document.getElementById('broadcastTitle').value.trim();
+            const badge_label = document.getElementById('broadcastBadge').value;
+            const content = document.getElementById('broadcastContent').value.trim();
+
+            try {
+                const res = await fetch(`${API_BASE}/api/admin/broadcasts`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: JSON.stringify({ title, badge_label, content })
+                });
+                if (res.ok) {
+                    showToast("Notificación publicada con éxito.");
+                    document.getElementById('broadcastTitle').value = "";
+                    document.getElementById('broadcastContent').value = "";
+                }
+            } catch {
+                showToast("Error al publicar aviso.");
+            }
+        }
+
+        function openAddGuestModal() {
+            document.getElementById('addGuestModal').classList.add('active');
+            document.getElementById('newGuestName').focus();
+        }
+
+        function closeAddGuestModal() {
+            document.getElementById('addGuestModal').classList.remove('active');
+        }
+
+        async function handleAddGuest(e) {
+            e.preventDefault();
+            const full_name = document.getElementById('newGuestName').value.trim();
+            const phone = document.getElementById('newGuestPhone').value.trim();
+            const allowed_seats = Number(document.getElementById('newGuestSeats').value);
+
+            try {
+                const res = await fetch(`${API_BASE}/api/admin/guests`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: JSON.stringify({ full_name, phone, allowed_seats })
+                });
+                const data = await res.json();
+                if (res.ok && data.success) {
+                    showToast("Invitado añadido a la lista.");
+                    closeAddGuestModal();
+                    document.getElementById('newGuestName').value = "";
+                    document.getElementById('newGuestPhone').value = "";
+                    loadData();
+                } else {
+                    alert(data.error || "No se pudo agregar.");
+                }
+            } catch {
+                alert("Error de conexión al agregar invitado.");
+            }
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toastBox');
+            toast.innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2600);
+        }
+
+        function escapeHTML(str) {
+            if (!str) return '';
+            return str.replace(/[&<>'"]/g, tag => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                "'": '&#39;',
+                '"': '&quot;'
+            }[tag] || tag));
+        }
+    </script>
+</body>
+</html>
