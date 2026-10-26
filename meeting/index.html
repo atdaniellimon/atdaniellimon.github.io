@@ -923,7 +923,7 @@
                         Birthday
                     </div>
 
-                    <div class="dedication">Una invitación de la familia para celebrar a</div>
+                    <div class="dedication">Celebrando los 15 años de</div>
                     <div class="host-title">Daniel Limón Hernández</div>
 
                     <div class="separator"></div>
@@ -945,8 +945,8 @@
 
                         <div onclick="openRSVP()" class="action-plate">
                             <div class="label">
-                                <span class="label-meta">Acceso Dinástico</span>
-                                <span class="label-title">Validar Asistencia</span>
+                                <span class="label-meta">Confirmación</span>
+                                <span class="label-title">Confirmar Asistencia</span>
                             </div>
                             <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
                         </div>
@@ -959,7 +959,7 @@
         <!-- Provocative Manifesto -->
         <div class="manifesto-section">
             <p>
-                "Los años se cumplen, pero los buenos momentos se comparten. Estás en la <em>Selección de los Limón Hernández</em> para acompañarnos este día."
+                "Los años se cumplen, pero los buenos momentos se comparten. Gracias por acompañarnos a celebrar este día."
             </p>
             <span class="author">Familia Limón Hernández</span>
         </div>
@@ -1037,14 +1037,14 @@
             <div class="section-header">
                 <h3>Lomas del Lencero</h3>
                 <p>
-                    Recepción y comida privada. Selecciona tu aplicación preferida de navegación para trazar la ruta de llegada.
+                    Recepción y comida. Selecciona tu aplicación preferida de navegación para trazar la ruta de llegada.
                 </p>
             </div>
 
             <div class="venue-plate">
                 <div>
                     <span class="venue-meta-sub">Punto de Encuentro</span>
-                    <div class="venue-desc">Carretera Xalapa-Veracruz · Acceso Privado</div>
+                    <div class="venue-desc">Carretera Xalapa-Veracruz</div>
                 </div>
                 <div class="venue-links">
                     <!-- Apple Maps (Direct or Fallback) -->
@@ -1080,10 +1080,6 @@
             </ul>
         </div>
 
-        <footer>
-            Selección de los Limón Hernández · 2026
-        </footer>
-
     </div>
 
     <!-- RSVP Modal (Anti-Impersonation Protocol) -->
@@ -1091,8 +1087,8 @@
         <div class="modal-box">
             
             <div id="rsvpFormStage">
-                <h4>Validar Asistencia</h4>
-                <p class="explainer">Busca tu nombre en la Selección oficial e ingresa los últimos 4 dígitos del celular con el que recibiste la invitación.</p>
+                <h4>Confirmar Asistencia</h4>
+                <p class="explainer">Escribe tu nombre o familia e introduce los últimos 4 dígitos del celular con el que recibiste la invitación.</p>
 
                 <!-- Search Input with Fuzzy Autocomplete -->
                 <div class="input-row">
@@ -1112,13 +1108,13 @@
 
                 <!-- Seats selection bounded by allowed_seats -->
                 <div class="input-row" id="seatsRow" style="display: none;">
-                    <label for="guestSeats">Acompañantes asignados</label>
+                    <label for="guestSeats">Acompañantes</label>
                     <select id="guestSeats"></select>
                 </div>
 
                 <div class="input-row">
                     <label for="guestNote">Mensaje o preferencia (opcional)</label>
-                    <input type="text" id="guestNote" placeholder="¿Preferencia de bebida o saludo?">
+                    <input type="text" id="guestNote" placeholder="¿Algún comentario o mensaje?">
                 </div>
 
                 <div id="rsvpErrorMsg" style="color: #E57373; font-size: 0.82rem; margin-bottom: 16px; display: none;"></div>
@@ -1131,11 +1127,11 @@
 
             <!-- Success State: Digital VIP Pass -->
             <div class="pass-stamp" id="rsvpSuccessStage">
-                <h5>Acceso Confirmado</h5>
+                <h5>¡Asistencia Confirmada!</h5>
                 <p style="font-size: 0.88rem; color: var(--smoke-light);" id="passGuestName">Familia</p>
                 <div class="pass-token-badge" id="passTokenDisplay">VIP-LM-000</div>
                 <p style="font-size: 0.82rem; color: var(--smoke-mute); margin-bottom: 16px;">
-                    Tu confirmación ha quedado sellada en el registro de la Selección de los Limón Hernández.
+                    Tu confirmación ha quedado registrada. ¡Nos dará mucho gusto verte!
                 </p>
                 <button type="button" class="btn-clean-solid" onclick="closeRSVP()">Finalizar</button>
             </div>
