@@ -1,0 +1,22 @@
+{
+  "name": "Daniel Limón Hernández",
+  "short_name": "Daniel Limón",
+  "start_url": "/meeting/",
+  "scope": "/meeting/",
+  "display": "standalone",
+  "background_color": "#090A0D",
+  "theme_color": "#090A0D",
+  "description": "Celebración Daniel Limón Hernández.",
+  "icons": [
+    {
+      "src": "/src/assets/img/logo_min.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/src/assets/img/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

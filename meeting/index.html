@@ -13,6 +13,11 @@
     <meta name="description" content="Selección de los Limón Hernández. Daniel Limón. Sábado 07 Noviembre, 1:30 PM. Lomas del Lencero.">
     <meta name="robots" content="noindex, nofollow">
     <meta name="theme-color" content="#090A0D">
+    <link rel="manifest" href="/meeting/manifest.json">
+    <link rel="apple-touch-icon" href="/src/assets/img/logo_min.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Daniel Limón">
     <meta property="og:title" content="Daniel Limón — Selección de los Limón Hernández">
     <meta property="og:description" content="Selección de los Limón Hernández. Dress code: Beige & Neutral Monochrome.">
 
@@ -906,28 +911,39 @@
         <div class="halo halo-bottom" id="haloBottom"></div>
     </div>
 
-    <!-- Floating Push Notification Bell & Banner -->
-    <div id="pushFloatBanner" style="position: fixed; bottom: 24px; right: 24px; z-index: 999; max-width: 380px; width: calc(100% - 48px); background: linear-gradient(175deg, #161A22 0%, #0F1218 100%); border: 1px solid var(--border-elevated); border-radius: 14px; padding: 18px 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.85); display: none; animation: slideUpBanner 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
-        <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 8px;">
-            <div style="display: flex; align-items: center; gap: 8px;">
-                <span style="font-size: 1.1rem;">🔔</span>
-                <span style="font-size: 0.82rem; font-weight: 600; color: var(--brass-soft); letter-spacing: 0.05em; text-transform: uppercase;">Avisos & Novedades</span>
+    <!-- Entrance Push Notification Modal (Prominent & Elegant) -->
+    <div id="pushEntryModal" style="position: fixed; inset: 0; background: rgba(0, 0, 0, 0.82); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 24px;">
+        <div style="background: linear-gradient(175deg, #161A22 0%, #0D0F14 100%); border: 1px solid var(--border-elevated); border-radius: 18px; max-width: 460px; width: 100%; padding: 40px 32px 34px; text-align: center; box-shadow: 0 40px 100px rgba(0,0,0,0.95); position: relative; animation: modalPop 0.35s cubic-bezier(0.16, 1, 0.3, 1);">
+            
+            <div style="width: 56px; height: 56px; margin: 0 auto 18px; background: rgba(212, 185, 130, 0.12); border: 1px solid var(--brass-soft); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--brass-soft);">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
             </div>
-            <button onclick="dismissPushBanner()" style="background: transparent; border: none; color: var(--smoke-mute); cursor: pointer; font-size: 1.1rem; line-height: 1; padding: 2px;">✕</button>
-        </div>
-        <p style="font-size: 0.8rem; color: var(--smoke-light); line-height: 1.45; margin-bottom: 14px;">
-            ¿Deseas recibir avisos de cambios de horario, número de pases y noticias en tu teléfono aunque tengas la página cerrada?
-        </p>
-        <div style="display: flex; gap: 10px;">
-            <button onclick="dismissPushBanner()" class="btn-clean" style="flex: 1; justify-content: center; padding: 8px 12px; font-size: 0.72rem;">Más tarde</button>
-            <button onclick="subscribeToWebPushFromBanner()" class="btn-clean-solid" style="flex: 1.5; justify-content: center; padding: 8px 14px; font-size: 0.72rem;">Activar avisos</button>
+
+            <h3 style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 2.1rem; font-weight: 400; color: var(--ivory); margin-bottom: 8px;">Avisos & Novedades</h3>
+            
+            <p style="font-size: 0.9rem; color: var(--smoke-light); line-height: 1.6; margin-bottom: 24px;">
+                Para enterarte al instante de cualquier cambio de horario, actualización de pases o anuncios del evento en tu dispositivo (incluso con la página cerrada), activa las notificaciones.
+            </p>
+
+            <!-- Safari iOS PWA Note (Shows only on iOS Safari if not installed) -->
+            <div id="iosSafariHint" style="display: none; background: rgba(255,255,255,0.04); border: 1px solid var(--border-hairline); border-radius: 10px; padding: 12px; margin-bottom: 20px; font-size: 0.78rem; color: var(--smoke-mute); text-align: left;">
+                📱 <strong>En iPhone:</strong> Toca el botón <strong>Compartir (⎋)</strong> de Safari y selecciona <strong>"Agregar al inicio"</strong> para recibir notificaciones con la app cerrada.
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <button type="button" class="btn-clean-solid" id="btnModalEnablePush" onclick="triggerWebPushPermission()" style="width: 100%; justify-content: center; padding: 14px; font-size: 0.82rem;">
+                    Activar Notificaciones
+                </button>
+                <button type="button" class="btn-clean" onclick="dismissEntryModal()" style="width: 100%; justify-content: center; padding: 12px; font-size: 0.78rem; border-color: transparent; color: var(--smoke-mute);">
+                    Ahora no, continuar al evento
+                </button>
+            </div>
+
+            <div id="modalPushStatus" style="display: none; font-size: 0.85rem; color: #34C759; margin-top: 14px; font-weight: 500;">
+                ✓ Notificaciones activadas exitosamente
+            </div>
         </div>
     </div>
-
-    <!-- Floating Bell (to trigger anytime) -->
-    <button id="floatingBellBtn" onclick="togglePushBanner()" title="Notificaciones del evento" style="position: fixed; bottom: 24px; left: 24px; z-index: 900; background: var(--bg-surface); border: 1px solid var(--border-elevated); width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--brass-soft); box-shadow: 0 10px 30px rgba(0,0,0,0.6); transition: all 0.2s;">
-        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
-    </button>
 
     <div class="layout">
 
@@ -1412,41 +1428,112 @@
         }
 
         // =========================================================================
-        // BANNER CONTROLLER & AUTO-PROMPT
+        // ENTRANCE PUSH MODAL & SAFARI COMPATIBILITY
         // =========================================================================
-        function showPushBanner() {
-            const banner = document.getElementById('pushFloatBanner');
-            if (banner && localStorage.getItem('limon_push_dismissed') !== 'true') {
-                banner.style.display = 'block';
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        const isStandalone = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
+
+        function checkAndShowPushEntry() {
+            // Si el navegador soporta notificaciones y aún no se ha decidido
+            if ('Notification' in window) {
+                if (Notification.permission === 'default' && localStorage.getItem('limon_entry_push_dismissed') !== 'true') {
+                    const modal = document.getElementById('pushEntryModal');
+                    if (modal) modal.style.display = 'flex';
+
+                    // En iPhone Safari no-PWA, avisar que agregue al inicio para background push
+                    if (isIOS && !isStandalone) {
+                        const hint = document.getElementById('iosSafariHint');
+                        if (hint) hint.style.display = 'block';
+                    }
+                }
             }
         }
 
-        function dismissPushBanner() {
-            const banner = document.getElementById('pushFloatBanner');
-            if (banner) banner.style.display = 'none';
-            localStorage.setItem('limon_push_dismissed', 'true');
+        function dismissEntryModal() {
+            const modal = document.getElementById('pushEntryModal');
+            if (modal) modal.style.display = 'none';
+            localStorage.setItem('limon_entry_push_dismissed', 'true');
         }
 
-        function togglePushBanner() {
-            const banner = document.getElementById('pushFloatBanner');
-            if (!banner) return;
-            banner.style.display = banner.style.display === 'block' ? 'none' : 'block';
-        }
+        // Activación disparada directamente por el clic del usuario (vital para Safari)
+        async function triggerWebPushPermission() {
+            const btn = document.getElementById('btnModalEnablePush');
+            btn.innerText = "Solicitando permiso...";
+            btn.disabled = true;
 
-        async function subscribeToWebPushFromBanner() {
-            await subscribeToWebPush();
-            dismissPushBanner();
-        }
-
-        // Mostrar prompt automáticamente a los 2.5 segundos de abrir la página si no está suscrito
-        setTimeout(() => {
-            if ('Notification' in window && Notification.permission === 'default') {
-                showPushBanner();
+            if (!('Notification' in window)) {
+                alert("Tu navegador no soporta notificaciones Web Push.");
+                dismissEntryModal();
+                return;
             }
-        }, 2500);
+
+            try {
+                // Safari requiere que Notification.requestPermission() se invoque en el hilo del evento de clic
+                const permission = await Notification.requestPermission();
+                
+                if (permission === 'granted') {
+                    btn.innerText = "Sincronizando dispositivo...";
+                    
+                    // Esperar a que el service worker esté listo
+                    const reg = await navigator.serviceWorker.ready;
+                    
+                    const vapidPublicKey = "BNfkQrl7jQrNoxPY2osM5rIZIaorLMSi0XEooPqe6BDq-wgOxyViCHSGnzQmo3a8g3nDEOcej4nJsHVIM_g7NI8";
+                    const convertedKey = urlBase64ToUint8Array(vapidPublicKey);
+
+                    let subscription = await reg.pushManager.getSubscription();
+                    if (!subscription) {
+                        subscription = await reg.pushManager.subscribe({
+                            userVisibleOnly: true,
+                            applicationServerKey: convertedKey
+                        });
+                    }
+
+                    const subJSON = subscription.toJSON();
+                    const workerPushUrl = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
+                        ? "http://localhost:8787/api/push/subscribe"
+                        : "https://limon-rsvp-service.d4nilin0n.workers.dev/api/push/subscribe";
+
+                    await fetch(workerPushUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            endpoint: subJSON.endpoint,
+                            p256dh: subJSON.keys?.p256dh,
+                            auth: subJSON.keys?.auth,
+                            guest_name: "Visitante Web"
+                        })
+                    });
+
+                    document.getElementById('modalPushStatus').style.display = 'block';
+                    btn.style.display = 'none';
+                    setTimeout(() => {
+                        dismissEntryModal();
+                    }, 1400);
+                } else if (permission === 'denied') {
+                    btn.innerText = "Permiso denegado en Safari";
+                    setTimeout(() => dismissEntryModal(), 1800);
+                } else {
+                    btn.innerText = "Activar Notificaciones";
+                    btn.disabled = false;
+                }
+            } catch (err) {
+                console.error("Safari push error:", err);
+                alert("Asegúrate de permitir las notificaciones para este sitio en Ajustes > Safari > Notificaciones.");
+                btn.innerText = "Activar Notificaciones";
+                btn.disabled = false;
+            }
+        }
+
+        // Mostrar el modal de bienvenida a los 800ms de entrar
+        window.addEventListener('load', () => {
+            setTimeout(checkAndShowPushEntry, 800);
+        });
 
         window.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeRSVP();
+            if (e.key === 'Escape') {
+                closeRSVP();
+                dismissEntryModal();
+            }
         });
     </script>
 </body>
