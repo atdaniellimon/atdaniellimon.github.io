@@ -1069,39 +1069,33 @@
 
     </div>
 
-    <!-- RSVP Modal (Anti-Impersonation Protocol) -->
+    <!-- RSVP Modal -->
     <div class="modal-wrap" id="modalWrap" onclick="if(event.target===this) closeRSVP()">
         <div class="modal-box">
             
             <div id="rsvpFormStage">
                 <h4>Confirmar Asistencia</h4>
-                <p class="explainer">Escribe tu nombre o familia e introduce los últimos 4 dígitos del celular con el que recibiste la invitación.</p>
+                <p class="explainer">Por favor ingresa tu nombre completo o familia para registrar tu lugar.</p>
 
-                <!-- Search Input with Fuzzy Autocomplete -->
                 <div class="input-row">
-                    <label for="guestSearch">Nombre o Familia</label>
-                    <input type="text" id="guestSearch" placeholder="Escribe tu apellido o nombre..." autocomplete="off" oninput="handleGuestSearch(this.value)">
-                    <input type="hidden" id="selectedGuestId">
-                    <input type="hidden" id="selectedAllowedSeats" value="1">
-                    
-                    <div class="search-results" id="searchResultsDropdown"></div>
-                </div>
-
-                <!-- Last 4 Digits Security Validation -->
-                <div class="input-row">
-                    <label for="guestLast4">Últimos 4 dígitos de tu celular</label>
-                    <input type="text" id="guestLast4" placeholder="Ej. 4498" maxlength="4" inputmode="numeric" pattern="[0-9]*">
-                </div>
-
-                <!-- Seats selection bounded by allowed_seats -->
-                <div class="input-row" id="seatsRow" style="display: none;">
-                    <label for="guestSeats">Acompañantes</label>
-                    <select id="guestSeats"></select>
+                    <label for="guestNameInput">Nombre o Familia</label>
+                    <input type="text" id="guestNameInput" placeholder="Ej. Familia Silva / Carlos Mendoza" autocomplete="name">
                 </div>
 
                 <div class="input-row">
-                    <label for="guestNote">Mensaje o preferencia (opcional)</label>
-                    <input type="text" id="guestNote" placeholder="¿Algún comentario o mensaje?">
+                    <label for="guestSeatsInput">Número de Asistentes</label>
+                    <select id="guestSeatsInput">
+                        <option value="1">1 persona (Solo yo)</option>
+                        <option value="2">2 personas</option>
+                        <option value="3">3 personas</option>
+                        <option value="4">4 personas</option>
+                        <option value="5">5 personas</option>
+                    </select>
+                </div>
+
+                <div class="input-row">
+                    <label for="guestNote">Mensaje (opcional)</label>
+                    <input type="text" id="guestNote" placeholder="¿Algún mensaje para Daniel?">
                 </div>
 
                 <div id="rsvpErrorMsg" style="color: #E57373; font-size: 0.82rem; margin-bottom: 16px; display: none;"></div>
@@ -1112,13 +1106,12 @@
                 </div>
             </div>
 
-            <!-- Success State: Digital VIP Pass -->
+            <!-- Success State -->
             <div class="pass-stamp" id="rsvpSuccessStage">
                 <h5>¡Asistencia Confirmada!</h5>
-                <p style="font-size: 0.88rem; color: var(--smoke-light);" id="passGuestName">Familia</p>
-                <div class="pass-token-badge" id="passTokenDisplay">VIP-LM-000</div>
-                <p style="font-size: 0.82rem; color: var(--smoke-mute); margin-bottom: 16px;">
-                    Tu confirmación ha quedado registrada. ¡Nos dará mucho gusto verte!
+                <p style="font-size: 0.95rem; color: var(--ivory); margin: 12px 0 6px;" id="passGuestName">Invitado</p>
+                <p style="font-size: 0.85rem; color: var(--smoke-light); margin-bottom: 20px;">
+                    Tu confirmación ha quedado registrada. ¡Nos dará mucho gusto compartir este día contigo!
                 </p>
                 <button type="button" class="btn-clean-solid" onclick="closeRSVP()">Finalizar</button>
             </div>
@@ -1234,128 +1227,41 @@
         }
 
         // =========================================================================
-        // ANTI-IMPERSONATION CLIENT & SELECCIÓN DATA
         // =========================================================================
-        // Lista local sincronizable con la base de datos D1
-        const SELECTION_FALLBACK = [
-            { id: 1, full_name: "Familia Silva Limón", phone_last4: "1420", allowed_seats: 3 },
-            { id: 2, full_name: "Santiago Ramírez", phone_last4: "7890", allowed_seats: 2 },
-            { id: 3, full_name: "Carlos Mendoza", phone_last4: "4498", allowed_seats: 1 },
-            { id: 4, full_name: "Mariana Valdés", phone_last4: "3312", allowed_seats: 2 },
-            { id: 5, full_name: "Fernando Limón", phone_last4: "9012", allowed_seats: 4 }
-        ];
-
+        // RSVP CLIENT LOGIC (Simple & Direct)
+        // =========================================================================
         function openRSVP() {
             document.getElementById('modalWrap').classList.add('active');
             document.getElementById('rsvpFormStage').style.display = "block";
             document.getElementById('rsvpSuccessStage').classList.remove('active');
             document.getElementById('rsvpErrorMsg').style.display = "none";
-            setTimeout(() => document.getElementById('guestSearch').focus(), 80);
+            setTimeout(() => {
+                const input = document.getElementById('guestNameInput');
+                if (input) input.focus();
+            }, 80);
         }
 
         function closeRSVP() {
             document.getElementById('modalWrap').classList.remove('active');
         }
 
-        let debounceTimer;
-        function handleGuestSearch(val) {
-            clearTimeout(debounceTimer);
-            const dropdown = document.getElementById('searchResultsDropdown');
-            const query = val.trim().toLowerCase();
-
-            if (query.length < 2) {
-                dropdown.classList.remove('open');
-                dropdown.innerHTML = "";
-                return;
-            }
-
-            debounceTimer = setTimeout(() => {
-                // Filtro difuso sobre la Selección autorizada
-                const matches = SELECTION_FALLBACK.filter(g => g.full_name.toLowerCase().includes(query));
-                dropdown.innerHTML = "";
-                
-                if (matches.length === 0) {
-                    dropdown.innerHTML = `<div style="padding: 12px; font-size: 0.82rem; color: var(--smoke-mute);">No se encontró en la Selección oficial.</div>`;
-                    dropdown.classList.add('open');
-                    return;
-                }
-
-                matches.forEach(m => {
-                    const div = document.createElement('div');
-                    div.className = "search-item";
-                    div.innerHTML = `<span>${m.full_name}</span><span class="item-meta">Hasta ${m.allowed_seats} ${m.allowed_seats === 1 ? 'lugar' : 'lugares'}</span>`;
-                    div.onclick = () => selectGuest(m);
-                    dropdown.appendChild(div);
-                });
-                dropdown.classList.add('open');
-            }, 120);
-        }
-
-        function selectGuest(guest) {
-            document.getElementById('guestSearch').value = guest.full_name;
-            document.getElementById('selectedGuestId').value = guest.id;
-            document.getElementById('selectedAllowedSeats').value = guest.allowed_seats;
-            document.getElementById('searchResultsDropdown').classList.remove('open');
-
-            // Configurar selector de asientos permitidos
-            const seatsRow = document.getElementById('seatsRow');
-            const selectSeats = document.getElementById('guestSeats');
-            selectSeats.innerHTML = "";
-            for (let i = 1; i <= guest.allowed_seats; i++) {
-                const opt = document.createElement('option');
-                opt.value = i;
-                opt.innerText = i === 1 ? "1 persona (Solo yo)" : `${i} personas`;
-                selectSeats.appendChild(opt);
-            }
-            seatsRow.style.display = "block";
-            document.getElementById('guestLast4').focus();
-        }
-
         function submitRSVP() {
-            const guestId = document.getElementById('selectedGuestId').value;
-            const guestName = document.getElementById('guestSearch').value.trim();
-            const last4 = document.getElementById('guestLast4').value.trim();
-            const seats = document.getElementById('guestSeats').value || 1;
+            const guestName = document.getElementById('guestNameInput').value.trim();
+            const seats = document.getElementById('guestSeatsInput').value || 1;
             const note = document.getElementById('guestNote').value.trim();
             const errBox = document.getElementById('rsvpErrorMsg');
 
-            if (!guestId || !guestName) {
-                errBox.innerText = "Por favor selecciona tu nombre de la Selección oficial.";
+            if (!guestName || guestName.length < 2) {
+                errBox.innerText = "Por favor escribe tu nombre completo o familia.";
                 errBox.style.display = "block";
                 return;
             }
 
-            if (last4.length !== 4 || isNaN(last4)) {
-                errBox.innerText = "Ingresa los 4 dígitos numéricos de tu celular para validar identidad.";
-                errBox.style.display = "block";
-                return;
-            }
-
-            // Validación contra la Selección (Anti-Suplantación)
-            const record = SELECTION_FALLBACK.find(g => g.id === Number(guestId));
-            if (!record || record.phone_last4 !== last4) {
-                errBox.innerText = "Verificación rechazada: Los dígitos no coinciden con el registro de este invitado.";
-                errBox.style.display = "block";
-                return;
-            }
-
-            // Exito: Generar pase y sellar
+            // Exito directo
             errBox.style.display = "none";
             document.getElementById('rsvpFormStage').style.display = "none";
-            document.getElementById('passGuestName').innerText = `${record.full_name} · ${seats} ${seats == 1 ? 'lugar confirmado' : 'lugares confirmados'}`;
-            document.getElementById('passTokenDisplay').innerText = `VIP-LM-${String(record.id).padStart(3, '0')}-${last4.slice(2)}`;
+            document.getElementById('passGuestName').innerText = `${guestName} · ${seats} ${seats == 1 ? 'lugar' : 'lugares'}`;
             document.getElementById('rsvpSuccessStage').classList.add('active');
-
-            // Sincronizar confirmación con WhatsApp opcionalmente
-            let waMsg = `*CONFIRMACIÓN SELLADA · SELECCIÓN DE LOS LIMÓN HERNÁNDEZ*%0A`;
-            waMsg += `Pase digital validado con éxito.%0A%0A`;
-            waMsg += `👤 *Invitado:* ${encodeURIComponent(record.full_name)}%0A`;
-            waMsg += `👥 *Lugares:* ${encodeURIComponent(seats)}%0A`;
-            waMsg += `🎟 *Folio:* VIP-LM-${String(record.id).padStart(3, '0')}-${last4.slice(2)}%0A`;
-            if (note) waMsg += `💬 *Nota:* ${encodeURIComponent(note)}%0A`;
-            waMsg += `%0A¡Nos vemos el 7 de Noviembre a la 1:30 PM!`;
-            
-            // Opcional abrir WhatsApp en segundo plano o dejar al invitado en su pase digital
         }
 
         window.addEventListener('keydown', (e) => {
