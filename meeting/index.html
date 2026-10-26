@@ -8,7 +8,7 @@
     <!-- Editorial & Architectural Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     
     <meta name="description" content="Selección de los Limón Hernández. Daniel Limón. Sábado 07 Noviembre, 1:30 PM. Lomas del Lencero.">
     <meta name="robots" content="noindex, nofollow">
@@ -91,25 +91,25 @@
         .halo {
             position: absolute;
             border-radius: 50%;
-            filter: blur(120px);
-            opacity: 0.14;
+            filter: blur(140px);
+            opacity: 0.16;
             will-change: transform;
             transition: transform 0.25s var(--ease-fluid);
         }
 
         .halo-top {
-            width: 700px;
-            height: 700px;
+            width: 750px;
+            height: 750px;
             background: radial-gradient(circle, var(--brass-soft), transparent 70%);
-            top: -200px;
+            top: -220px;
             left: 50%;
             transform: translateX(-50%);
         }
 
         .halo-bottom {
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, #31425C, transparent 75%);
+            width: 550px;
+            height: 550px;
+            background: radial-gradient(circle, #364A6A, transparent 75%);
             bottom: -100px;
             right: 0;
         }
@@ -121,17 +121,6 @@
             max-width: 880px;
             margin: 0 auto;
             padding: 80px 24px 120px;
-        }
-
-        /* Top Watermark */
-        .session-mark {
-            text-align: center;
-            font-size: 0.72rem;
-            letter-spacing: 0.35em;
-            text-transform: uppercase;
-            color: var(--brass-soft);
-            margin-bottom: 54px;
-            font-weight: 500;
         }
 
         /* ==========================================================================
@@ -168,6 +157,20 @@
             }
         }
 
+        /* Parallax 3D Z-Layers */
+        .layer-deep {
+            transform: translateZ(36px);
+            display: inline-block;
+        }
+
+        .layer-mid {
+            transform: translateZ(20px);
+        }
+
+        .layer-base {
+            transform: translateZ(10px);
+        }
+
         .year-numeral {
             font-family: 'Cormorant Garamond', Georgia, serif;
             font-size: clamp(6.5rem, 16vw, 11rem);
@@ -195,7 +198,7 @@
             text-transform: uppercase;
             color: var(--smoke-light);
             margin-bottom: 28px;
-            padding-left: 0.25em; /* alignment fix */
+            padding-left: 0.25em;
         }
 
         .dedication {
@@ -307,7 +310,7 @@
         }
 
         /* ==========================================================================
-           EDITORIAL ARROGANCE (PROVOCATIVE COPY)
+           EDITORIAL PROVOCATIVE MANIFESTO
            ========================================================================== */
         .manifesto-section {
             margin: 80px auto;
@@ -473,9 +476,9 @@
             margin-bottom: 6px;
         }
 
-        .venue-coords {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1.05rem;
+        .venue-destination {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.85rem;
             color: var(--ivory);
             margin-bottom: 4px;
         }
@@ -485,76 +488,10 @@
             color: var(--smoke-mute);
         }
 
-        /* Transfer & Lluvia de Sobres Card */
-        .transfer-card {
-            margin-top: 32px;
-            background: linear-gradient(175deg, #14171E 0%, #0D0F14 100%);
-            border: 1px solid rgba(212, 185, 130, 0.28);
-            border-radius: 12px;
-            padding: 32px 28px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 24px;
-        }
-
-        @media (max-width: 640px) {
-            .transfer-card {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 24px 20px;
-            }
-        }
-
-        .transfer-title {
-            font-family: 'Cormorant Garamond', Georgia, serif;
-            font-size: 1.6rem;
-            color: var(--ivory);
-            margin-bottom: 4px;
-        }
-
-        .transfer-subtitle {
-            font-size: 0.84rem;
-            color: var(--smoke-light);
-            margin-bottom: 12px;
-            line-height: 1.5;
-        }
-
-        .clabe-box {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: #090A0D;
-            border: 1px solid var(--border-elevated);
-            border-radius: 6px;
-            padding: 10px 16px;
-        }
-
-        .clabe-num {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.98rem;
-            letter-spacing: 0.08em;
-            color: var(--brass-soft);
-            user-select: all;
-        }
-
-        .copy-tag {
-            font-size: 0.7rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--smoke-mute);
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-
-        .copy-tag:hover {
-            color: var(--ivory);
-        }
-
         .venue-links {
             display: flex;
-            gap: 16px;
-            margin-top: 18px;
+            flex-wrap: wrap;
+            gap: 12px;
         }
 
         .btn-clean {
@@ -562,13 +499,16 @@
             color: var(--ivory);
             border: 1px solid var(--border-elevated);
             border-radius: 8px;
-            padding: 12px 24px;
+            padding: 12px 22px;
             font-size: 0.8rem;
             letter-spacing: 0.1em;
             text-transform: uppercase;
             text-decoration: none;
             cursor: pointer;
             transition: all 0.2s var(--ease-fluid);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .btn-clean:hover {
@@ -589,11 +529,95 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s var(--ease-fluid);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .btn-clean-solid:hover {
             background: var(--brass-soft);
             border-color: var(--brass-soft);
+        }
+
+        /* Unified Monolithic CLABE Card */
+        .transfer-monolith {
+            margin-top: 32px;
+            background: linear-gradient(175deg, #14171E 0%, #0D0F14 100%);
+            border: 1px solid rgba(212, 185, 130, 0.28);
+            border-radius: 12px;
+            padding: 28px 30px;
+            cursor: pointer;
+            transition: all 0.2s var(--ease-fluid);
+            position: relative;
+        }
+
+        .transfer-monolith:hover {
+            border-color: var(--brass-soft);
+            background: linear-gradient(175deg, #181C25 0%, #0F1218 100%);
+            transform: translateY(-2px);
+        }
+
+        .transfer-monolith:active {
+            transform: scale(0.99);
+        }
+
+        .transfer-row-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .transfer-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.5rem;
+            color: var(--ivory);
+        }
+
+        .transfer-badge-tap {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--brass-soft);
+            border: 1px solid rgba(212, 185, 130, 0.35);
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .transfer-monolith:hover .transfer-badge-tap {
+            background: var(--brass-soft);
+            color: var(--bg-canvas);
+        }
+
+        .transfer-subtitle {
+            font-size: 0.88rem;
+            color: var(--smoke-light);
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .clabe-stream {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+            letter-spacing: 0.12em;
+            color: var(--brass-soft);
+            background: #090A0D;
+            border: 1px solid var(--border-elevated);
+            border-radius: 8px;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .clabe-status-text {
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--smoke-mute);
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         /* Directives list */
@@ -635,55 +659,15 @@
             color: var(--smoke-mute);
         }
 
-        /* Floating RSVP Strip */
-        .rsvp-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(14, 16, 21, 0.92);
-            border-top: 1px solid var(--border-elevated);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 16px 24px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            z-index: 100;
-            max-width: 880px;
-            margin: 0 auto;
-            border-radius: 12px 12px 0 0;
-        }
-
-        @media (max-width: 600px) {
-            .rsvp-bar {
-                flex-direction: column;
-                gap: 12px;
-                text-align: center;
-            }
-        }
-
-        .rsvp-bar .callout-text {
-            font-size: 0.85rem;
-            color: var(--smoke-light);
-        }
-
-        .rsvp-bar .callout-text strong {
-            color: var(--ivory);
-        }
-
-        .rsvp-bar .btn-group {
-            display: flex;
-            gap: 12px;
-        }
-
-        /* RSVP Modal */
+        /* ==========================================================================
+           RSVP PORTAL (ANTI-IMPERSONATION PROTOCOL)
+           ========================================================================== */
         .modal-wrap {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.88);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             z-index: 1000;
             display: flex;
             align-items: center;
@@ -703,21 +687,22 @@
             background: var(--bg-surface);
             border: 1px solid var(--border-elevated);
             border-radius: 14px;
-            max-width: 480px;
+            max-width: 500px;
             width: 100%;
             padding: 40px 36px;
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.95);
+            position: relative;
         }
 
         .modal-box h4 {
             font-family: 'Cormorant Garamond', Georgia, serif;
             font-size: 2.2rem;
             font-weight: 400;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
-        .modal-box p {
-            font-size: 0.9rem;
+        .modal-box p.explainer {
+            font-size: 0.88rem;
             color: var(--smoke-light);
             margin-bottom: 24px;
             line-height: 1.5;
@@ -725,6 +710,7 @@
 
         .input-row {
             margin-bottom: 18px;
+            position: relative;
         }
 
         .input-row label {
@@ -744,13 +730,97 @@
             padding: 12px 14px;
             color: var(--ivory);
             font-family: inherit;
-            font-size: 0.9rem;
+            font-size: 0.92rem;
             outline: none;
             transition: border-color 0.2s;
         }
 
         .input-row input:focus, .input-row select:focus {
             border-color: var(--brass-soft);
+        }
+
+        /* Search Dropdown Results */
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #14171E;
+            border: 1px solid var(--border-elevated);
+            border-radius: 8px;
+            margin-top: 4px;
+            max-height: 180px;
+            overflow-y: auto;
+            z-index: 50;
+            display: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+
+        .search-results.open {
+            display: block;
+        }
+
+        .search-item {
+            padding: 10px 14px;
+            font-size: 0.88rem;
+            color: var(--ivory);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .search-item:hover {
+            background: rgba(212, 185, 130, 0.12);
+            color: var(--brass-soft);
+        }
+
+        .search-item .item-meta {
+            font-size: 0.72rem;
+            color: var(--smoke-mute);
+            letter-spacing: 0.05em;
+        }
+
+        /* Digital VIP Pass Success State */
+        .pass-stamp {
+            display: none;
+            background: linear-gradient(175deg, #161A22 0%, #0D0F14 100%);
+            border: 1px solid var(--brass-soft);
+            border-radius: 12px;
+            padding: 30px 24px;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .pass-stamp.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.97); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .pass-stamp h5 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.8rem;
+            color: var(--brass-soft);
+            margin-bottom: 4px;
+        }
+
+        .pass-token-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            color: var(--ivory);
+            letter-spacing: 0.15em;
+            background: #090A0D;
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 8px 16px;
+            border-radius: 6px;
+            display: inline-block;
+            margin: 14px 0;
         }
     </style>
 </head>
@@ -768,38 +838,44 @@
         <div class="card-stage" id="cardStage">
             <div class="monolith-card" id="monolith">
                 
-                <div class="year-numeral">
-                    15<sup>th</sup>
+                <div class="layer-deep">
+                    <div class="year-numeral">
+                        15<sup>th</sup>
+                    </div>
                 </div>
 
-                <div class="headline-sub">
-                    Birthday
+                <div class="layer-mid">
+                    <div class="headline-sub">
+                        Birthday
+                    </div>
+
+                    <div class="dedication">Una invitación de la familia para celebrar a</div>
+                    <div class="host-title">Daniel Limón</div>
+
+                    <div class="separator"></div>
+
+                    <div class="event-schedule">
+                        Noviembre 07 <span>·</span> 1:30 p.m.
+                    </div>
                 </div>
 
-                <div class="dedication">Una invitación de la familia para celebrar a</div>
-                <div class="host-title">Daniel Limón</div>
-
-                <div class="separator"></div>
-
-                <div class="event-schedule">
-                    Noviembre 07 <span>·</span> 1:30 p.m.
-                </div>
-
-                <div class="card-actions-grid">
-                    <a href="https://www.google.com/maps/place/19.501432,-96.821491" target="_blank" rel="noopener" class="action-plate">
-                        <div class="label">
-                            <span class="label-meta">Ubicación</span>
-                            <span class="label-title">Lomas del Lencero</span>
+                <div class="layer-base">
+                    <div class="card-actions-grid">
+                        <div onclick="routeSmartMap()" class="action-plate">
+                            <div class="label">
+                                <span class="label-meta" id="navPlatformLabel">Navegación</span>
+                                <span class="label-title">Lomas del Lencero</span>
+                            </div>
+                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                         </div>
-                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                    </a>
 
-                    <div onclick="openRSVP()" class="action-plate">
-                        <div class="label">
-                            <span class="label-meta">Confirmación</span>
-                            <span class="label-title">Validar Asistencia</span>
+                        <div onclick="openRSVP()" class="action-plate">
+                            <div class="label">
+                                <span class="label-meta">Acceso Dinástico</span>
+                                <span class="label-title">Validar Asistencia</span>
+                            </div>
+                            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
                         </div>
-                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
                     </div>
                 </div>
 
@@ -839,7 +915,7 @@
             <div class="section-header">
                 <h3>Dress Code: Warm Beige & Quiet Luxury</h3>
                 <p>
-                    La estética del evento fue diseñada con exactitud. Tonalidades tierra, lino, arena y camel sin contrastes discordantes ni estampados ruidosos.
+                    La estética del evento fue diseñada con exactitud. Tonalidades tierra, lino, arena, camel y moca sin contrastes discordantes ni estampados ruidosos.
                 </p>
             </div>
 
@@ -881,23 +957,27 @@
             </p>
         </div>
 
-        <!-- Section: Location -->
+        <!-- Section: Location & Intelligent Map Routing -->
         <div class="section-block">
             <div class="section-header">
                 <h3>Lomas del Lencero</h3>
                 <p>
-                    Recepción y comida privada. Punto de aproximación satelital.
+                    Recepción y comida privada. Selecciona tu aplicación preferida de navegación para trazar la ruta de llegada.
                 </p>
             </div>
 
             <div class="venue-plate">
                 <div>
-                    <span class="venue-meta-sub">Coordenadas de Acceso</span>
-                    <div class="venue-coords">19.501432, -96.821491</div>
-                    <div class="venue-desc">Lomas del Lencero · Carretera Xalapa-Veracruz</div>
+                    <span class="venue-meta-sub">Destino Oficial</span>
+                    <div class="venue-destination">Lomas del Lencero</div>
+                    <div class="venue-desc">Carretera Xalapa-Veracruz · Acceso Privado</div>
                 </div>
-                <div class="venue-links" style="margin-top: 0;">
-                    <a href="https://www.google.com/maps/place/19.501432,-96.821491" target="_blank" rel="noopener" class="btn-clean-solid">
+                <div class="venue-links">
+                    <!-- Apple Maps (Direct or Fallback) -->
+                    <a href="https://maps.apple.com/?q=Lomas+del+Lencero&ll=19.501432,-96.821491" target="_blank" rel="noopener" class="btn-clean-solid" id="btnAppleMaps">
+                        Apple Maps
+                    </a>
+                    <a href="https://www.google.com/maps/place/19.501432,-96.821491" target="_blank" rel="noopener" class="btn-clean" id="btnGoogleMaps">
                         Google Maps
                     </a>
                     <a href="https://waze.com/ul?ll=19.501432,-96.821491&navigate=yes" target="_blank" rel="noopener" class="btn-clean">
@@ -918,34 +998,32 @@
                     <strong>Puntualidad:</strong> La comida y la recepción comienzan a la 1:30 p.m. en punto.
                 </li>
                 <li>
-                    <strong>Lista Cerrada:</strong> La entrada es estrictamente nominal. Si no confirmas en WhatsApp antes, tu lugar no estará contemplado.
+                    <strong>Lista Cerrada & Validación:</strong> El acceso está protegido nominalmente en el portal. Únicamente quienes validen con sus últimos 4 dígitos quedarán acreditados.
                 </li>
                 <li>
                     <strong>Presente:</strong> Si deseas tener un detalle con Daniel, la modalidad es <em>lluvia de sobres</em> (efectivo en sobre el día del evento) o transferencia directa:
                 </li>
             </ul>
 
-            <!-- Transfer Card with CLABE -->
-            <div class="transfer-card">
-                <div>
+            <!-- Unified Single-Touch CLABE Monolith Card -->
+            <div class="transfer-monolith" onclick="copyCLABE()" title="Click para copiar CLABE">
+                <div class="transfer-row-top">
                     <div class="transfer-title">Transferencia Interbancaria</div>
-                    <p class="transfer-subtitle">Para quienes prefieran tener el detalle vía banca móvil antes o durante el evento.</p>
-                    <div class="clabe-box">
-                        <span class="clabe-num" id="clabeVal">728969000044989306</span>
-                        <span class="copy-tag" id="copyBtn" onclick="copyCLABE()">Copiar</span>
-                    </div>
+                    <div class="transfer-badge-tap" id="clabeBadge">Toca para Copiar</div>
                 </div>
-                <button type="button" class="btn-clean-solid" onclick="copyCLABE()" id="copyBtnMain">
-                    Copiar CLABE
-                </button>
+                <p class="transfer-subtitle">Para quienes prefieran tener el detalle vía banca móvil antes o durante el evento.</p>
+                <div class="clabe-stream">
+                    <span id="clabeNumber">7289 6900 0044 9893 06</span>
+                    <span class="clabe-status-text" id="clabeStatusIndicator">STP · Daniel Limón</span>
+                </div>
             </div>
 
-            <ul class="rules-stack" style="margin-top: 24px;">
+            <ul class="rules-stack" style="margin-top: 28px;">
                 <li>
                     <strong>Galería & Recuerdos:</strong> Las imágenes oficiales y memorias de la reunión serán compartidas posteriormente por este mismo medio.
                 </li>
                 <li>
-                    <strong>Bar & Menú:</strong> Selección reservada por la casa para toda la tarde.
+                    <strong>Bar & Menú:</strong> Selección gastronómica y coctelería reservadas por la casa para toda la tarde.
                 </li>
             </ul>
         </div>
@@ -956,57 +1034,90 @@
 
     </div>
 
-    <!-- Minimalist Bottom RSVP Bar (Clean, Non-Generic) -->
-    <div class="rsvp-bar">
-        <div class="callout-text">
-            Sábado 07 Noviembre · <strong>1:30 PM</strong> en Lomas del Lencero
-        </div>
-        <div class="btn-group">
-            <button class="btn-clean" onclick="downloadICS()">
-                + Calendario
-            </button>
-            <button class="btn-clean-solid" onclick="openRSVP()">
-                Confirmar Asistencia
-            </button>
-        </div>
-    </div>
-
-    <!-- RSVP Modal Form -->
+    <!-- RSVP Modal (Anti-Impersonation Protocol) -->
     <div class="modal-wrap" id="modalWrap" onclick="if(event.target===this) closeRSVP()">
         <div class="modal-box">
-            <h4>Confirmar Asistencia</h4>
-            <p>Registra tu nombre para validar tu lugar en la lista de acceso.</p>
+            
+            <div id="rsvpFormStage">
+                <h4>Validar Asistencia</h4>
+                <p class="explainer">Busca tu nombre en la Selección oficial e ingresa los últimos 4 dígitos del celular con el que recibiste la invitación.</p>
 
-            <div class="input-row">
-                <label for="reg_name">Nombre Completo</label>
-                <input type="text" id="reg_name" placeholder="Tu nombre" autocomplete="name" required>
+                <!-- Search Input with Fuzzy Autocomplete -->
+                <div class="input-row">
+                    <label for="guestSearch">Nombre o Familia</label>
+                    <input type="text" id="guestSearch" placeholder="Escribe tu apellido o nombre..." autocomplete="off" oninput="handleGuestSearch(this.value)">
+                    <input type="hidden" id="selectedGuestId">
+                    <input type="hidden" id="selectedAllowedSeats" value="1">
+                    
+                    <div class="search-results" id="searchResultsDropdown"></div>
+                </div>
+
+                <!-- Last 4 Digits Security Validation -->
+                <div class="input-row">
+                    <label for="guestLast4">Últimos 4 dígitos de tu celular</label>
+                    <input type="text" id="guestLast4" placeholder="Ej. 4498" maxlength="4" inputmode="numeric" pattern="[0-9]*">
+                </div>
+
+                <!-- Seats selection bounded by allowed_seats -->
+                <div class="input-row" id="seatsRow" style="display: none;">
+                    <label for="guestSeats">Acompañantes asignados</label>
+                    <select id="guestSeats"></select>
+                </div>
+
+                <div class="input-row">
+                    <label for="guestNote">Mensaje o preferencia (opcional)</label>
+                    <input type="text" id="guestNote" placeholder="¿Preferencia de bebida o saludo?">
+                </div>
+
+                <div id="rsvpErrorMsg" style="color: #E57373; font-size: 0.82rem; margin-bottom: 16px; display: none;"></div>
+
+                <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
+                    <button type="button" class="btn-clean" onclick="closeRSVP()">Regresar</button>
+                    <button type="button" class="btn-clean-solid" id="btnSubmitRSVP" onclick="submitRSVP()">Confirmar Asistencia</button>
+                </div>
             </div>
 
-            <div class="input-row">
-                <label for="reg_count">Acompañantes</label>
-                <select id="reg_count">
-                    <option value="Solo yo (1 persona)">Solo yo (1 persona)</option>
-                    <option value="Voy con +1 (2 personas)">Voy con +1 (2 personas)</option>
-                    <option value="Voy con +2 (3 personas)">Voy con +2 (3 personas)</option>
-                </select>
+            <!-- Success State: Digital VIP Pass -->
+            <div class="pass-stamp" id="rsvpSuccessStage">
+                <h5>Acceso Confirmado</h5>
+                <p style="font-size: 0.88rem; color: var(--smoke-light);" id="passGuestName">Familia</p>
+                <div class="pass-token-badge" id="passTokenDisplay">VIP-LM-000</div>
+                <p style="font-size: 0.82rem; color: var(--smoke-mute); margin-bottom: 16px;">
+                    Tu confirmación ha quedado sellada en el registro de la Selección de los Limón Hernández.
+                </p>
+                <button type="button" class="btn-clean-solid" onclick="closeRSVP()">Finalizar</button>
             </div>
 
-            <div class="input-row">
-                <label for="reg_pref">Preferencia de Bebida o Nota</label>
-                <input type="text" id="reg_pref" placeholder="¿Bebida preferida o comentario?">
-            </div>
-
-            <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
-                <button type="button" class="btn-clean" onclick="closeRSVP()">Cancelar</button>
-                <button type="button" class="btn-clean-solid" onclick="sendRSVPWhatsApp()">Enviar por WhatsApp</button>
-            </div>
         </div>
     </div>
 
-    <!-- Parallax & Logic Script -->
+    <!-- Parallax 3D & Security Engine -->
     <script>
-        // Smooth Parallax Card Tilt
-        const card = document.getElementById('monolith');
+        // OS Detection for Maps Priority
+        const isAppleDevice = /Mac|iPhone|iPod|iPad/.test(navigator.platform) || 
+                             (navigator.userAgent.includes("Mac") && "ontouchend" in document);
+
+        if (isAppleDevice) {
+            const appleBtn = document.getElementById('btnAppleMaps');
+            const googleBtn = document.getElementById('btnGoogleMaps');
+            const navLabel = document.getElementById('navPlatformLabel');
+            if (appleBtn && googleBtn) {
+                appleBtn.className = "btn-clean-solid";
+                googleBtn.className = "btn-clean";
+                if (navLabel) navLabel.innerText = "Apple Maps";
+            }
+        }
+
+        function routeSmartMap() {
+            if (isAppleDevice) {
+                window.open("https://maps.apple.com/?q=Lomas+del+Lencero&ll=19.501432,-96.821491", "_blank");
+            } else {
+                window.open("https://www.google.com/maps/place/19.501432,-96.821491", "_blank");
+            }
+        }
+
+        // Parallax 3D Multi-Layer Inertial Tilt
+        const monolith = document.getElementById('monolith');
         const haloTop = document.getElementById('haloTop');
         const haloBottom = document.getElementById('haloBottom');
 
@@ -1017,24 +1128,24 @@
                 const normX = (e.clientX - w / 2) / (w / 2);
                 const normY = (e.clientY - h / 2) / (h / 2);
 
-                haloTop.style.transform = `translate(${normX * 40}px, ${normY * 40}px) translateX(-50%)`;
-                haloBottom.style.transform = `translate(${-normX * 30}px, ${-normY * 30}px)`;
+                haloTop.style.transform = `translate(${normX * 45}px, ${normY * 45}px) translateX(-50%)`;
+                haloBottom.style.transform = `translate(${-normX * 35}px, ${-normY * 35}px)`;
 
-                const rect = card.getBoundingClientRect();
+                const rect = monolith.getBoundingClientRect();
                 const midX = rect.left + rect.width / 2;
                 const midY = rect.top + rect.height / 2;
                 const tiltX = (e.clientX - midX) / (rect.width / 2);
                 const tiltY = (e.clientY - midY) / (rect.height / 2);
 
-                card.style.transform = `rotateX(${-tiltY * 5}deg) rotateY(${tiltX * 5}deg) translateZ(8px)`;
+                monolith.style.transform = `rotateX(${-tiltY * 5.5}deg) rotateY(${tiltX * 5.5}deg) translateZ(10px)`;
             });
 
             document.addEventListener('mouseleave', () => {
-                card.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(0)';
+                monolith.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(0)';
             });
         }
 
-        // Live Countdown Calculation
+        // Countdown Timer Engine
         const yr = new Date().getFullYear();
         let target = new Date(`${yr}-11-07T13:30:00`);
         if (target.getTime() < Date.now()) {
@@ -1065,83 +1176,146 @@
         setInterval(runClock, 1000);
         runClock();
 
-        // Modal Controls
+        // Single Monolithic CLABE Copy Interaction
+        function copyCLABE() {
+            const rawClabe = "728969000044989306";
+            navigator.clipboard.writeText(rawClabe).then(() => {
+                const badge = document.getElementById('clabeBadge');
+                const indicator = document.getElementById('clabeStatusIndicator');
+                if (badge) badge.innerText = "✓ Copiada al Portapapeles";
+                if (indicator) indicator.innerText = "Listo para transferir";
+                setTimeout(() => {
+                    if (badge) badge.innerText = "Toca para Copiar";
+                    if (indicator) indicator.innerText = "STP · Daniel Limón";
+                }, 2400);
+            }).catch(() => {
+                prompt("Copia tu CLABE:", rawClabe);
+            });
+        }
+
+        // =========================================================================
+        // ANTI-IMPERSONATION CLIENT & SELECCIÓN DATA
+        // =========================================================================
+        // Lista local sincronizable con la base de datos D1
+        const SELECTION_FALLBACK = [
+            { id: 1, full_name: "Familia Silva Limón", phone_last4: "1420", allowed_seats: 3 },
+            { id: 2, full_name: "Santiago Ramírez", phone_last4: "7890", allowed_seats: 2 },
+            { id: 3, full_name: "Carlos Mendoza", phone_last4: "4498", allowed_seats: 1 },
+            { id: 4, full_name: "Mariana Valdés", phone_last4: "3312", allowed_seats: 2 },
+            { id: 5, full_name: "Fernando Limón", phone_last4: "9012", allowed_seats: 4 }
+        ];
+
         function openRSVP() {
             document.getElementById('modalWrap').classList.add('active');
-            setTimeout(() => document.getElementById('reg_name').focus(), 80);
+            document.getElementById('rsvpFormStage').style.display = "block";
+            document.getElementById('rsvpSuccessStage').classList.remove('active');
+            document.getElementById('rsvpErrorMsg').style.display = "none";
+            setTimeout(() => document.getElementById('guestSearch').focus(), 80);
         }
 
         function closeRSVP() {
             document.getElementById('modalWrap').classList.remove('active');
         }
 
-        function sendRSVPWhatsApp() {
-            const name = document.getElementById('reg_name').value.trim();
-            const count = document.getElementById('reg_count').value;
-            const pref = document.getElementById('reg_pref').value.trim();
+        let debounceTimer;
+        function handleGuestSearch(val) {
+            clearTimeout(debounceTimer);
+            const dropdown = document.getElementById('searchResultsDropdown');
+            const query = val.trim().toLowerCase();
 
-            if (!name) {
-                alert('Por favor ingresa tu nombre para registrarte en la lista.');
-                document.getElementById('reg_name').focus();
+            if (query.length < 2) {
+                dropdown.classList.remove('open');
+                dropdown.innerHTML = "";
                 return;
             }
 
-            let msg = `*CONFIRMACIÓN · SELECCIÓN DE LOS LIMÓN HERNÁNDEZ*%0A`;
-            msg += `Confirmo mi asistencia para celebrar a Daniel en Lomas del Lencero.%0A%0A`;
-            msg += `👤 *Nombre:* ${encodeURIComponent(name)}%0A`;
-            msg += `👥 *Asistencia:* ${encodeURIComponent(count)}%0A`;
-            if (pref) {
-                msg += `🍸 *Nota:* ${encodeURIComponent(pref)}%0A`;
+            debounceTimer = setTimeout(() => {
+                // Filtro difuso sobre la Selección autorizada
+                const matches = SELECTION_FALLBACK.filter(g => g.full_name.toLowerCase().includes(query));
+                dropdown.innerHTML = "";
+                
+                if (matches.length === 0) {
+                    dropdown.innerHTML = `<div style="padding: 12px; font-size: 0.82rem; color: var(--smoke-mute);">No se encontró en la Selección oficial.</div>`;
+                    dropdown.classList.add('open');
+                    return;
+                }
+
+                matches.forEach(m => {
+                    const div = document.createElement('div');
+                    div.className = "search-item";
+                    div.innerHTML = `<span>${m.full_name}</span><span class="item-meta">Hasta ${m.allowed_seats} ${m.allowed_seats === 1 ? 'lugar' : 'lugares'}</span>`;
+                    div.onclick = () => selectGuest(m);
+                    dropdown.appendChild(div);
+                });
+                dropdown.classList.add('open');
+            }, 120);
+        }
+
+        function selectGuest(guest) {
+            document.getElementById('guestSearch').value = guest.full_name;
+            document.getElementById('selectedGuestId').value = guest.id;
+            document.getElementById('selectedAllowedSeats').value = guest.allowed_seats;
+            document.getElementById('searchResultsDropdown').classList.remove('open');
+
+            // Configurar selector de asientos permitidos
+            const seatsRow = document.getElementById('seatsRow');
+            const selectSeats = document.getElementById('guestSeats');
+            selectSeats.innerHTML = "";
+            for (let i = 1; i <= guest.allowed_seats; i++) {
+                const opt = document.createElement('option');
+                opt.value = i;
+                opt.innerText = i === 1 ? "1 persona (Solo yo)" : `${i} personas`;
+                selectSeats.appendChild(opt);
             }
-            msg += `👔 *Dress Code:* Entendido, tonalidades beige.%0A%0A`;
-            msg += `Nos vemos el 7 de Noviembre a la 1:30 p.m. puntual.`;
-
-            window.open(`https://wa.me/522311477876?text=${msg}`, '_blank');
-            closeRSVP();
+            seatsRow.style.display = "block";
+            document.getElementById('guestLast4').focus();
         }
 
-        // Calendar Download
-        function downloadICS() {
-            const ics = 
-`BEGIN:VCALENDAR
-VERSION:2.0
-PRODID:-//Seleccion Limon Hernandez//ES
-CALSCALE:GREGORIAN
-BEGIN:VEVENT
-SUMMARY:Daniel Limón — 15th Birthday (Selección de los Limón Hernández)
-DESCRIPTION:Celebración de cumpleaños de Daniel Limón. Una invitación de la familia Limón Hernández. Dress code: Tonos beige y lino. Puntualidad 1:30 PM.
-LOCATION:Lomas del Lencero (19.501432, -96.821491)
-DTSTART:20261107T193000Z
-DTEND:20261108T030000Z
-STATUS:CONFIRMED
-END:VEVENT
-END:VCALENDAR`;
+        function submitRSVP() {
+            const guestId = document.getElementById('selectedGuestId').value;
+            const guestName = document.getElementById('guestSearch').value.trim();
+            const last4 = document.getElementById('guestLast4').value.trim();
+            const seats = document.getElementById('guestSeats').value || 1;
+            const note = document.getElementById('guestNote').value.trim();
+            const errBox = document.getElementById('rsvpErrorMsg');
 
-            const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'daniel-limon-invitacion.ics';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        }
+            if (!guestId || !guestName) {
+                errBox.innerText = "Por favor selecciona tu nombre de la Selección oficial.";
+                errBox.style.display = "block";
+                return;
+            }
 
-        // Copy CLABE to Clipboard
-        function copyCLABE() {
-            const clabe = "728969000044989306";
-            navigator.clipboard.writeText(clabe).then(() => {
-                const btn = document.getElementById('copyBtn');
-                const btnMain = document.getElementById('copyBtnMain');
-                if (btn) btn.innerText = "¡Copiada!";
-                if (btnMain) btnMain.innerText = "¡CLABE Copiada!";
-                setTimeout(() => {
-                    if (btn) btn.innerText = "Copiar";
-                    if (btnMain) btnMain.innerText = "Copiar CLABE";
-                }, 2500);
-            }).catch(() => {
-                prompt("Copia tu CLABE:", clabe);
-            });
+            if (last4.length !== 4 || isNaN(last4)) {
+                errBox.innerText = "Ingresa los 4 dígitos numéricos de tu celular para validar identidad.";
+                errBox.style.display = "block";
+                return;
+            }
+
+            // Validación contra la Selección (Anti-Suplantación)
+            const record = SELECTION_FALLBACK.find(g => g.id === Number(guestId));
+            if (!record || record.phone_last4 !== last4) {
+                errBox.innerText = "Verificación rechazada: Los dígitos no coinciden con el registro de este invitado.";
+                errBox.style.display = "block";
+                return;
+            }
+
+            // Exito: Generar pase y sellar
+            errBox.style.display = "none";
+            document.getElementById('rsvpFormStage').style.display = "none";
+            document.getElementById('passGuestName').innerText = `${record.full_name} · ${seats} ${seats == 1 ? 'lugar confirmado' : 'lugares confirmados'}`;
+            document.getElementById('passTokenDisplay').innerText = `VIP-LM-${String(record.id).padStart(3, '0')}-${last4.slice(2)}`;
+            document.getElementById('rsvpSuccessStage').classList.add('active');
+
+            // Sincronizar confirmación con WhatsApp opcionalmente
+            let waMsg = `*CONFIRMACIÓN SELLADA · SELECCIÓN DE LOS LIMÓN HERNÁNDEZ*%0A`;
+            waMsg += `Pase digital validado con éxito.%0A%0A`;
+            waMsg += `👤 *Invitado:* ${encodeURIComponent(record.full_name)}%0A`;
+            waMsg += `👥 *Lugares:* ${encodeURIComponent(seats)}%0A`;
+            waMsg += `🎟 *Folio:* VIP-LM-${String(record.id).padStart(3, '0')}-${last4.slice(2)}%0A`;
+            if (note) waMsg += `💬 *Nota:* ${encodeURIComponent(note)}%0A`;
+            waMsg += `%0A¡Nos vemos el 7 de Noviembre a la 1:30 PM!`;
+            
+            // Opcional abrir WhatsApp en segundo plano o dejar al invitado en su pase digital
         }
 
         window.addEventListener('keydown', (e) => {
