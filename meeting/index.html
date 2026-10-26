@@ -400,41 +400,64 @@
             max-width: 62ch;
         }
 
-        /* Palette Swatches — Clean Minimal Architectural Format */
-        .palette-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 16px;
+        /* Unified Chromatic Ribbon (Cinta Cromática Continua — Atelier / Sastrería) */
+        .ribbon-container {
             margin: 32px 0 16px;
-        }
-
-        .swatch-brick {
-            border: 1px solid var(--border-hairline);
-            border-radius: 8px;
-            padding: 12px;
             background: var(--bg-surface);
-            transition: border-color 0.2s;
+            border: 1px solid var(--border-elevated);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
 
-        .swatch-brick:hover {
-            border-color: var(--brass-soft);
+        .chromatic-ribbon {
+            display: flex;
+            height: 72px;
+            width: 100%;
         }
 
-        .swatch-tone {
-            height: 64px;
-            border-radius: 4px;
-            margin-bottom: 12px;
+        .ribbon-stripe {
+            flex: 1;
+            height: 100%;
+            transition: flex 0.25s var(--ease-fluid);
+            position: relative;
         }
 
-        .swatch-title {
-            font-size: 0.82rem;
+        .ribbon-stripe:hover {
+            flex: 1.35;
+        }
+
+        .ribbon-labels {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            padding: 16px 12px;
+            border-top: 1px solid var(--border-hairline);
+            background: rgba(14, 16, 21, 0.7);
+        }
+
+        @media (max-width: 680px) {
+            .ribbon-labels {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 12px;
+                padding: 14px;
+            }
+        }
+
+        .ribbon-label-col {
+            text-align: center;
+        }
+
+        .ribbon-label-col .name {
+            font-size: 0.8rem;
             font-weight: 500;
             color: var(--ivory);
+            display: block;
             margin-bottom: 2px;
         }
 
-        .swatch-hex {
-            font-size: 0.68rem;
+        .ribbon-label-col .code {
+            font-size: 0.65rem;
+            font-family: 'JetBrains Mono', monospace;
             color: var(--smoke-mute);
             letter-spacing: 0.05em;
         }
@@ -561,63 +584,114 @@
             transform: scale(0.99);
         }
 
+        /* Architectural Bank Vault Surface (Precision Financial Panel) */
+        .transfer-monolith {
+            margin-top: 32px;
+            background: linear-gradient(175deg, #13161D 0%, #0B0D12 100%);
+            border: 1px solid var(--border-elevated);
+            border-radius: 12px;
+            padding: 30px 32px;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            transition: border-color 0.25s var(--ease-fluid), transform 0.2s;
+        }
+
+        .transfer-monolith:hover {
+            border-color: rgba(212, 185, 130, 0.45);
+            transform: translateY(-2px);
+        }
+
+        .transfer-monolith:active {
+            transform: scale(0.995);
+        }
+
         .transfer-row-top {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: space-between;
-            margin-bottom: 12px;
+            gap: 16px;
+            margin-bottom: 8px;
         }
 
         .transfer-title {
             font-family: 'Cormorant Garamond', Georgia, serif;
-            font-size: 1.5rem;
+            font-size: 1.65rem;
+            font-weight: 500;
             color: var(--ivory);
-        }
-
-        .transfer-badge-tap {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.68rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--brass-soft);
-            border: 1px solid rgba(212, 185, 130, 0.35);
-            padding: 6px 12px;
-            border-radius: 6px;
-            transition: background 0.2s, color 0.2s;
-        }
-
-        .transfer-monolith:hover .transfer-badge-tap {
-            background: var(--brass-soft);
-            color: var(--bg-canvas);
+            line-height: 1.2;
         }
 
         .transfer-subtitle {
-            font-size: 0.88rem;
-            color: var(--smoke-light);
-            margin-bottom: 16px;
+            font-size: 0.86rem;
+            color: var(--smoke-mute);
+            margin-bottom: 20px;
             line-height: 1.5;
         }
 
+        /* Monolithic Bank Display */
         .clabe-stream {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: clamp(1.1rem, 2.5vw, 1.45rem);
-            letter-spacing: 0.12em;
-            color: var(--brass-soft);
-            background: #090A0D;
-            border: 1px solid var(--border-elevated);
+            background: #07080B;
+            border: 1px solid var(--border-hairline);
             border-radius: 8px;
-            padding: 14px 20px;
+            padding: 16px 22px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 16px;
         }
 
-        .clabe-status-text {
+        @media (max-width: 640px) {
+            .clabe-stream {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+        }
+
+        .clabe-value-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .clabe-digits-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(1.15rem, 2.8vw, 1.45rem);
+            letter-spacing: 0.14em;
+            color: var(--brass-soft);
+            user-select: all;
+        }
+
+        .clabe-beneficiary-tag {
             font-size: 0.72rem;
             letter-spacing: 0.12em;
             text-transform: uppercase;
             color: var(--smoke-mute);
             font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* Tactile Action Button inside Vault */
+        .clabe-trigger-btn {
+            background: rgba(212, 185, 130, 0.1);
+            color: var(--brass-soft);
+            border: 1px solid rgba(212, 185, 130, 0.3);
+            border-radius: 6px;
+            padding: 10px 20px;
+            font-size: 0.75rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 600;
+            white-space: nowrap;
+            transition: all 0.2s var(--ease-fluid);
+            pointer-events: none; /* activates with the whole card */
+        }
+
+        .transfer-monolith:hover .clabe-trigger-btn {
+            background: var(--brass-soft);
+            color: var(--bg-canvas);
+            border-color: var(--brass-soft);
         }
 
         /* Directives list */
@@ -850,7 +924,7 @@
                     </div>
 
                     <div class="dedication">Una invitación de la familia para celebrar a</div>
-                    <div class="host-title">Daniel Limón</div>
+                    <div class="host-title">Daniel Limón Hernández</div>
 
                     <div class="separator"></div>
 
@@ -885,7 +959,7 @@
         <!-- Provocative Manifesto -->
         <div class="manifesto-section">
             <p>
-                "El tiempo es el único capital que no se negocia. Si este enlace llegó a ti, estás en la <em>Selección de los Limón Hernández</em> para acompañarnos este día."
+                "Los años se cumplen, pero los buenos momentos se comparten. Estás en la <em>Selección de los Limón Hernández</em> para acompañarnos este día."
             </p>
             <span class="author">Familia Limón Hernández</span>
         </div>
@@ -919,36 +993,41 @@
                 </p>
             </div>
 
-            <div class="palette-row">
-                <div class="swatch-brick">
-                    <div class="swatch-tone" style="background: var(--tone-linen);"></div>
-                    <div class="swatch-title">Lino Crudo</div>
-                    <div class="swatch-hex">#FAF6F0</div>
+            <!-- Unified Chromatic Ribbon -->
+            <div class="ribbon-container">
+                <div class="chromatic-ribbon">
+                    <div class="ribbon-stripe" style="background: var(--tone-linen);" title="Lino Crudo"></div>
+                    <div class="ribbon-stripe" style="background: var(--tone-sand);" title="Sand Beige"></div>
+                    <div class="ribbon-stripe" style="background: var(--tone-ecru);" title="Écru"></div>
+                    <div class="ribbon-stripe" style="background: var(--tone-taupe);" title="Warm Taupe"></div>
+                    <div class="ribbon-stripe" style="background: var(--tone-camel);" title="Camel"></div>
+                    <div class="ribbon-stripe" style="background: var(--tone-mocha);" title="Moca Suave"></div>
                 </div>
-                <div class="swatch-brick">
-                    <div class="swatch-tone" style="background: var(--tone-sand);"></div>
-                    <div class="swatch-title">Sand Beige</div>
-                    <div class="swatch-hex">#EFE4D6</div>
-                </div>
-                <div class="swatch-brick">
-                    <div class="swatch-tone" style="background: var(--tone-ecru);"></div>
-                    <div class="swatch-title">Écru</div>
-                    <div class="swatch-hex">#DFCEB9</div>
-                </div>
-                <div class="swatch-brick">
-                    <div class="swatch-tone" style="background: var(--tone-taupe);"></div>
-                    <div class="swatch-title">Warm Taupe</div>
-                    <div class="swatch-hex">#BEAC95</div>
-                </div>
-                <div class="swatch-brick">
-                    <div class="swatch-tone" style="background: var(--tone-camel);"></div>
-                    <div class="swatch-title">Camel</div>
-                    <div class="swatch-hex">#998369</div>
-                </div>
-                <div class="swatch-brick">
-                    <div class="swatch-tone" style="background: var(--tone-mocha);"></div>
-                    <div class="swatch-title">Moca Suave</div>
-                    <div class="swatch-hex">#6D5B48</div>
+                <div class="ribbon-labels">
+                    <div class="ribbon-label-col">
+                        <span class="name">Lino Crudo</span>
+                        <span class="code">#FAF6F0</span>
+                    </div>
+                    <div class="ribbon-label-col">
+                        <span class="name">Sand Beige</span>
+                        <span class="code">#EFE4D6</span>
+                    </div>
+                    <div class="ribbon-label-col">
+                        <span class="name">Écru</span>
+                        <span class="code">#DFCEB9</span>
+                    </div>
+                    <div class="ribbon-label-col">
+                        <span class="name">Warm Taupe</span>
+                        <span class="code">#BEAC95</span>
+                    </div>
+                    <div class="ribbon-label-col">
+                        <span class="name">Camel</span>
+                        <span class="code">#998369</span>
+                    </div>
+                    <div class="ribbon-label-col">
+                        <span class="name">Moca Suave</span>
+                        <span class="code">#6D5B48</span>
+                    </div>
                 </div>
             </div>
 
@@ -1008,13 +1087,17 @@
             <!-- Unified Single-Touch CLABE Monolith Card -->
             <div class="transfer-monolith" onclick="copyCLABE()" title="Click para copiar CLABE">
                 <div class="transfer-row-top">
-                    <div class="transfer-title">Transferencia Interbancaria</div>
-                    <div class="transfer-badge-tap" id="clabeBadge">Toca para Copiar</div>
+                    <div>
+                        <div class="transfer-title">Transferencia Interbancaria</div>
+                        <p class="transfer-subtitle">Para quienes prefieran tener el detalle vía banca móvil antes o durante el evento.</p>
+                    </div>
                 </div>
-                <p class="transfer-subtitle">Para quienes prefieran tener el detalle vía banca móvil antes o durante el evento.</p>
                 <div class="clabe-stream">
-                    <span id="clabeNumber">7289 6900 0044 9893 06</span>
-                    <span class="clabe-status-text" id="clabeStatusIndicator">STP · Daniel Limón</span>
+                    <div class="clabe-value-group">
+                        <span class="clabe-digits-text" id="clabeNumber">7289 6900 0044 9893 06</span>
+                        <span class="clabe-beneficiary-tag">STP · Daniel Limón Hernández</span>
+                    </div>
+                    <button type="button" class="clabe-trigger-btn" id="clabeBadge">Copiar CLABE</button>
                 </div>
             </div>
 
@@ -1181,12 +1264,17 @@
             const rawClabe = "728969000044989306";
             navigator.clipboard.writeText(rawClabe).then(() => {
                 const badge = document.getElementById('clabeBadge');
-                const indicator = document.getElementById('clabeStatusIndicator');
-                if (badge) badge.innerText = "✓ Copiada al Portapapeles";
-                if (indicator) indicator.innerText = "Listo para transferir";
+                if (badge) {
+                    badge.innerText = "✓ Copiada";
+                    badge.style.background = "var(--brass-soft)";
+                    badge.style.color = "var(--bg-canvas)";
+                }
                 setTimeout(() => {
-                    if (badge) badge.innerText = "Toca para Copiar";
-                    if (indicator) indicator.innerText = "STP · Daniel Limón";
+                    if (badge) {
+                        badge.innerText = "Copiar CLABE";
+                        badge.style.background = "";
+                        badge.style.color = "";
+                    }
                 }, 2400);
             }).catch(() => {
                 prompt("Copia tu CLABE:", rawClabe);
