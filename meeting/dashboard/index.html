@@ -631,7 +631,7 @@
                 </div>
                 <div class="metric-card accent">
                     <div class="val" id="statConfirmedSeats">0</div>
-                    <div class="lbl">Personas Acreditadas</div>
+                    <div class="lbl">Pases Confirmados</div>
                 </div>
                 <div class="metric-card">
                     <div class="val" id="statActivePush">0</div>
@@ -661,7 +661,7 @@
                             <th>Invitado / Familia</th>
                             <th>Estado</th>
                             <th>Pases Máximos</th>
-                            <th>Asistentes Registrados</th>
+                            <th>Pases Confirmados</th>
                             <th>Nota / Mensaje</th>
                             <th style="text-align: right;">Acciones</th>
                         </tr>
@@ -892,7 +892,7 @@
                             </div>
                         </td>
                         <td>
-                            ${g.confirmed === 1 ? `<span style="font-weight: 600; color: #34C759;">${g.confirmed_seats} personas</span>` : '<span style="color: var(--smoke-mute);">—</span>'}
+                            ${g.confirmed === 1 ? `<span style="font-weight: 600; color: #34C759;">${g.confirmed_seats} ${g.confirmed_seats === 1 ? 'pase' : 'pases'}</span>` : '<span style="color: var(--smoke-mute);">—</span>'}
                         </td>
                         <td>
                             <div class="guest-note">${g.note ? `"${escapeHTML(g.note)}"` : '<span style="color: var(--smoke-mute);">Sin nota</span>'}</div>
