@@ -443,25 +443,112 @@
             line-height: 1.5;
         }
 
-        /* Location Frame */
-        .venue-carrier {
+        /* Location & Approach Plate */
+        .venue-plate {
             margin-top: 24px;
+            background: linear-gradient(175deg, #12141A 0%, #0A0B0E 100%);
+            border: 1px solid var(--border-elevated);
             border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--border-hairline);
-            height: 280px;
+            padding: 32px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
         }
 
-        .venue-carrier iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            filter: invert(90%) hue-rotate(180deg) contrast(1.1) opacity(0.85);
-            transition: filter 0.3s;
+        @media (max-width: 640px) {
+            .venue-plate {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 24px 20px;
+            }
         }
 
-        .venue-carrier:hover iframe {
-            filter: invert(90%) hue-rotate(180deg) contrast(1.1) opacity(0.98);
+        .venue-meta-sub {
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--brass-soft);
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .venue-coords {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.05rem;
+            color: var(--ivory);
+            margin-bottom: 4px;
+        }
+
+        .venue-desc {
+            font-size: 0.88rem;
+            color: var(--smoke-mute);
+        }
+
+        /* Transfer & Lluvia de Sobres Card */
+        .transfer-card {
+            margin-top: 32px;
+            background: linear-gradient(175deg, #14171E 0%, #0D0F14 100%);
+            border: 1px solid rgba(212, 185, 130, 0.28);
+            border-radius: 12px;
+            padding: 32px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        @media (max-width: 640px) {
+            .transfer-card {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 24px 20px;
+            }
+        }
+
+        .transfer-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.6rem;
+            color: var(--ivory);
+            margin-bottom: 4px;
+        }
+
+        .transfer-subtitle {
+            font-size: 0.84rem;
+            color: var(--smoke-light);
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .clabe-box {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: #090A0D;
+            border: 1px solid var(--border-elevated);
+            border-radius: 6px;
+            padding: 10px 16px;
+        }
+
+        .clabe-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.98rem;
+            letter-spacing: 0.08em;
+            color: var(--brass-soft);
+            user-select: all;
+        }
+
+        .copy-tag {
+            font-size: 0.7rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--smoke-mute);
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .copy-tag:hover {
+            color: var(--ivory);
         }
 
         .venue-links {
@@ -799,30 +886,28 @@
             <div class="section-header">
                 <h3>Lomas del Lencero</h3>
                 <p>
-                    Coordenadas exactas para tu llegada: <strong>19.501432, -96.821491</strong>.
+                    Recepción y comida privada. Punto de aproximación satelital.
                 </p>
             </div>
 
-            <div class="venue-links">
-                <a href="https://www.google.com/maps/place/19.501432,-96.821491" target="_blank" rel="noopener" class="btn-clean-solid">
-                    Google Maps
-                </a>
-                <a href="https://waze.com/ul?ll=19.501432,-96.821491&navigate=yes" target="_blank" rel="noopener" class="btn-clean">
-                    Waze
-                </a>
-            </div>
-
-            <div class="venue-carrier">
-                <iframe 
-                    loading="lazy" 
-                    allowfullscreen 
-                    referrerpolicy="no-referrer-when-downgrade" 
-                    src="https://maps.google.com/maps?q=19.501432,-96.8214909&hl=es&z=15&output=embed">
-                </iframe>
+            <div class="venue-plate">
+                <div>
+                    <span class="venue-meta-sub">Coordenadas de Acceso</span>
+                    <div class="venue-coords">19.501432, -96.821491</div>
+                    <div class="venue-desc">Lomas del Lencero · Carretera Xalapa-Veracruz</div>
+                </div>
+                <div class="venue-links" style="margin-top: 0;">
+                    <a href="https://www.google.com/maps/place/19.501432,-96.821491" target="_blank" rel="noopener" class="btn-clean-solid">
+                        Google Maps
+                    </a>
+                    <a href="https://waze.com/ul?ll=19.501432,-96.821491&navigate=yes" target="_blank" rel="noopener" class="btn-clean">
+                        Waze
+                    </a>
+                </div>
             </div>
         </div>
 
-        <!-- Section: Protocol -->
+        <!-- Section: Present & Directives -->
         <div class="section-block">
             <div class="section-header">
                 <h3>Directrices & Cortesías</h3>
@@ -836,8 +921,26 @@
                     <strong>Lista Cerrada:</strong> La entrada es estrictamente nominal. Si no confirmas en WhatsApp antes, tu lugar no estará contemplado.
                 </li>
                 <li>
-                    <strong>Presente:</strong> Si deseas tener un detalle con Daniel, la modalidad es <em>lluvia de sobres</em> (efectivo en sobre el día del evento) o transferencia bancaria.
+                    <strong>Presente:</strong> Si deseas tener un detalle con Daniel, la modalidad es <em>lluvia de sobres</em> (efectivo en sobre el día del evento) o transferencia directa:
                 </li>
+            </ul>
+
+            <!-- Transfer Card with CLABE -->
+            <div class="transfer-card">
+                <div>
+                    <div class="transfer-title">Transferencia Interbancaria</div>
+                    <p class="transfer-subtitle">Para quienes prefieran tener el detalle vía banca móvil antes o durante el evento.</p>
+                    <div class="clabe-box">
+                        <span class="clabe-num" id="clabeVal">728969000044989306</span>
+                        <span class="copy-tag" id="copyBtn" onclick="copyCLABE()">Copiar</span>
+                    </div>
+                </div>
+                <button type="button" class="btn-clean-solid" onclick="copyCLABE()" id="copyBtnMain">
+                    Copiar CLABE
+                </button>
+            </div>
+
+            <ul class="rules-stack" style="margin-top: 24px;">
                 <li>
                     <strong>Galería & Recuerdos:</strong> Las imágenes oficiales y memorias de la reunión serán compartidas posteriormente por este mismo medio.
                 </li>
@@ -1022,6 +1125,23 @@ END:VCALENDAR`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
+        }
+
+        // Copy CLABE to Clipboard
+        function copyCLABE() {
+            const clabe = "728969000044989306";
+            navigator.clipboard.writeText(clabe).then(() => {
+                const btn = document.getElementById('copyBtn');
+                const btnMain = document.getElementById('copyBtnMain');
+                if (btn) btn.innerText = "¡Copiada!";
+                if (btnMain) btnMain.innerText = "¡CLABE Copiada!";
+                setTimeout(() => {
+                    if (btn) btn.innerText = "Copiar";
+                    if (btnMain) btnMain.innerText = "Copiar CLABE";
+                }, 2500);
+            }).catch(() => {
+                prompt("Copia tu CLABE:", clabe);
+            });
         }
 
         window.addEventListener('keydown', (e) => {
