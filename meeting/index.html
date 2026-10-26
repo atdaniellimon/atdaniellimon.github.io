@@ -1495,29 +1495,51 @@
         // =========================================================================
         // ENTRANCE PUSH MODAL & SAFARI COMPATIBILITY
         // =========================================================================
-        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
         const isStandalone = window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
 
         function checkAndShowPushEntry() {
-            // Si el navegador soporta notificaciones y aún no se ha decidido
-            if ('Notification' in window) {
-                if (Notification.permission === 'default' && localStorage.getItem('limon_entry_push_dismissed') !== 'true') {
-                    const modal = document.getElementById('pushEntryModal');
-                    if (modal) modal.style.display = 'flex';
+            // No mostrar si el usuario ya lo cerró voluntariamente en esta sesión
+            if (sessionStorage.getItem('limon_entry_push_dismissed') === 'true') {
+                return;
+            }
 
-                    // En iPhone Safari no-PWA, avisar que agregue al inicio para background push
-                    if (isIOS && !isStandalone) {
-                        const hint = document.getElementById('iosSafariHint');
-                        if (hint) hint.style.display = 'block';
-                    }
+            const modal = document.getElementById('pushEntryModal');
+            if (!modal) return;
+
+            // En iOS Safari estándar (no PWA añadida a la pantalla de inicio)
+            if (isIOS && !isStandalone) {
+                const hint = document.getElementById('iosSafariHint');
+                if (hint) {
+                    hint.style.display = 'block';
+                    hint.innerHTML = `📱 <strong>Para recibir notificaciones en iPhone:</strong><br>Apple requiere agregar esta página a tu pantalla de inicio.<br><br>1. Toca el botón <strong>Compartir ( <svg width="14" height="14" style="vertical-align:middle;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg> )</strong> en la barra de Safari.<br>2. Selecciona <strong>"Agregar al inicio"</strong>.<br>3. Abre la app desde tu pantalla de inicio para recibir los avisos incluso cerrada.`;
                 }
+                const mainBtn = document.getElementById('btnModalEnablePush');
+                if (mainBtn) {
+                    mainBtn.innerText = "Entendido, ver instrucciones";
+                    mainBtn.onclick = () => {
+                        const hint = document.getElementById('iosSafariHint');
+                        if (hint) hint.scrollIntoView({ behavior: 'smooth' });
+                    };
+                }
+                modal.style.display = 'flex';
+                return;
+            }
+
+            // En Mac Safari, Chrome, Edge, Android o iOS PWA
+            if ('Notification' in window) {
+                if (Notification.permission === 'default') {
+                    modal.style.display = 'flex';
+                }
+            } else {
+                modal.style.display = 'flex';
             }
         }
 
         function dismissEntryModal() {
             const modal = document.getElementById('pushEntryModal');
             if (modal) modal.style.display = 'none';
-            localStorage.setItem('limon_entry_push_dismissed', 'true');
+            sessionStorage.setItem('limon_entry_push_dismissed', 'true');
         }
 
         // Activación disparada directamente por el clic del usuario (vital para Safari)
