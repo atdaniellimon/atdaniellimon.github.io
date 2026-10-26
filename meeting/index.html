@@ -129,40 +129,39 @@
             opacity: 0.12;
         }
 
-        /* Floating Architectural Geometry (Parallax Depth Tokens) */
+        /* Floating Architectural Geometry (Parallax Depth Tokens - Whisper Subtle) */
         .geo-orb {
             position: absolute;
             border-radius: 50%;
-            border: 1px solid rgba(212, 185, 130, 0.14);
             pointer-events: none;
             will-change: transform;
         }
 
         .geo-orb-1 {
-            width: 180px;
-            height: 180px;
-            top: 140px;
-            left: -50px;
-            opacity: 0.25;
-            background: radial-gradient(circle, rgba(212, 185, 130, 0.05) 0%, transparent 80%);
+            width: 260px;
+            height: 260px;
+            top: 15%;
+            left: -40px;
+            border: 1px solid rgba(212, 185, 130, 0.08);
+            background: radial-gradient(circle, rgba(212, 185, 130, 0.03) 0%, transparent 75%);
+            filter: blur(1px);
         }
 
         .geo-orb-2 {
-            width: 110px;
-            height: 110px;
-            top: 520px;
-            right: -20px;
-            opacity: 0.2;
-            border-color: rgba(255, 255, 255, 0.08);
+            width: 140px;
+            height: 140px;
+            top: 55%;
+            right: -25px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.02) 0%, transparent 70%);
         }
 
         .geo-orb-3 {
-            width: 220px;
-            height: 220px;
-            top: 960px;
-            left: -70px;
-            opacity: 0.15;
-            border-style: dashed;
+            width: 320px;
+            height: 320px;
+            top: 78%;
+            left: 20%;
+            border: 1px dashed rgba(212, 185, 130, 0.05);
         }
 
         /* Specular Dynamic Sheen on 3D Card */
@@ -188,24 +187,33 @@
             transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* Mobile Sticky RSVP Bar */
+        /* Mobile Sticky RSVP Bar (Smooth Spring Entrance) */
         .mobile-rsvp-dock {
             display: none;
             position: fixed;
             bottom: 20px;
-            left: 20px;
-            right: 20px;
+            left: 16px;
+            right: 16px;
             z-index: 800;
-            background: rgba(14, 16, 21, 0.88);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: rgba(14, 16, 21, 0.92);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
             border: 1px solid var(--border-elevated);
-            border-radius: 14px;
+            border-radius: 16px;
             padding: 12px 18px;
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 20px 48px rgba(0, 0, 0, 0.85);
             align-items: center;
             justify-content: space-between;
-            animation: fadeIn 0.4s ease;
+            transform: translateY(120%);
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+        }
+
+        .mobile-rsvp-dock.visible {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
         }
 
         @media (max-width: 768px) {
@@ -1330,7 +1338,7 @@
         let currentTiltX = 0, currentTiltY = 0;
         let mouseX = 0, mouseY = 0;
 
-        // Pointer / Mouse Parallax & Dynamic Specular Sheen
+        // Pointer / Mouse Parallax & Dynamic Specular Sheen (Desktop)
         if (window.matchMedia("(pointer: fine)").matches) {
             window.addEventListener('mousemove', (e) => {
                 mouseX = e.clientX;
@@ -1360,17 +1368,39 @@
                 targetTiltX = 0;
                 targetTiltY = 0;
             });
-        } else if (window.DeviceOrientationEvent) {
-            // Gyroscope tilt parallax for mobile devices
-            window.addEventListener('deviceorientation', (e) => {
-                if (e.gamma !== null && e.beta !== null) {
-                    // Clamp mobile tilt angles
-                    const gamma = Math.max(-30, Math.min(30, e.gamma));
-                    const beta = Math.max(-30, Math.min(30, e.beta - 45)); // Calibrated for phone reading angle
-                    targetTiltX = gamma / 25;
-                    targetTiltY = beta / 25;
+        } else {
+            // Touch / Mobile Parallax & Gyroscope
+            window.addEventListener('touchmove', (e) => {
+                if (e.touches && e.touches[0] && monolith) {
+                    const touch = e.touches[0];
+                    const rect = monolith.getBoundingClientRect();
+                    // Solo si está tocando cerca o dentro del monolith
+                    if (touch.clientY >= rect.top && touch.clientY <= rect.bottom) {
+                        targetTiltX = (touch.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
+                        targetTiltY = (touch.clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
+                        const sheenX = ((touch.clientX - rect.left) / rect.width) * 100;
+                        const sheenY = ((touch.clientY - rect.top) / rect.height) * 100;
+                        monolith.style.setProperty('--sheen-x', `${sheenX}%`);
+                        monolith.style.setProperty('--sheen-y', `${sheenY}%`);
+                    }
                 }
             }, { passive: true });
+
+            window.addEventListener('touchend', () => {
+                targetTiltX = 0;
+                targetTiltY = 0;
+            });
+
+            if (window.DeviceOrientationEvent) {
+                window.addEventListener('deviceorientation', (e) => {
+                    if (e.gamma !== null && e.beta !== null) {
+                        const gamma = Math.max(-25, Math.min(25, e.gamma));
+                        const beta = Math.max(-25, Math.min(25, e.beta - 40));
+                        targetTiltX = gamma / 20;
+                        targetTiltY = beta / 20;
+                    }
+                }, { passive: true });
+            }
         }
 
         // 60FPS RAF Multi-Layer Parallax Loop (Scroll & Tilt Interpolation)
@@ -1398,17 +1428,13 @@
                 yearNumeral.style.transform = `translate3d(0, ${scrollY * 0.08}px, 36px)`;
             }
 
-            // Mobile Dock Appearance Management (Show only after scrolling past top hero)
+            // Mobile Dock Appearance Management (Show with smooth cubic-bezier spring after top card)
             const mobileDock = document.getElementById('mobileDock');
             if (mobileDock) {
                 if (scrollY > 380) {
-                    mobileDock.style.transform = 'translateY(0)';
-                    mobileDock.style.opacity = '1';
-                    mobileDock.style.pointerEvents = 'auto';
+                    mobileDock.classList.add('visible');
                 } else {
-                    mobileDock.style.transform = 'translateY(40px)';
-                    mobileDock.style.opacity = '0';
-                    mobileDock.style.pointerEvents = 'none';
+                    mobileDock.classList.remove('visible');
                 }
             }
 
