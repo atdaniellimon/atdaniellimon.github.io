@@ -1117,8 +1117,13 @@
                 <p class="explainer">Por favor ingresa tu nombre completo o familia para registrar tu lugar.</p>
 
                 <div class="input-row">
-                    <label for="guestNameInput">Nombre o Familia</label>
+                    <label for="guestNameInput">Nombre o Familia *</label>
                     <input type="text" id="guestNameInput" placeholder="Ej. Familia Silva / Carlos Mendoza" autocomplete="name">
+                </div>
+
+                <div class="input-row">
+                    <label for="guestPhoneInput">Número Telefónico (Obligatorio) *</label>
+                    <input type="tel" id="guestPhoneInput" placeholder="Ej. 2281234567" inputmode="tel" autocomplete="tel">
                 </div>
 
                 <div class="input-row">
@@ -1283,10 +1288,23 @@
 
         // =========================================================================
         // =========================================================================
-        // RSVP CLIENT LOGIC (Simple & Direct)
+        // RSVP CLIENT LOGIC (With localStorage Lock & Mandatory Phone)
         // =========================================================================
         function openRSVP() {
             document.getElementById('modalWrap').classList.add('active');
+            
+            // Si ya confirmaron previamente en este dispositivo
+            const savedRSVP = localStorage.getItem('limon_rsvp_confirmed');
+            if (savedRSVP) {
+                try {
+                    const data = JSON.parse(savedRSVP);
+                    document.getElementById('rsvpFormStage').style.display = "none";
+                    document.getElementById('passGuestName').innerText = `${data.name} · ${data.seats} ${data.seats == 1 ? 'lugar' : 'lugares'}`;
+                    document.getElementById('rsvpSuccessStage').classList.add('active');
+                    return;
+                } catch (e) {}
+            }
+
             document.getElementById('rsvpFormStage').style.display = "block";
             document.getElementById('rsvpSuccessStage').classList.remove('active');
             document.getElementById('rsvpErrorMsg').style.display = "none";
@@ -1301,7 +1319,14 @@
         }
 
         async function submitRSVP() {
+            // Verificar si ya confirmaron antes
+            if (localStorage.getItem('limon_rsvp_confirmed')) {
+                openRSVP();
+                return;
+            }
+
             const guestName = document.getElementById('guestNameInput').value.trim();
+            const phone = document.getElementById('guestPhoneInput').value.trim();
             const seats = document.getElementById('guestSeatsInput').value || 1;
             const note = document.getElementById('guestNote').value.trim();
             const errBox = document.getElementById('rsvpErrorMsg');
@@ -1312,13 +1337,34 @@
                 return;
             }
 
+            // Validación de teléfono obligatorio (al menos 8 dígitos numéricos)
+            const cleanPhone = phone.replace(/\D/g, "");
+            if (!phone || cleanPhone.length < 8) {
+                errBox.innerText = "Por favor ingresa un número telefónico válido (mínimo 8-10 dígitos).";
+                errBox.style.display = "block";
+                document.getElementById('guestPhoneInput').focus();
+                return;
+            }
+
             // Exito visual inmediato
             errBox.style.display = "none";
             document.getElementById('rsvpFormStage').style.display = "none";
             document.getElementById('passGuestName').innerText = `${guestName} · ${seats} ${seats == 1 ? 'lugar' : 'lugares'}`;
             document.getElementById('rsvpSuccessStage').classList.add('active');
 
-            // Enviar registro al backend en segundo plano
+            // Guardar en localStorage para bloquear envíos repetidos
+            const rsvpRecord = {
+                name: guestName,
+                phone: phone,
+                seats: Number(seats),
+                timestamp: new Date().toISOString()
+            };
+            localStorage.setItem('limon_rsvp_confirmed', JSON.stringify(rsvpRecord));
+
+            // Actualizar botón de la tarjeta principal
+            updateRSVPButtonState();
+
+            // Enviar registro al backend de Cloudflare en segundo plano
             const workerUrl = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
                 ? "http://localhost:8787/api/guests/confirm"
                 : "https://limon-rsvp-service.d4nilin0n.workers.dev/api/guests/confirm";
@@ -1329,6 +1375,7 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         full_name: guestName,
+                        phone: phone,
                         seats: Number(seats),
                         note: note
                     })
@@ -1337,6 +1384,24 @@
                 console.warn("Backend sync offline, registered locally.");
             }
         }
+
+        function updateRSVPButtonState() {
+            const savedRSVP = localStorage.getItem('limon_rsvp_confirmed');
+            if (savedRSVP) {
+                const btnTitle = document.querySelector('.action-plate .label-title');
+                const plates = document.querySelectorAll('.action-plate');
+                if (plates.length >= 2) {
+                    const rsvpPlate = plates[1];
+                    const labelMeta = rsvpPlate.querySelector('.label-meta');
+                    const labelTitle = rsvpPlate.querySelector('.label-title');
+                    if (labelMeta) labelMeta.innerText = "Acreditado";
+                    if (labelTitle) labelTitle.innerText = "Ver mi Asistencia ✓";
+                }
+            }
+        }
+
+        // Revisar al cargar
+        window.addEventListener('DOMContentLoaded', updateRSVPButtonState);
 
         // =========================================================================
         // WEB PUSH NOTIFICATIONS REGISTRATION (Background Notifications)

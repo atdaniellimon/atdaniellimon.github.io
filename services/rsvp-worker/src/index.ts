@@ -283,6 +283,7 @@ export default {
             if (url.pathname === "/api/guests/confirm" && request.method === "POST") {
                 const body: any = await request.json();
                 const fullName = String(body.full_name || "").trim();
+                const phone = String(body.phone || "").trim();
                 const seats = Math.max(1, Math.min(10, Number(body.seats || 1)));
                 const note = String(body.note || "").trim().slice(0, 400);
 
@@ -298,16 +299,17 @@ export default {
                     await env.DB.prepare(
                         `UPDATE guests 
                          SET confirmed = 1, 
+                             phone = CASE WHEN ? != '' THEN ? ELSE phone END,
                              confirmed_seats = ?, 
                              note = ?, 
                              confirmed_at = datetime('now') 
                          WHERE id = ?`
-                    ).bind(seats, note, existing.id).run();
+                    ).bind(phone, phone, seats, note, existing.id).run();
                 } else {
                     await env.DB.prepare(
-                        `INSERT INTO guests (full_name, allowed_seats, confirmed, confirmed_seats, note, confirmed_at)
-                         VALUES (?, ?, 1, ?, ?, datetime('now'))`
-                    ).bind(fullName, seats, seats, note).run();
+                        `INSERT INTO guests (full_name, phone, allowed_seats, confirmed, confirmed_seats, note, confirmed_at)
+                         VALUES (?, ?, ?, 1, ?, ?, datetime('now'))`
+                    ).bind(fullName, phone, seats, seats, note).run();
                 }
 
                 return jsonResponse({
